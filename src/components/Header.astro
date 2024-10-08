@@ -1,0 +1,60 @@
+---
+export const routes = [
+  { href: "/", title: "Homepage" },
+  { href: "/articles", title: "Articles" },
+  { href: "/about-me", title: "About me" },
+];
+---
+
+<script>
+  // Highlight current page
+  const navLinks = document.querySelectorAll(".nav-link");
+  navLinks.forEach(link => {
+    if (link.getAttribute("href") === window.location.pathname) {
+      link.setAttribute("aria-current", "page");
+    }
+  });
+</script>
+
+<header>
+  <a class="blog-title" href="/">A. Bozzoli</a>
+  <nav aria-label="Primary">
+    <ul role="list">
+      {routes.map(route => <li><a class="nav-link" href={route.href}>{route.title}</a></li>)}
+    </ul>
+  </nav>
+</header>
+
+<style lang="scss">
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .blog-title {
+      display: block;
+      padding: 1rem;
+      font-size: var(--fs-600);
+      font-weight: bold;
+      letter-spacing: 0.125em;
+    }
+
+    nav {
+      ul {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        .nav-link {
+          display: block;
+          padding: 1rem;
+
+          &[aria-current="page"] {
+            background-color: black;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+</style>
