@@ -1,0 +1,22 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+
+const title = "Page Not Found";
+---
+
+<MainLayout {title}>
+  <div class="page-not-found">
+    <h1>{title}</h1>
+    <p>Sorry, this page does not exist.</p>
+    <a href="/">Go back to the homepage</a>
+  </div>
+</MainLayout>
+
+<style>
+  .page-not-found {
+    text-align: center;
+    margin-block: 32px;
+    max-width: fit-content;
+    margin-inline: auto;
+  }
+</style>
