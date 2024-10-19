@@ -1,0 +1,37 @@
+---
+import { formatDate, slugify } from "../js/utils";
+
+const { frontmatter, url, hLevel } = Astro.props;
+const { title, category, author, date, image, description } = frontmatter;
+const Heading = hLevel ?? "h2";
+---
+
+<article class="post-card">
+  <a href={url} tabindex="-1" aria-hidden="true">
+    <img src={image.src} alt={image.alt} />
+  </a>
+
+  <div class="content">
+    <Heading><a href={url}>{title}</a></Heading>
+
+    <p>by <a href={`/author/${slugify(author)}/`}>{author}</a> · {formatDate(date)}</p>
+
+    <p>{description}</p>
+
+    <a class="badge" href={`/category/${slugify(category)}/`}>{category}</a>
+  </div>
+</article>
+
+<style>
+  .post-card {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .post-card .content {
+    padding: 1rem;
+  }
+</style>

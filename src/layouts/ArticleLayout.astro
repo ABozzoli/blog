@@ -1,0 +1,30 @@
+---
+import MainLayout from "./MainLayout.astro";
+import { slugify, formatDate } from "../js/utils";
+
+const { frontmatter, url } = Astro.props;
+const { title, category, author, date, image } = frontmatter;
+---
+
+<MainLayout>
+  <div class="hero-image">
+    <img src={image.src} alt={image.alt} />
+    <h1>{title}</h1>
+    <a class="badge" href={`/category/${slugify(category)}/`}>{category}</a>
+    <p>by <a href={`/author/${slugify(author)}/`}>{author}</a> · {formatDate(date)}</p>
+  </div>
+
+  <slot />
+</MainLayout>
+
+<style>
+  .badge {
+    display: inline-block;
+    background-color: black;
+    color: white;
+    padding: 0.5em 0.5em 0.25em;
+    text-transform: uppercase;
+    font-size: var(--fs-200);
+    letter-spacing: 0.0625em;
+  }
+</style>

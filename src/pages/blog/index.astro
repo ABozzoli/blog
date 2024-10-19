@@ -1,0 +1,25 @@
+---
+import PostCard from "../../components/PostCard.astro";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+const posts = await Astro.glob("./post-*.md");
+console.log("🚀 ~ posts:", posts); //DEBUG
+
+const title = "Blog";
+---
+
+<MainLayout {title}>
+  <h1>{title}</h1>
+
+  <div class="cards-grid">
+    {posts.map(({ frontmatter, url }) => <PostCard {frontmatter} {url} hLevel="h3" />)}
+  </div>
+</MainLayout>
+
+<style>
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+</style>
