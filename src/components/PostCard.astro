@@ -1,8 +1,9 @@
 ---
 import { formatDate, slugify } from "../js/utils";
 
-const { frontmatter, url, hLevel } = Astro.props;
-const { title, category, author, date, image, description } = frontmatter;
+const { post, hLevel } = Astro.props;
+const { title, category, author, date, image, description } = post.data;
+const url = `/${post.collection}/${post.slug}/`;
 const Heading = hLevel ?? "h2";
 ---
 
@@ -12,12 +13,9 @@ const Heading = hLevel ?? "h2";
   </a>
 
   <div class="content">
-    <Heading><a href={url}>{title}</a></Heading>
-
+    <Heading class="h3"><a href={url}>{title}</a></Heading>
     <p>by <a href={`/author/${slugify(author)}/`}>{author}</a> · {formatDate(date)}</p>
-
     <p>{description}</p>
-
     <a class="badge" href={`/category/${slugify(category)}/`}>{category}</a>
   </div>
 </article>

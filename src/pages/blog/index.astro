@@ -1,18 +1,21 @@
 ---
+import { getCollection } from "astro:content";
 import PostCard from "../../components/PostCard.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 
-const posts = await Astro.glob("./post-*.md");
-console.log("🚀 ~ posts:", posts); //DEBUG
+//const posts = await Astro.glob("./post-*.md");
+const posts = await getCollection("blog", ({ data }) => {
+  return data.draft !== true;
+});
+//console.log("🚀 ~ posts:", posts); //DEBUG
 
 const title = "Blog";
 ---
 
 <MainLayout {title}>
   <h1>{title}</h1>
-
   <div class="cards-grid">
-    {posts.map(({ frontmatter, url }) => <PostCard {frontmatter} {url} hLevel="h3" />)}
+    {posts.map((post) => <PostCard {post} hLevel="h3" />)}
   </div>
 </MainLayout>
 
