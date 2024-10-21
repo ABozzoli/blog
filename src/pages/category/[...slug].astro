@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import { slugify } from "../../js/utils";
+import MainLayout from "../../layouts/MainLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  const categories = [...new Set(posts.map(({ data }) => data.category))];
+
+  return categories.map((category) => ({
+    params: { slug: slugify(category) },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+
+const posts = await getCollection("blog", ({ data }) => {
+  return data.draft !== true && data.category === category;
+});
+---
+
+<MainLayout {category}>
+  <h1>{category}</h1>
+  <div class="cards-grid">
+    {posts.map((post) => <PostCard {post} hLevel="h3" />)}
+  </div>
+</MainLayout>
+
+<style>
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+</style>
