@@ -4,17 +4,9 @@ export const routes = [
   { href: "/articles", title: "Articles" },
   { href: "/about-me", title: "About me" },
 ];
----
 
-<script>
-  // Highlight current page
-  const navLinks = document.querySelectorAll(".nav-link");
-  navLinks.forEach((link) => {
-    if (link.getAttribute("href") === window.location.pathname) {
-      link.setAttribute("aria-current", "page");
-    }
-  });
-</script>
+const currentPage = Astro.url.pathname;
+---
 
 <header>
   <a class="blog-title" href="/">A. Bozzoli</a>
@@ -24,7 +16,7 @@ export const routes = [
       {
         routes.map((route) => (
           <li>
-            <a class="nav-link" href={route.href}>
+            <a class="nav-link" href={route.href} aria-current={route.href === currentPage ? "page" : undefined}>
               {route.title}
             </a>
           </li>
