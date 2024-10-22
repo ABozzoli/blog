@@ -3,6 +3,8 @@ import { getCollection } from "astro:content";
 import PostCard from "../../components/PostCard.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 import type { GetStaticPaths } from "astro";
+import Pagination from "../../components/Pagination.astro";
+import Spacer from "../../components/Spacer.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = await getCollection("blog", ({ data }) => {
@@ -14,6 +16,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 }) satisfies GetStaticPaths; //https://github.com/withastro/astro/issues/6507#issuecomment-1489916992
 
 const { page } = Astro.props;
+console.log("🚀 ~ page:", {...page, data: null});
 
 const title = "Blog";
 ---
@@ -23,12 +26,16 @@ const title = "Blog";
   <div class="cards-grid">
     {page.data.map((post) => <PostCard {post} hLevel="h3" />)}
   </div>
+
+  <Spacer height="2rem" />
+  <Pagination {page} />
 </MainLayout>
 
 <style>
   .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 0 1rem 1rem 0;
   }
 </style>

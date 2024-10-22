@@ -1,0 +1,48 @@
+---
+const { page } = Astro.props;
+const length = page.lastPage;
+const pageNumbers = Array.from({ length }, (_, i) => i + 1);
+const currentPage = Astro.url.pathname;
+const root = currentPage.replace(/\/\d$/, "");
+---
+
+<nav aria-label="Page navigation">
+  <ul class="pagination" role="list">
+    <li><a href={page.url.first} aria-label="First Page">❮❮</a></li>
+    <li><a href={page.url.prev} aria-label="Previous Page">❮</a></li>
+    {
+      pageNumbers.map((pageNumber) => (
+        <li>
+          <a href={`${root}/${pageNumber}`} aria-current={`${root}/${pageNumber}` === currentPage ? "page" : undefined}>
+            {pageNumber}
+          </a>
+        </li>
+      ))
+    }
+    <li><a href={page.url.next} aria-label="Next Page">❯</a></li>
+    <li><a href={page.url.last} aria-label="Last Page">❯❯</a></li>
+  </ul>
+</nav>
+
+<style lang="scss">
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+
+    a {
+      display: inline-block;
+      height: 44px;
+      width: 44px;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &[aria-current="page"] {
+        background-color: black;
+        color: white;
+      }
+    }
+  }
+</style>
