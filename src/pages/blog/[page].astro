@@ -5,6 +5,7 @@ import MainLayout from "../../layouts/MainLayout.astro";
 import type { GetStaticPaths } from "astro";
 import Pagination from "../../components/Pagination.astro";
 import Spacer from "../../components/Spacer.astro";
+import TagCloud from "../../components/TagCloud.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = await getCollection("blog", ({ data }) => {
@@ -29,6 +30,9 @@ const title = "Blog";
 
   <Spacer height="2rem" />
   <Pagination {page} />
+  
+  <Spacer height="2rem" />
+  <TagCloud />
 </MainLayout>
 
 <style>
