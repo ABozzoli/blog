@@ -1,6 +1,7 @@
 ---
 import MainLayout from "./MainLayout.astro";
 import { slugify, formatDate } from "../js/utils";
+import RelatedPosts from "../components/relatedPosts.astro";
 
 const { frontmatter } = Astro.props;
 const { title, category, author, date, image } = frontmatter;
@@ -15,6 +16,8 @@ const { title, category, author, date, image } = frontmatter;
   </div>
 
   <slot />
+
+  <RelatedPosts {category} {title} />
 </MainLayout>
 
 <style>

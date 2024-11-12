@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+
+const { category, title } = Astro.props;
+
+// Note: check on title to exclude current post
+const posts = await getCollection("blog", ({ data }) => {
+  return data.draft !== true && data.category === category && data.title !== title;
+});
+---
+
+<h2>Related posts</h2>
+<ul class="related-posts" role="list" title="Related posts">
+  {
+    // Note: slice to cap number of related posts
+    posts.slice(0, 3).map((post) => (
+      <li>
+        <a class="badge" href={`/blog/${post.slug}/`}>
+          {post.data.title}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  h2 {
+    text-align: center;
+  }
+
+  .related-posts {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+</style>
