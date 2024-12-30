@@ -6,10 +6,21 @@ const currentPage = Astro.url.pathname;
 const root = currentPage.replace(/\/\d$/, "");
 ---
 
-<nav aria-label="Page navigation">
+<!-- Ref: https://www.htmhell.dev/adventcalendar/2024/14/ -->
+<nav aria-label="Pagination">
   <ul class="pagination" role="list">
-    <li><a href={page.url.first} aria-label="First Page">❮❮</a></li>
-    <li><a href={page.url.prev} aria-label="Previous Page">❮</a></li>
+    <li>
+      <a role="link" href={page.url.first} aria-disabled={!page.url.first ? "true" : "false"}>
+        <span class="visually-hidden">First page</span>
+        <span aria-hidden="true">❮❮</span>
+      </a>
+    </li>
+    <li>
+      <a role="link" href={page.url.prev} aria-disabled={!page.url.prev ? "true" : "false"}>
+        <span class="visually-hidden">Previous page</span>
+        <span aria-hidden="true">❮</span>
+      </a>
+    </li>
     {
       pageNumbers.map((pageNumber) => (
         <li>
@@ -19,8 +30,18 @@ const root = currentPage.replace(/\/\d$/, "");
         </li>
       ))
     }
-    <li><a href={page.url.next} aria-label="Next Page">❯</a></li>
-    <li><a href={page.url.last} aria-label="Last Page">❯❯</a></li>
+    <li>
+      <a role="link" href={page.url.next} aria-disabled={!page.url.next ? "true" : "false"}>
+        <span class="visually-hidden">Next page</span>
+        <span aria-hidden="true">❯</span>
+      </a>
+    </li>
+    <li>
+      <a role="link" href={page.url.last} aria-disabled={!page.url.last ? "true" : "false"}>
+        <span class="visually-hidden">Last page</span>
+        <span aria-hidden="true">❯❯</span>
+      </a>
+    </li>
   </ul>
 </nav>
 
