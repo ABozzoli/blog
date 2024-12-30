@@ -31,8 +31,8 @@ a {
 }
 
 button {
-  -webkit-appearance: none;
-  appearance: none;
+  all: unset;
+  outline: revert;
 }
 
 input,
@@ -54,6 +54,8 @@ button,
 [type="image"],
 [type="checkbox"],
 [type="radio"],
+label,
+select,
 summary {
   cursor: pointer;
 }
