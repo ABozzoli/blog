@@ -4,46 +4,52 @@ const length = page.lastPage;
 const pageNumbers = Array.from({ length }, (_, i) => i + 1);
 const currentPage = Astro.url.pathname;
 const root = currentPage.replace(/\/\d$/, "");
+
+/* Ref: https://www.htmhell.dev/adventcalendar/2024/14/ */
 ---
 
-<!-- Ref: https://www.htmhell.dev/adventcalendar/2024/14/ -->
-<nav aria-label="Pagination">
-  <ul class="pagination" role="list">
-    <li>
-      <a role="link" href={page.url.first} aria-disabled={!page.url.first ? "true" : "false"}>
-        <span class="visually-hidden">First page</span>
-        <span aria-hidden="true">❮❮</span>
-      </a>
-    </li>
-    <li>
-      <a role="link" href={page.url.prev} aria-disabled={!page.url.prev ? "true" : "false"}>
-        <span class="visually-hidden">Previous page</span>
-        <span aria-hidden="true">❮</span>
-      </a>
-    </li>
-    {
-      pageNumbers.map((pageNumber) => (
+{
+  page.lastPage > 1 && (
+    <nav aria-label="Pagination">
+      <ul class="pagination" role="list">
         <li>
-          <a href={`${root}/${pageNumber}`} aria-current={`${root}/${pageNumber}` === currentPage ? "page" : undefined}>
-            {pageNumber}
+          <a role="link" href={page.url.first} aria-disabled={!page.url.first ? "true" : "false"}>
+            <span class="visually-hidden">First page</span>
+            <span aria-hidden="true">❮❮</span>
           </a>
         </li>
-      ))
-    }
-    <li>
-      <a role="link" href={page.url.next} aria-disabled={!page.url.next ? "true" : "false"}>
-        <span class="visually-hidden">Next page</span>
-        <span aria-hidden="true">❯</span>
-      </a>
-    </li>
-    <li>
-      <a role="link" href={page.url.last} aria-disabled={!page.url.last ? "true" : "false"}>
-        <span class="visually-hidden">Last page</span>
-        <span aria-hidden="true">❯❯</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+        <li>
+          <a role="link" href={page.url.prev} aria-disabled={!page.url.prev ? "true" : "false"}>
+            <span class="visually-hidden">Previous page</span>
+            <span aria-hidden="true">❮</span>
+          </a>
+        </li>
+        {pageNumbers.map((pageNumber) => (
+          <li>
+            <a
+              href={`${root}/${pageNumber}`}
+              aria-current={`${root}/${pageNumber}` === currentPage ? "page" : undefined}
+            >
+              {pageNumber}
+            </a>
+          </li>
+        ))}
+        <li>
+          <a role="link" href={page.url.next} aria-disabled={!page.url.next ? "true" : "false"}>
+            <span class="visually-hidden">Next page</span>
+            <span aria-hidden="true">❯</span>
+          </a>
+        </li>
+        <li>
+          <a role="link" href={page.url.last} aria-disabled={!page.url.last ? "true" : "false"}>
+            <span class="visually-hidden">Last page</span>
+            <span aria-hidden="true">❯❯</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  )
+}
 
 <style lang="scss">
   .pagination {
