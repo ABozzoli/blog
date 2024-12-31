@@ -2,8 +2,28 @@
 const { page } = Astro.props;
 const length = page.lastPage;
 const pageNumbers = Array.from({ length }, (_, i) => i + 1);
-const currentPage = Astro.url.pathname;
-const root = currentPage.replace(/\/\d$/, "");
+const currentUrl = Astro.url.pathname;
+const root = currentUrl.replace(/\/\d$/, "");
+
+const ellipsedPageNumbers = (range = 0) => {
+  const index = pageNumbers.indexOf(page.currentPage);
+  const start = Math.max(0, index - range);
+  const end = index + range + 1;
+
+  const hiddenBefore = pageNumbers.slice(0, start);
+  const shownPages = pageNumbers.slice(start, end);
+  const hiddenAfter = pageNumbers.slice(end);
+
+  return { hiddenBefore, shownPages, hiddenAfter };
+};
+
+const getSkipText = (pages: number[]) => {
+  if (pages.length === 1) return `Skipping page ${pages[0]}`;
+  if (pages.length === 2) return `Skipping pages ${pages[0]} and ${pages[1]}`;
+  return `Skipping pages from ${pages[0]} to ${pages[pages.length - 1]}`;
+};
+
+const { hiddenBefore, shownPages, hiddenAfter } = ellipsedPageNumbers(1);
 
 /* Ref: https://www.htmhell.dev/adventcalendar/2024/14/ */
 ---
@@ -24,16 +44,32 @@ const root = currentPage.replace(/\/\d$/, "");
             <span aria-hidden="true">❮</span>
           </a>
         </li>
-        {pageNumbers.map((pageNumber) => (
+        {hiddenBefore.length > 0 && (
+          <li>
+            <div class="ellipses">
+              <span class="visually-hidden">{getSkipText(hiddenBefore)}</span>
+              <span aria-hidden="true">⋯</span>
+            </div>
+          </li>
+        )}
+        {shownPages.map((pageNumber) => (
           <li>
             <a
               href={`${root}/${pageNumber}`}
-              aria-current={`${root}/${pageNumber}` === currentPage ? "page" : undefined}
+              aria-current={`${root}/${pageNumber}` === currentUrl ? "page" : undefined}
             >
               {pageNumber}
             </a>
           </li>
         ))}
+        {hiddenAfter.length > 0 && (
+          <li>
+            <div class="ellipses">
+              <span class="visually-hidden">{getSkipText(hiddenAfter)}</span>
+              <span aria-hidden="true">⋯</span>
+            </div>
+          </li>
+        )}
         <li>
           <a role="link" href={page.url.next} aria-disabled={!page.url.next ? "true" : "false"}>
             <span class="visually-hidden">Next page</span>
@@ -57,7 +93,8 @@ const root = currentPage.replace(/\/\d$/, "");
     justify-content: center;
     gap: 0.5rem;
 
-    a {
+    a,
+    .ellipses {
       display: inline-block;
       height: 44px;
       width: 44px;
