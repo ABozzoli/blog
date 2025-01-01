@@ -52,7 +52,7 @@ body:has(.scroll-lock) {
   white-space: nowrap;
 }
 
-/* https://www.scottohara.me/blog/2023/03/21/visually-hidden-hack.html */
+/* Ref: https://www.scottohara.me/blog/2023/03/21/visually-hidden-hack.html */
 .visually-hidden:not(:focus):not(:active):not(:focus-within) {
   clip-path: inset(50%);
   height: 1px;
