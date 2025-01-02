@@ -6,7 +6,8 @@ a[href]:hover,
 a[href]:focus {
   text-decoration: underline;
   text-decoration-thickness: 0.125em;
-  text-underline-offset: 0.25em;
+  text-underline-offset: 0.125em;
+  text-decoration-skip-ink: none;
 }
 
 a:not([href]) {
@@ -42,10 +43,11 @@ body:has(.scroll-lock) {
 
 .badge {
   display: inline-block;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 500;
+  padding: 0.5em;
   line-height: 1;
+  font-size: var(--fs-12px);
+  font-weight: 500;
+  letter-spacing: 0.0625em;
   text-transform: uppercase;
   background-color: black;
   color: white;
