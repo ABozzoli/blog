@@ -6,6 +6,11 @@ const currentUrl = Astro.url.pathname;
 const root = currentUrl.replace(/\/\d$/, "");
 
 const ellipsedPageNumbers = (range = 0) => {
+  /* Check to prevent cutting off pages if not needed */
+  if (1 + range * 2 >= pageNumbers.length) {
+    return { hiddenBefore: [], shownPages: pageNumbers, hiddenAfter: [] };
+  }
+
   const index = pageNumbers.indexOf(page.currentPage);
   const start = Math.max(0, index - range);
   const end = index + range + 1;
@@ -32,13 +37,13 @@ const { hiddenBefore, shownPages, hiddenAfter } = ellipsedPageNumbers(1);
   page.lastPage > 1 && (
     <nav aria-label="Pagination">
       <ul class="pagination" role="list">
-        <li>
+        <li class="arrow">
           <a role="link" href={page.url.first} aria-disabled={!page.url.first ? "true" : "false"}>
             <span class="visually-hidden">First page</span>
             <span aria-hidden="true">❮❮</span>
           </a>
         </li>
-        <li>
+        <li class="arrow">
           <a role="link" href={page.url.prev} aria-disabled={!page.url.prev ? "true" : "false"}>
             <span class="visually-hidden">Previous page</span>
             <span aria-hidden="true">❮</span>
@@ -70,13 +75,13 @@ const { hiddenBefore, shownPages, hiddenAfter } = ellipsedPageNumbers(1);
             </div>
           </li>
         )}
-        <li>
+        <li class="arrow">
           <a role="link" href={page.url.next} aria-disabled={!page.url.next ? "true" : "false"}>
             <span class="visually-hidden">Next page</span>
             <span aria-hidden="true">❯</span>
           </a>
         </li>
-        <li>
+        <li class="arrow">
           <a role="link" href={page.url.last} aria-disabled={!page.url.last ? "true" : "false"}>
             <span class="visually-hidden">Last page</span>
             <span aria-hidden="true">❯❯</span>
@@ -106,6 +111,12 @@ const { hiddenBefore, shownPages, hiddenAfter } = ellipsedPageNumbers(1);
       &[aria-current="page"] {
         background-color: black;
         color: white;
+      }
+    }
+
+    @media (max-width: 768px) {
+      li:not(.arrow):has(> :not([aria-current="page"])) {
+        display: none;
       }
     }
   }
