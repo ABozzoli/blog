@@ -1,18 +1,14 @@
----
-import Spacer from "./Spacer.astro";
----
-
-<Spacer height="5rem" />
 <footer>
-  Copyright &copy; {new Date().getFullYear().toString()} A. Bozzoli
+   &copy; {new Date().getFullYear().toString()} Alessandro Bozzoli — All rights reserved.
 </footer>
 
 <style>
   footer {
     text-align: center;
-    padding: 2rem;
+    padding: 24px;
     background-color: black;
     color: white;
     font-size: var(--fs-300);
+    box-shadow: var(--border-shadow);
   }
 </style>

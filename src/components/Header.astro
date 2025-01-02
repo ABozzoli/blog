@@ -1,46 +1,58 @@
 ---
 export const routes = [
-  { href: "/", title: "Homepage" },
-  { href: "/articles", title: "Articles" },
-  { href: "/about-me", title: "About me" },
+  { href: "/", title: "Home" },
+  { href: "/blog", title: "Blog" },
 ];
 
 const currentPage = Astro.url.pathname;
 ---
 
 <header>
-  <a class="blog-title" href="/">A. Bozzoli</a>
+  <div class="container">
+    <a class="blog-title" href="/">A. Bozzoli</a>
 
-  <nav aria-label="Primary">
-    <ul role="list">
-      {
-        routes.map((route) => (
-          <li>
-            <a class="nav-link" href={route.href} aria-current={route.href === currentPage ? "page" : undefined}>
-              {route.title}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </nav>
+    <nav aria-label="Primary">
+      <ul role="list">
+        {
+          routes.map((route) => (
+            <li>
+              <a class="nav-link" href={route.href} aria-current={route.href === currentPage ? "page" : undefined}>
+                {route.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
 </header>
 
 <style lang="scss">
   header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background-color: white;
+    border-bottom: 1px solid black;
+    box-shadow: var(--border-shadow);
+    position: sticky;
+    top: 0;
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
     .blog-title {
       display: block;
-      padding: 1rem;
+      padding: 0.5rem 1rem;
       font-size: var(--fs-600);
       font-weight: bold;
       letter-spacing: 0.125em;
+      width: fit-content;
     }
 
     nav {
+      width: fit-content;
+
       ul {
         display: flex;
         align-items: center;

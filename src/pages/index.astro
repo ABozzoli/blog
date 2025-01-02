@@ -1,9 +1,35 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
+import MainLayout from "../layouts/MainLayout.astro";
 
-const title = 'Homepage';
+const title = "About me";
 ---
 
 <MainLayout {title}>
   <h1>{title}</h1>
+
+  <div class="d-flex gap-16 mb-48">
+    <!-- TODO: improve portrait alt text -->
+    <img class="portrait card-shadow" src="/images/portrait.jpg" alt="Alessandro Bozzoli portrait" />
+    <p class="intro align-self-end">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab error, facere vel ad similique ut expedita ea alias
+      quam eaque pariatur! Perferendis quibusdam quidem ducimus necessitatibus eaque illo tempora maxime, voluptatibus
+      nemo, eius quisquam quasi fugit voluptatem distinctio soluta deserunt!
+    </p>
+  </div>
+
+  <h2>Latest posts</h2>
+  TODO
 </MainLayout>
+
+<style>
+  .portrait {
+    width: 180px;
+    height: 180px;
+    aspect-ratio: 1;
+  }
+
+  .intro {
+    font-size: var(--fs-20px);
+    margin-bottom: 12px;
+  }
+</style>
