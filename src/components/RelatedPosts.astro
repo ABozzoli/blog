@@ -9,29 +9,18 @@ const posts = await getCollection("blog", ({ data }) => {
 });
 ---
 
-<h2>Related posts</h2>
-<ul class="related-posts" role="list" title="Related posts">
-  {
-    // Note: slice to cap number of related posts
-    posts.slice(0, 3).map((post) => (
-      <li>
-        <a class="badge" href={`/blog/${post.slug}/`}>
-          {post.data.title}
-        </a>
-      </li>
-    ))
-  }
-</ul>
-
-<style>
-  h2 {
-    text-align: center;
-  }
-
-  .related-posts {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-</style>
+{posts.length > 0 &&
+  <h2 id="related-posts-title" class="text-center mt-48">Related posts</h2>
+  <ul class="tag-cloud" role="list" aria-labelledby="related-posts-title">
+    {
+      // Note: slice to cap number of related posts
+      posts.slice(0, 3).map((post) => (
+        <li>
+          <a class="badge" href={`/blog/${post.slug}/`}>
+            {post.data.title}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+}

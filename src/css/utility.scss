@@ -188,3 +188,14 @@ $sides: (top, bottom, left, right);
 .line-clamp-none {
   @include line-clamp(none);
 }
+
+/* Text alignment */
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
