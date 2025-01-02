@@ -8,26 +8,17 @@ const { title, category, author, date, image } = frontmatter;
 ---
 
 <MainLayout>
-  <div class="hero-image">
+  <div class="flow">
     <img src={image.src} alt={image.alt} />
-    <h1>{title}</h1>
-    <a class="badge" href={`/category/${slugify(category)}/`}>{category}</a>
-    <p>by <a href={`/author/${slugify(author)}/`}>{author}</a> · {formatDate(date)}</p>
+
+    <div class="mt-32 mb-32">
+      <h1 class="mb-0">{title}</h1>
+      <p>By <a href={`/author/${slugify(author)}/`}>{author}</a> · {formatDate(date)}</p>
+      <a class="badge" href={`/category/${slugify(category)}/`}>{category}</a>
+    </div>
+
+    <slot />
+
+    <RelatedPosts {category} {title} />
   </div>
-
-  <slot />
-
-  <RelatedPosts {category} {title} />
 </MainLayout>
-
-<style>
-  .badge {
-    display: inline-block;
-    background-color: black;
-    color: white;
-    padding: 0.5em 0.5em 0.25em;
-    text-transform: uppercase;
-    font-size: var(--fs-200);
-    letter-spacing: 0.0625em;
-  }
-</style>

@@ -17,6 +17,10 @@
   }
 }
 
+.flow > * + * {
+  margin-top: 1em;
+}
+
 body {
   min-height: 100svh;
   display: flex;

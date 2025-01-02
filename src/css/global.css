@@ -60,6 +60,12 @@ body:has(.scroll-lock) {
   gap: 24px;
 }
 
+.card-shadow {
+  border: 1px solid black;
+  box-shadow: 12px 12px 0 black;
+  margin: 0 12px 12px 0;
+}
+
 .tag-cloud {
   display: flex;
   justify-content: center;
