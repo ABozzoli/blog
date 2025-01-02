@@ -23,15 +23,7 @@ const posts = await getCollection("blog", ({ data }) => {
 
 <MainLayout {category}>
   <h1>{category}</h1>
-  <div class="cards-grid">
+  <div class="card-stack">
     {posts.map((post) => <PostCard {post} hLevel="h3" />)}
   </div>
 </MainLayout>
-
-<style>
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1rem;
-  }
-</style>

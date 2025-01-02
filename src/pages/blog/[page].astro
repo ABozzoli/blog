@@ -24,7 +24,7 @@ const title = "Blog";
 
 <MainLayout {title}>
   <h1>{title}</h1>
-  <div class="cards-grid">
+  <div class="card-stack">
     {page.data.map((post) => <PostCard {post} hLevel="h3" />)}
   </div>
 
@@ -35,12 +35,3 @@ const title = "Blog";
   <Spacer height="2rem" />
   <TagCloud />
 </MainLayout>
-
-<style>
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 0 1rem 1rem 0;
-  }
-</style>

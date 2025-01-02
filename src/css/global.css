@@ -54,6 +54,12 @@ body:has(.scroll-lock) {
   white-space: nowrap;
 }
 
+.card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 /* Ref: https://www.scottohara.me/blog/2023/03/21/visually-hidden-hack.html */
 .visually-hidden:not(:focus):not(:active):not(:focus-within) {
   clip-path: inset(50%);
