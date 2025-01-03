@@ -7,20 +7,18 @@ const { category, title } = Astro.props;
 const posts = await getCollection("blog", ({ data }) => {
   return data.draft !== true && data.category === category && data.title !== title;
 });
+posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 ---
 
 {posts.length > 0 &&
   <h2 id="related-posts-title" class="text-center mt-48">Related posts</h2>
   <ul class="tag-cloud" role="list" aria-labelledby="related-posts-title">
-    {
-      // Note: slice to cap number of related posts
-      posts.slice(0, 3).map((post) => (
-        <li>
-          <a class="badge" href={`/blog/${post.slug}/`}>
-            {post.data.title}
-          </a>
-        </li>
-      ))
-    }
+    {posts.slice(0, 3).map((post) => (
+      <li>
+        <a class="badge" href={`/blog/${post.slug}/`}>
+          {post.data.title}
+        </a>
+      </li>
+    ))}
   </ul>
 }

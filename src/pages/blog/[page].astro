@@ -11,6 +11,7 @@ export const getStaticPaths = (async ({ paginate }) => {
   const posts = await getCollection("blog", ({ data }) => {
     return data.draft !== true;
   });
+  posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
   const pages = paginate(posts, { pageSize: 2 });
   return pages;
