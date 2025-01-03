@@ -28,10 +28,10 @@ const title = "Home";
     </div>
   </section>
 
-  <h2>Latest posts</h2>
-  <div class="card-stack">
+  <h2 id="latest-posts-title">Latest posts</h2>
+  <ul class="card-stack" role="list" aria-labelledby="latest-posts-title">
     {posts.slice(0, 3).map((post) => <PostCard {post} hLevel="h3" />)}
-  </div>
+  </ul>
 </MainLayout>
 
 <style lang="scss">

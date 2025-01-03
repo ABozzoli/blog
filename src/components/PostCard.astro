@@ -7,18 +7,20 @@ const url = `/${post.collection}/${post.slug}/`;
 const Heading = hLevel ?? "h2";
 ---
 
-<article class="post-card card-shadow">
-  <a class="card-image" href={url} tabindex="-1" aria-hidden="true">
-    <img src={image.src} alt={image.alt} />
-  </a>
+<li>
+  <article class="post-card card-shadow">
+    <a class="card-image" href={url} tabindex="-1" aria-hidden="true">
+      <img src={image.src} alt={image.alt} />
+    </a>
 
-  <div class="card-content">
-    <Heading class="h3"><a href={url}>{title}</a></Heading>
-    <p class="ribbon">By <a href={`/author/${slugify(author)}/`}>{author}</a> · {formatDate(date)}</p>
-    <p class="line-clamp-2">{description}</p>
-    <a class="badge" href={`/category/${slugify(category)}/`}>{category}</a>
-  </div>
-</article>
+    <div class="card-content">
+      <Heading class="h3"><a href={url}>{title}</a></Heading>
+      <p class="ribbon">By <a href={`/author/${slugify(author)}/`}>{author}</a> · {formatDate(date)}</p>
+      <p class="line-clamp-2">{description}</p>
+      <a class="badge" href={`/category/${slugify(category)}/`}>{category}</a>
+    </div>
+  </article>
+</li>
 
 <style lang="scss">
   .post-card {

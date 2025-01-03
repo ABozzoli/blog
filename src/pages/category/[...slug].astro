@@ -23,8 +23,8 @@ posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).get
 ---
 
 <MainLayout {category}>
-  <h1>{category}</h1>
-  <div class="card-stack">
+  <h1 id="page-title">{category}</h1>
+  <ul class="card-stack" role="list" aria-labelledby="page-title">
     {posts.map((post) => <PostCard {post} hLevel="h3" />)}
-  </div>
+  </ul>
 </MainLayout>
