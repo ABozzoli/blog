@@ -1,35 +1,55 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 
-const title = "About me";
+const title = "Home";
 ---
 
 <MainLayout {title}>
-  <h1>{title}</h1>
-
-  <div class="d-flex gap-16 mb-48">
+  <section class="about-me" aria-labelledby="about-me-title">
     <!-- TODO: improve portrait alt text -->
     <img class="portrait card-shadow" src="/images/portrait.jpg" alt="Alessandro Bozzoli portrait" />
-    <p class="intro align-self-end">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab error, facere vel ad similique ut expedita ea alias
-      quam eaque pariatur! Perferendis quibusdam quidem ducimus necessitatibus eaque illo tempora maxime, voluptatibus
-      nemo, eius quisquam quasi fugit voluptatem distinctio soluta deserunt!
-    </p>
-  </div>
+    <div class="intro-text">
+      <hgroup>
+        <h2 id="about-me-title" class="mb-0">Alessandro Bozzoli</h2>
+        <p>Frontend Developer</p>
+      </hgroup>
+      <p>
+        Serial overthinker,<br />
+        fervently passionate about<br />
+        <strong>CSS</strong> and <strong>accessibility</strong>.
+      </p>
+    </div>
+  </section>
 
   <h2>Latest posts</h2>
   TODO
 </MainLayout>
 
-<style>
-  .portrait {
-    width: 180px;
-    height: 180px;
-    aspect-ratio: 1;
+<style lang="scss">
+  .about-me {
+    display: flex;
+    column-gap: 16px;
+    margin-bottom: 48px;
+
+    .portrait {
+      width: 140px;
+      height: 160px;
+      aspect-ratio: 1;
+    }
+
+    .intro-text {
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      > p {
+        font-size: var(--fs-20px);
+      }
+    }
   }
 
-  .intro {
-    font-size: var(--fs-20px);
-    margin-bottom: 12px;
+  @media (max-width: 576px) {
+    /* TODO */
   }
 </style>
