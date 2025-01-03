@@ -14,3 +14,7 @@ export function formatDate(date) {
     timeZone: "UTC",
   })
 }
+
+export function sortByDate(posts) {
+  return posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+}

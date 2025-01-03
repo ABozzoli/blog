@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { sortByDate } from "../js/utils";
 
 const { category, title } = Astro.props;
 
@@ -7,7 +8,7 @@ const { category, title } = Astro.props;
 const posts = await getCollection("blog", ({ data }) => {
   return data.draft !== true && data.category === category && data.title !== title;
 });
-posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+sortByDate(posts);
 ---
 
 {posts.length > 0 &&
