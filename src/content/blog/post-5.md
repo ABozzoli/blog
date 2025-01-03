@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/ArticleLayout.astro"
 title: JavaScript SchmavaScript
-date: 2022-12-05
+date: 2024-12-05
 author: Victoria Greenfelder
 image: {
   src: "/images/post-5.jpg",
