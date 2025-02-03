@@ -14,7 +14,7 @@ const Heading = hLevel ?? "h2";
     </a>
 
     <div class="card-content">
-      <Heading class="h3"><a href={url}>{title}</a></Heading>
+      <Heading class="h3 mb-4"><a href={url}>{title}</a></Heading>
       <p class="ribbon">By <a href={`/author/${slugify(author)}/`}>{author}</a> · {formatDate(date)}</p>
       <p class="line-clamp-2">{description}</p>
       <a class="badge" href={`/category/${slugify(category)}/`}>{category}</a>
@@ -35,19 +35,15 @@ const Heading = hLevel ?? "h2";
     .card-content {
       padding: 16px;
 
-      .h3 {
-        margin-bottom: 0;
-      }
-
       .ribbon {
-        font-size: var(--fs-12px);
+        font-size: var(--fs-14px);
       }
     }
   }
 
   @media (max-width: 768px) {
     .post-card {
-      display: initial;
+      display: revert;
 
       .card-image {
         display: none;
