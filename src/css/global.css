@@ -95,3 +95,24 @@ ul.tag-cloud {
   white-space: nowrap;
   width: 1px;
 }
+
+/* Ref: https://medienbaecker.com/articles/focus-outlines */
+*:focus-visible {
+  box-shadow: 0 0 0 3px white;
+  outline: 2px solid black;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  *:focus-visible {
+    animation: outline-close-in 0.2s ease-out;
+  }
+}
+
+@keyframes outline-close-in {
+  from {
+    box-shadow: 0 0 0 3px transparent;
+    outline-color: transparent;
+    outline-offset: 6px;
+  }
+}
