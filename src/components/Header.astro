@@ -1,4 +1,6 @@
 ---
+import SkipLinks from "./SkipLinks.astro";
+
 export const routes = [
   { href: "/", title: "Home" },
   { href: "/blog", title: "Blog" },
@@ -8,6 +10,8 @@ const currentPage = Astro.url.pathname;
 ---
 
 <header>
+  <SkipLinks />
+
   <div class="container">
     <a class="blog-title" href="/">A. Bozzoli</a>
 
@@ -34,6 +38,7 @@ const currentPage = Astro.url.pathname;
     box-shadow: var(--border-shadow);
     position: sticky;
     top: 0;
+    height: var(--header-height);
 
     .container {
       display: flex;
