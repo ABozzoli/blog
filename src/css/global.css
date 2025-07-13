@@ -79,7 +79,7 @@ ul.card-stack {
   gap: 24px;
 }
 
-.card-shadow {
+.block-shadow {
   border: 1px solid black;
   box-shadow: 12px 12px 0 black;
   margin: 0 12px 12px 0;
