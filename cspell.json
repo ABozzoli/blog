@@ -3,7 +3,30 @@
   "ignorePaths": [],
   "dictionaryDefinitions": [],
   "dictionaries": [],
-  "words": ["frontmatter", "ellipsed"],
+  "words": [
+    "frontmatter",
+    "ellipsed",
+    "jfif",
+    "frameset",
+    "nobr",
+    "noembed",
+    "noframes",
+    "tabindex",
+    /*** ROLES ***/
+    "contentinfo",
+    "menuitemcheckbox",
+    "menuitemradio",
+    "menuitem",
+    "spinbutton",
+    "treegrid",
+    /*** ARIA ***/
+    "aria-labelledby",
+    "aria-describedby",
+    "aria-posinset",
+    "aria-setsize",
+    "aria-haspopup",
+    "aria-multiselectable"
+  ],
   "ignoreWords": [],
   "import": []
 }
