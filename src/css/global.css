@@ -1,10 +1,19 @@
-@view-transition {
-  navigation: auto;
+/* Ref: https://utilitybend.com/blog/added-to-my-css-reset-interpolate-size-the-quality-of-life-feature-we-all-wanted-at-some-point */
+:root {
+  interpolate-size: allow-keywords;
+}
+
+* {
+  transition-behavior: allow-discrete;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+
+  @view-transition {
+    navigation: auto;
   }
 }
 
