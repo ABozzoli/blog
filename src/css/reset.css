@@ -34,6 +34,9 @@ a {
 button {
   all: unset;
   outline: revert;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 input,
@@ -70,6 +73,11 @@ summary {
 
 [aria-busy="true"] {
   cursor: progress;
+}
+
+/* Ref: https://webkit.org/blog/16831/line-height-units/ */
+p {
+  margin-block: 1lh;
 }
 
 h1,
