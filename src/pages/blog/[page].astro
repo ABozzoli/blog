@@ -27,7 +27,7 @@ const title = "Blog";
 <MainLayout {title}>
   <h1 id="page-title">{title}</h1>
   <ul class="card-stack" role="list" aria-labelledby="page-title">
-    {page.data.map((post) => <PostCard {post} hLevel="h3" />)}
+    {page.data.map((post, index) => <PostCard {post} {index} {page} hLevel="h3" />)}
   </ul>
 
   <!-- TODO: hide spacer if there's no pagination -->
