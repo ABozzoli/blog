@@ -1,15 +1,29 @@
 /*** LAYOUT ***/
-/* Ref: https://gist.github.com/jacurtis/30da4bf9a6c9b9b5cc0aebac512ca7c9 */
-$spaces: (0, 4, 8, 12, 16, 24, 32, 48, 64);
-$sides: (top, bottom, left, right);
-@each $space in $spaces {
-  @each $side in $sides {
-    .m#{str-slice($side, 0, 1)}-#{$space} {
-      margin-#{$side}: #{$space}px !important;
+/*** Spacing ***/
+@each $prop in (margin, padding) {
+  $prop-abbr: str-slice($prop, 1, 1);
+
+  @each $space in (0, 4, 8, 12, 16, 24, 32, 48, 64) {
+    .#{$prop-abbr}-#{$space} {
+      #{$prop}: #{$space}px !important;
     }
 
-    .p#{str-slice($side, 0, 1)}-#{$space} {
-      padding-#{$side}: #{$space}px !important;
+    .#{$prop-abbr}x-#{$space} {
+      #{$prop}-left: #{$space}px !important;
+      #{$prop}-right: #{$space}px !important;
+    }
+
+    .#{$prop-abbr}y-#{$space} {
+      #{$prop}-top: #{$space}px !important;
+      #{$prop}-bottom: #{$space}px !important;
+    }
+
+    @each $dir in (top, right, bottom, left) {
+      $dir-abbr: str-slice($dir, 1, 1);
+
+      .#{$prop-abbr}#{$dir-abbr}-#{$space} {
+        #{$prop}-#{$dir}: #{$space}px !important;
+      }
     }
   }
 }
@@ -132,7 +146,7 @@ $sides: (top, bottom, left, right);
 }
 
 /* Gap between rows and columns */
-@each $space in $spaces {
+@each $space in (0, 4, 8, 12, 16, 24, 32, 48, 64) {
   .gap-#{$space} {
     gap: #{$space}px !important;
   }

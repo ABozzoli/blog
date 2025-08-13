@@ -29,3 +29,12 @@ body {
 *:target {
   scroll-margin-top: calc(var(--header-height) + 32px);
 }
+
+/* Grid auto-fill (Ref: https://youtu.be/bj0Z_GncIwY) */
+.grid-auto-fill {
+  --min-size: 120px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--min-size, 16rem), 100%), 1fr));
+  gap: 1rem;
+}
