@@ -12,6 +12,8 @@
     "noembed",
     "noframes",
     "tabindex",
+    "closedby",
+    "commandfor",
     /*** ROLES ***/
     "contentinfo",
     "menuitemcheckbox",
@@ -25,7 +27,8 @@
     "aria-posinset",
     "aria-setsize",
     "aria-haspopup",
-    "aria-multiselectable"
+    "aria-multiselectable",
+    "aria-valuenow",
   ],
   "ignoreWords": [],
   "import": []
