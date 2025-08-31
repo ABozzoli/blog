@@ -38,3 +38,7 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(min(var(--min-size, 16rem), 100%), 1fr));
   gap: 1rem;
 }
+
+html {
+  scrollbar-gutter: stable;
+}
