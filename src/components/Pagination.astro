@@ -111,6 +111,13 @@ const { hiddenBefore, shownPages, hiddenAfter } = ellipsedPageNumbers(1);
       &[aria-current="page"] {
         background-color: black;
         color: white;
+        font-weight: bold;
+      }
+
+      &:not([aria-disabled="true"]):hover {
+        background-color: black;
+        color: white;
+        text-decoration-line: none;
       }
     }
 
