@@ -2,52 +2,35 @@
 import { formatDate, slugify } from "../js/utils";
 
 const { article, index, page, hLevel } = Astro.props;
-const { title, category, author, date, image, description } = article.data;
+const { title, category, date, description } = article.data;
 const url = `/${article.collection}/${article.slug}/`;
 const Heading = hLevel ?? "h2";
 ---
 
 <li aria-setsize={page?.total} aria-posinset={page?.start + index + 1}>
   <article class="article-card block-shadow" aria-labelledby=`article-card-${index}-title`>
-    <a class="card-image" href={url} tabindex="-1" aria-hidden="true">
-      <img src={image.src} alt={image.alt} />
-    </a>
-
-    <div class="card-content">
-      <Heading id=`article-card-${index}-title` class="h3 mb-4"><a href={url}>{title}</a></Heading>
-      <p class="ribbon">By <a href={`/author/${slugify(author)}/`}>{author}</a> · {formatDate(date)}</p>
-      <p class="line-clamp-2">{description}</p>
-      <a class="badge" href={`/category/${slugify(category)}/`}>{category}</a>
-    </div>
+    <Heading id=`article-card-${index}-title` class="h3 mb-4">
+      <a href={url}>{title}</a>
+    </Heading>
+    <p class="ribbon">Posted on {formatDate(date)}</p>
+    <p class="line-clamp-2">{description}</p>
+    <a class="badge" href={`/category/${slugify(category)}/`}>{category}</a>
   </article>
 </li>
 
 <style lang="scss">
   .article-card {
-    display: grid;
-    grid-template-columns: 158px 1fr;
-    min-height: 158px;
+    min-height: 160px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
 
-    img {
-      height: 100%;
+    .ribbon {
+      font-size: var(--fs-14px);
     }
 
-    .card-content {
-      padding: 16px;
-
-      .ribbon {
-        font-size: var(--fs-14px);
-      }
-    }
-  }
-
-  @media (max-width: 768px) {
-    .article-card {
-      display: revert;
-
-      .card-image {
-        display: none;
-      }
+    .badge {
+      margin-top: auto;
     }
   }
 </style>
