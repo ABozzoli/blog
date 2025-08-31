@@ -28,12 +28,11 @@ img {
 
 a {
   color: inherit;
-  text-decoration: none;
 }
 
 button {
   all: unset;
-  outline: revert;
+  outline: revert; /* Restore the default focus outline removed by "all: unset" */
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
