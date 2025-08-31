@@ -1,13 +1,13 @@
 ---
 import { getCollection } from "astro:content";
 import MainLayout from "../layouts/MainLayout.astro";
-import PostCard from "../components/PostCard.astro";
+import ArticleCard from "../components/ArticleCard.astro";
 import { sortByDate } from "../js/utils";
 
-const posts = await getCollection("blog", ({ data }) => {
+const articles = await getCollection("blog", ({ data }) => {
   return data.draft !== true;
 });
-sortByDate(posts);
+sortByDate(articles);
 
 const title = "Home";
 ---
@@ -29,9 +29,9 @@ const title = "Home";
     </div>
   </section>
 
-  <h2 id="latest-posts-title">Latest posts</h2>
-  <ul class="card-stack" role="list" aria-labelledby="latest-posts-title">
-    {posts.slice(0, 3).map((post) => <PostCard {post} hLevel="h3" />)}
+  <h2 id="latest-articles-title">Latest articles</h2>
+  <ul class="card-stack" role="list" aria-labelledby="latest-articles-title">
+    {articles.slice(0, 3).map((article) => <ArticleCard {article} hLevel="h3" />)}
   </ul>
 </MainLayout>
 

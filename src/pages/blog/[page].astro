@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import PostCard from "../../components/PostCard.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 import type { GetStaticPaths } from "astro";
 import Pagination from "../../components/Pagination.astro";
@@ -9,12 +9,12 @@ import TagCloud from "../../components/TagCloud.astro";
 import { sortByDate } from "../../js/utils";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const posts = await getCollection("blog", ({ data }) => {
+  const articles = await getCollection("blog", ({ data }) => {
     return data.draft !== true;
   });
-  sortByDate(posts);
+  sortByDate(articles);
 
-  const pages = paginate(posts, { pageSize: 2 });
+  const pages = paginate(articles, { pageSize: 2 });
   return pages;
 }) satisfies GetStaticPaths; /* https://github.com/withastro/astro/issues/6507#issuecomment-1489916992 */
 
@@ -27,7 +27,7 @@ const title = "Blog";
 <MainLayout {title}>
   <h1 id="page-title">{title}</h1>
   <ul class="card-stack" role="list" aria-labelledby="page-title">
-    {page.data.map((post, index) => <PostCard {post} {index} {page} hLevel="h3" />)}
+    {page.data.map((article, index) => <ArticleCard {article} {index} {page} hLevel="h3" />)}
   </ul>
 
   <!-- TODO: hide spacer if there's no pagination -->

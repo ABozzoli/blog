@@ -1,13 +1,13 @@
 ---
 import { getCollection } from "astro:content";
-import PostCard from "../../components/PostCard.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 import { sortByDate } from "../../js/utils";
 
-const posts = await getCollection("blog", ({ data }) => {
+const articles = await getCollection("blog", ({ data }) => {
   return data.draft !== true;
 });
-sortByDate(posts);
+sortByDate(articles);
 
 const title = "Blog";
 ---
@@ -15,6 +15,6 @@ const title = "Blog";
 <MainLayout {title}>
   <h1 id="page-title">{title}</h1>
   <ul class="card-stack" role="list" aria-labelledby="page-title">
-    {posts.map((post) => <PostCard {post} hLevel="h3" />)}
+    {articles.map((article) => <ArticleCard {article} hLevel="h3" />)}
   </ul>
 </MainLayout>

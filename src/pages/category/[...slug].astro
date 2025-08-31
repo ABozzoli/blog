@@ -2,11 +2,11 @@
 import { getCollection } from "astro:content";
 import { slugify, sortByDate } from "../../js/utils";
 import MainLayout from "../../layouts/MainLayout.astro";
-import PostCard from "../../components/PostCard.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
-  const categories = [...new Set(posts.map(({ data }) => data.category))];
+  const articles = await getCollection("blog");
+  const categories = [...new Set(articles.map(({ data }) => data.category))];
 
   return categories.map((category) => ({
     params: { slug: slugify(category) },
@@ -16,15 +16,15 @@ export async function getStaticPaths() {
 
 const { category } = Astro.props;
 
-const posts = await getCollection("blog", ({ data }) => {
+const articles = await getCollection("blog", ({ data }) => {
   return data.draft !== true && data.category === category;
 });
-sortByDate(posts);
+sortByDate(articles);
 ---
 
 <MainLayout {category}>
   <h1 id="page-title">{category}</h1>
   <ul class="card-stack" role="list" aria-labelledby="page-title">
-    {posts.map((post) => <PostCard {post} hLevel="h3" />)}
+    {articles.map((article) => <ArticleCard {article} hLevel="h3" />)}
   </ul>
 </MainLayout>

@@ -15,6 +15,6 @@ export function formatDate(date) {
   })
 }
 
-export function sortByDate(posts) {
-  return posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+export function sortByDate(articles) {
+  return articles.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 }
