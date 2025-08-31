@@ -2,7 +2,7 @@
   <a href="#main" class="skip-link">Skip to main content</a>
 </div>
 
-<style>
+<style lang="scss">
   .skip-links {
     position: absolute;
     inset-inline: 0;
@@ -12,11 +12,17 @@
     background-color: black;
     color: white;
     font-size: var(--fs-400);
+    opacity: 0;
     transform: translateY(-100%);
     transition: transform 0.3s;
-  }
 
-  .skip-links:focus-within {
-    transform: translateY(0%);
+    &:focus-within {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+
+    a {
+      padding-inline: 0.25ch;
+    }
   }
 </style>
