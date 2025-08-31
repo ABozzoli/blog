@@ -25,21 +25,36 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-a[href] {
-  text-decoration-skip-ink: none;
+a {
   text-decoration-thickness: 0.125em;
   text-underline-offset: 0.125em;
 }
 
+a:not(p *) {
+  text-decoration-line: none;
+}
+
 a[href]:hover {
-  text-decoration-style: double;
-  text-decoration-thickness: 0.1em;
+  text-decoration-line: underline;
 }
 
 :is(h1, h2, h3, h4, h5, h6),
 :is(.h1, .h2, .h3, .h4, .h5, .h6) {
   font-family: var(--ff-title);
   text-decoration-skip-ink: none;
+
+  a {
+    text-decoration-line: underline;
+
+    &:hover {
+      background-color: black;
+      text-decoration-color: black;
+      box-shadow:
+        0.125em 0 black,
+        -0.125em 0 black;
+      color: white;
+    }
+  }
 }
 
 a:not([href]) {
@@ -102,6 +117,8 @@ body:has(.scroll-lock) {
 
 .badge {
   display: inline-block;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
   padding: 0.5em;
   line-height: 1;
   font-size: var(--fs-12px);
