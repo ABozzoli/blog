@@ -5,7 +5,14 @@
 }
 
 .flow > * + * {
-  margin-top: 1em;
+  margin-top: 1em; /* fallback for browsers lh without support */
+  margin-top: 1lh;
+
+  &:is(h1, h2, h3, h4, h5, h6),
+  &:is(.h1, .h2, .h3, .h4, .h5, .h6) {
+    margin-top: 1.5em; /* fallback for browsers lh without support */
+    margin-top: 1.5lh;
+  }
 }
 
 /* To make main expand and push footer to the bottom */
@@ -23,7 +30,7 @@ body {
 
 /* Ref: https://youtu.be/xpQYd_rxy8Y */
 :root {
-  --header-height: 50px;
+  --header-height: 3.5rem;
 }
 
 *:target {
@@ -37,8 +44,4 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(var(--min-size, 16rem), 100%), 1fr));
   gap: 1rem;
-}
-
-html {
-  scrollbar-gutter: stable;
 }

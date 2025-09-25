@@ -74,11 +74,6 @@ summary {
   cursor: progress;
 }
 
-/* Ref: https://webkit.org/blog/16831/line-height-units/ */
-p {
-  margin-block: 1lh;
-}
-
 h1,
 h2,
 h3,
@@ -86,9 +81,5 @@ h4,
 h5,
 h6,
 p {
-  margin-top: 0;
-}
-
-p:last-child {
-  margin-bottom: 0;
+  margin: 0;
 }
