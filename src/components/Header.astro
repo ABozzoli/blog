@@ -13,7 +13,7 @@ const currentPage = Astro.url.pathname;
   <SkipLinks />
 
   <div class="container">
-    <a class="blog-title" href="/">A. Bozzoli</a>
+    <a class="blog-title" href="/" aria-label="A.Bozzoli, Homepage">A.Bozzoli</a>
 
     <nav aria-label="Primary">
       <ul role="list">
@@ -46,33 +46,33 @@ const currentPage = Astro.url.pathname;
       align-items: center;
     }
 
-    .blog-title {
+    a {
       display: block;
-      padding: 0.5rem 1rem;
-      font-size: var(--fs-600);
-      font-weight: bold;
-      letter-spacing: 0.125em;
-      width: fit-content;
-      font-family: var(--ff-title);
+      padding-inline: 1rem;
+      height: var(--header-height);
+      line-height: var(--header-height);
     }
 
-    nav {
-      width: fit-content;
+    .blog-title {
+      font-size: var(--fs-600);
+      font-weight: bold;
+      font-family: var(--ff-title);
 
-      ul {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+      &:hover {
+        background-color: black;
+        text-decoration-color: black;
+        color: white;
+      }
+    }
 
-        .nav-link {
-          display: block;
-          padding: 1rem;
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
 
-          &[aria-current="page"] {
-            background-color: black;
-            color: white;
-          }
-        }
+      [aria-current="page"] {
+        background-color: black;
+        color: white;
       }
     }
   }
