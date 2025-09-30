@@ -3,7 +3,7 @@ import { formatDate, slugify } from "../js/utils";
 
 const { article, index, page, hLevel } = Astro.props;
 const { title, category, date, description } = article.data;
-const url = `/${article.collection}/${article.slug}/`;
+const url = `${article.collection}/${article.slug}`;
 const Heading = hLevel ?? "h2";
 ---
 
@@ -14,7 +14,7 @@ const Heading = hLevel ?? "h2";
     </Heading>
     <p class="ribbon">Posted on {formatDate(date)}</p>
     <p class="line-clamp-2">{description}</p>
-    <a class="badge" href={`/category/${slugify(category)}/`}>{category}</a>
+    <a class="badge" href={`category/${slugify(category)}`}>{category}</a>
   </article>
 </li>
 

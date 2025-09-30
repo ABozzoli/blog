@@ -2,25 +2,30 @@
 import SkipLinks from "./SkipLinks.astro";
 
 export const routes = [
-  { href: "/", title: "Home" },
-  { href: "/blog/1", title: "Blog" },
+  { href: "", title: "Home" },
+  { href: "blog/1", title: "Blog" },
 ];
 
 const currentPage = Astro.url.pathname;
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <header>
   <SkipLinks />
 
   <div class="container">
-    <a class="blog-title" href="/" aria-label="A.Bozzoli, Homepage">A.Bozzoli</a>
+    <a class="blog-title" href="" aria-label="A.Bozzoli, Homepage">A.Bozzoli</a>
 
     <nav aria-label="Primary">
       <ul role="list">
         {
           routes.map((route) => (
             <li>
-              <a class="nav-link" href={route.href} aria-current={route.href === currentPage ? "page" : undefined}>
+              <a
+                class="nav-link"
+                href={route.href}
+                aria-current={`${baseUrl}${route.href}` === currentPage ? "page" : undefined}
+              >
                 {route.title}
               </a>
             </li>

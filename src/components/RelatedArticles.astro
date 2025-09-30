@@ -20,7 +20,7 @@ sortByDate(articles);
       <ul class="tag-cloud" role="list" aria-labelledby="related-articles-title">
         {articles.slice(0, 3).map((article) => (
           <li>
-            <a class="badge" href={`/blog/${article.slug}/`}>
+            <a class="badge" href={`blog/${article.slug}`}>
               {article.data.title}
             </a>
           </li>

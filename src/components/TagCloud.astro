@@ -21,7 +21,7 @@ const tagsCount = tags.reduce((acc, category) => {
     {
       Object.entries(tagsCount).map(([tag, count]) => (
         <li>
-          <a class="badge" href={`/category/${slugify(tag)}/`}>
+          <a class="badge" href={`category/${slugify(tag)}`}>
             {tag} ({count})
           </a>
         </li>
