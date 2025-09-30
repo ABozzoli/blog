@@ -1,24 +1,41 @@
 ---
 import MainLayout from "./MainLayout.astro";
-import { slugify, formatDate } from "../js/utils";
+import { formatDate } from "../js/utils";
 import RelatedArticles from "../components/RelatedArticles.astro";
 
 const { frontmatter } = Astro.props;
-const { title, category, author, date, image } = frontmatter;
+const { title, category, date } = frontmatter;
 ---
 
 <MainLayout>
   <div class="flow">
-    <img src={image.src} alt={image.alt} />
-
-    <div class="mt-32 mb-32">
-      <h1 class="mb-0">{title}</h1>
-      <p>By <a href={`/author/${slugify(author)}/`}>{author}</a> · {formatDate(date)}</p>
-      <a class="badge" href={`/category/${slugify(category)}/`}>{category}</a>
-    </div>
+    <hgroup>
+      <h1>{title}</h1>
+      <p>Posted on {formatDate(date)}, Last updated on {formatDate(date)}</p>
+    </hgroup>
 
     <slot />
 
     <RelatedArticles {category} {title} />
   </div>
 </MainLayout>
+
+<style lang="scss">
+  hgroup {
+    text-align: center;
+    margin-bottom: 32px;
+
+    h1 {
+      font-size: var(--fs-56px);
+      margin-bottom: 0.25em;
+
+      @media (max-width: 768px) {
+        font-size: var(--fs-32px);
+      }
+    }
+
+    p {
+      font-size: var(--fs-14px);
+    }
+  }
+</style>
