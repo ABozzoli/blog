@@ -16,10 +16,9 @@ export const getStaticPaths = (async ({ paginate }) => {
 
   const pages = paginate(articles, { pageSize: 2 });
   return pages;
-}) satisfies GetStaticPaths; /* https://github.com/withastro/astro/issues/6507#issuecomment-1489916992 */
+}) satisfies GetStaticPaths;
 
 const { page } = Astro.props;
-console.log("🚀 ~ page:", { ...page, data: null });
 
 const title = "Blog";
 ---
@@ -30,10 +29,9 @@ const title = "Blog";
     {page.data.map((article, index) => <ArticleCard {article} {index} {page} hLevel="h3" />)}
   </ul>
 
-  <!-- TODO: hide spacer if there's no pagination -->
   <Spacer height="2rem" />
   <Pagination {page} />
-
   <Spacer height="2rem" />
+  
   <TagCloud />
 </MainLayout>

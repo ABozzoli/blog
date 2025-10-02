@@ -1,5 +1,5 @@
 /* Ref: https://utilitybend.com/blog/added-to-my-css-reset-interpolate-size-the-quality-of-life-feature-we-all-wanted-at-some-point */
-:root {
+html {
   interpolate-size: allow-keywords;
 }
 
@@ -65,12 +65,16 @@ time {
   font-family: var(--ff-title);
 }
 
-a:not([href]) {
+a:not([href], [inert] *) {
   -moz-user-select: none;
   -ms-user-select: none;
   -webkit-user-select: none;
   user-select: none;
   cursor: not-allowed;
+  opacity: 0.5;
+}
+
+[inert] {
   opacity: 0.5;
 }
 

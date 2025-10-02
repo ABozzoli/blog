@@ -33,64 +33,63 @@ const { hiddenBefore, shownPages, hiddenAfter } = ellipsedPageNumbers(1);
 /* Ref: https://www.htmhell.dev/adventcalendar/2024/14/ */
 ---
 
-{
-  page.lastPage > 1 && (
-    <nav aria-label="Pagination">
-      <ul class="pagination" role="list">
-        <li class="arrow">
-          <a role="link" href={page.url.first} aria-disabled={!page.url.first ? "true" : "false"}>
-            <span class="visually-hidden">First page</span>
-            <span aria-hidden="true">❮❮</span>
+<nav aria-label="Pagination" inert={!(page.lastPage > 1)}>
+  <ul class="pagination" role="list">
+    <li class="arrow">
+      <a role="link" href={page.url.first} aria-disabled={!page.url.first ? "true" : "false"}>
+        <span class="visually-hidden">First page</span>
+        <span aria-hidden="true">❮❮</span>
+      </a>
+    </li>
+    <li class="arrow">
+      <a role="link" href={page.url.prev} aria-disabled={!page.url.prev ? "true" : "false"}>
+        <span class="visually-hidden">Previous page</span>
+        <span aria-hidden="true">❮</span>
+      </a>
+    </li>
+    {
+      hiddenBefore.length > 0 && (
+        <li>
+          <div class="ellipses">
+            <span class="visually-hidden">{getSkipText(hiddenBefore)}</span>
+            <span aria-hidden="true">⋯</span>
+          </div>
+        </li>
+      )
+    }
+    {
+      shownPages.map((pageNumber) => (
+        <li>
+          <a href={`${root}/${pageNumber}`} aria-current={`${root}/${pageNumber}` === currentUrl ? "page" : undefined}>
+            {pageNumber}
           </a>
         </li>
-        <li class="arrow">
-          <a role="link" href={page.url.prev} aria-disabled={!page.url.prev ? "true" : "false"}>
-            <span class="visually-hidden">Previous page</span>
-            <span aria-hidden="true">❮</span>
-          </a>
+      ))
+    }
+    {
+      hiddenAfter.length > 0 && (
+        <li>
+          <div class="ellipses">
+            <span class="visually-hidden">{getSkipText(hiddenAfter)}</span>
+            <span aria-hidden="true">⋯</span>
+          </div>
         </li>
-        {hiddenBefore.length > 0 && (
-          <li>
-            <div class="ellipses">
-              <span class="visually-hidden">{getSkipText(hiddenBefore)}</span>
-              <span aria-hidden="true">⋯</span>
-            </div>
-          </li>
-        )}
-        {shownPages.map((pageNumber) => (
-          <li>
-            <a
-              href={`${root}/${pageNumber}`}
-              aria-current={`${root}/${pageNumber}` === currentUrl ? "page" : undefined}
-            >
-              {pageNumber}
-            </a>
-          </li>
-        ))}
-        {hiddenAfter.length > 0 && (
-          <li>
-            <div class="ellipses">
-              <span class="visually-hidden">{getSkipText(hiddenAfter)}</span>
-              <span aria-hidden="true">⋯</span>
-            </div>
-          </li>
-        )}
-        <li class="arrow">
-          <a role="link" href={page.url.next} aria-disabled={!page.url.next ? "true" : "false"}>
-            <span class="visually-hidden">Next page</span>
-            <span aria-hidden="true">❯</span>
-          </a>
-        </li>
-        <li class="arrow">
-          <a role="link" href={page.url.last} aria-disabled={!page.url.last ? "true" : "false"}>
-            <span class="visually-hidden">Last page</span>
-            <span aria-hidden="true">❯❯</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  )
-}
+      )
+    }
+    <li class="arrow">
+      <a role="link" href={page.url.next} aria-disabled={!page.url.next ? "true" : "false"}>
+        <span class="visually-hidden">Next page</span>
+        <span aria-hidden="true">❯</span>
+      </a>
+    </li>
+    <li class="arrow">
+      <a role="link" href={page.url.last} aria-disabled={!page.url.last ? "true" : "false"}>
+        <span class="visually-hidden">Last page</span>
+        <span aria-hidden="true">❯❯</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 
 <style lang="scss">
   .pagination {
