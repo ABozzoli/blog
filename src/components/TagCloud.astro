@@ -15,17 +15,21 @@ const tagsCount = tags.reduce((acc, category) => {
 }, {} as Record<string, number>);
 ---
 
-{Object.keys(tagsCount).length > 0 &&
-  <h2 id="tag-cloud-title" class="text-center mt-48">Categories</h2>
-  <ul class="tag-cloud" role="list" aria-labelledby="tag-cloud-title">
-    {
-      Object.entries(tagsCount).map(([tag, count]) => (
-        <li>
-          <a class="badge" href={`category/${slugify(tag)}`}>
-            {tag} ({count})
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+{
+  Object.keys(tagsCount).length > 0 && (
+    <aside>
+      <h2 id="tag-cloud-title" class="text-center mt-48">
+        Categories
+      </h2>
+      <ul class="tag-cloud" role="list" aria-labelledby="tag-cloud-title">
+        {Object.entries(tagsCount).map(([tag, count]) => (
+          <li>
+            <a class="badge" href={`category/${slugify(tag)}`}>
+              {tag} ({count})
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )
 }
