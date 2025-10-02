@@ -1,0 +1,32 @@
+{
+  import.meta.env.DEV && (
+    <div class="dev-banner">
+      <strong>DEV MODE</strong>
+    </div>
+  )
+}
+
+<style>
+  .dev-banner {
+    --stripe-width: 8px;
+    --range-width: 16px;
+
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    /* Ref: https://css-tricks.com/why-do-we-have-repeating-linear-gradient-anyway/ */
+    background-image: repeating-linear-gradient(
+      135deg,
+      gold 0,
+      black 1px,
+      black var(--stripe-width),
+      gold calc(var(--stripe-width) + 1px),
+      gold var(--range-width)
+    );
+
+    strong {
+      background-color: gold;
+      padding-inline: 0.25rem;
+    }
+  }
+</style>
