@@ -15,6 +15,6 @@ const title = "Blog";
 <MainLayout {title}>
   <h1 id="page-title">{title}</h1>
   <ul class="card-stack" role="list" aria-labelledby="page-title">
-    {articles.map((article) => <ArticleCard {article} hLevel="h3" />)}
+    {articles.map((article, index) => <ArticleCard {article} {index} hLevel="h3" />)}
   </ul>
 </MainLayout>

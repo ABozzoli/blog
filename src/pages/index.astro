@@ -29,7 +29,7 @@ const title = "Home";
 
   <h2 id="latest-articles-title">Latest articles</h2>
   <ul class="card-stack" role="list" aria-labelledby="latest-articles-title">
-    {articles.slice(0, 3).map((article) => <ArticleCard {article} hLevel="h3" />)}
+    {articles.slice(0, 3).map((article, index) => <ArticleCard {article} {index} hLevel="h3" />)}
   </ul>
 </MainLayout>
 

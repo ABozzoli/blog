@@ -1,13 +1,23 @@
 ---
 import { formatDate, slugify } from "../js/utils";
 
+interface Props {
+  article: import("astro:content").CollectionEntry<"blog">;
+  index: number;
+  page?: {
+    total: number;
+    start: number;
+  };
+  hLevel?: `h${2 | 3 | 4 | 5 | 6}`;
+}
+
 const { article, index, page, hLevel } = Astro.props;
 const { title, category, date, description } = article.data;
 const url = `${article.collection}/${article.slug}`;
 const Heading = hLevel ?? "h2";
 ---
 
-<li aria-setsize={page?.total} aria-posinset={page?.start + index + 1}>
+<li aria-setsize={page?.total} aria-posinset={page ? page.start + index + 1 : undefined}>
   <article class="article-card block-shadow" aria-labelledby=`article-card-${index}-title`>
     <Heading id=`article-card-${index}-title` class="h3 mb-4">
       <a href={url}>{title}</a>
