@@ -23,7 +23,7 @@ const Heading = hLevel ?? "h2";
       <a href={url}>{title}</a>
     </Heading>
     <p class="ribbon">Posted on {formatDate(date)}</p>
-    <p class="line-clamp-2">{description}</p>
+    <p class="content line-clamp-2">{description}</p>
     <a class="badge" href={`category/${slugify(category)}`}>{category}</a>
   </article>
 </li>
@@ -37,6 +37,10 @@ const Heading = hLevel ?? "h2";
 
     .ribbon {
       font-size: var(--fs-14px);
+    }
+
+    .content {
+      min-height: 2lh;
     }
 
     .badge {
