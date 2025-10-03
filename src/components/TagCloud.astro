@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import { slugify } from "../js/utils";
 
-const articles = await getCollection("blog", ({ data }) => {
+const articles = await getCollection("articles", ({ data }) => {
   return data.draft !== true;
 });
 

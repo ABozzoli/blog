@@ -5,7 +5,7 @@ import { sortByDate } from "../js/utils";
 const { category, title } = Astro.props;
 
 // Note: check on title to exclude current article
-const articles = await getCollection("blog", ({ data }) => {
+const articles = await getCollection("articles", ({ data }) => {
   return data.draft !== true && data.category === category && data.title !== title;
 });
 sortByDate(articles);
@@ -20,7 +20,7 @@ sortByDate(articles);
       <ul class="tag-cloud" role="list" aria-labelledby="related-articles-title">
         {articles.slice(0, 3).map((article) => (
           <li>
-            <a class="badge" href={`blog/${article.slug}`}>
+            <a class="badge" href={`articles/${article.slug}`}>
               {article.data.title}
             </a>
           </li>

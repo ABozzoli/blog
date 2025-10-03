@@ -9,7 +9,7 @@ import TagCloud from "../../components/TagCloud.astro";
 import { sortByDate } from "../../js/utils";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const articles = await getCollection("blog", ({ data }) => {
+  const articles = await getCollection("articles", ({ data }) => {
     return data.draft !== true;
   });
   sortByDate(articles);
@@ -32,6 +32,6 @@ const title = "Blog";
   <Spacer height="2rem" />
   <Pagination {page} />
   <Spacer height="2rem" />
-  
+
   <TagCloud />
 </MainLayout>
