@@ -1,14 +1,14 @@
 ---
 import DevBanner from "./DevBanner.astro";
 import SkipLinks from "./SkipLinks.astro";
+import { isCurrentPage } from "../js/utils";
 
 export const routes = [
   { href: "", title: "Home" },
   { href: "articles", title: "Articles" },
 ];
 
-const currentPage = Astro.url.pathname;
-const baseUrl = import.meta.env.BASE_URL;
+const currentPath = Astro.url.pathname;
 ---
 
 <DevBanner />
@@ -27,7 +27,7 @@ const baseUrl = import.meta.env.BASE_URL;
               <a
                 class="nav-link"
                 href={route.href}
-                aria-current={`${baseUrl}${route.href}` === currentPage ? "page" : undefined}
+                aria-current={isCurrentPage(currentPath, route.href)}
               >
                 {route.title}
               </a>
