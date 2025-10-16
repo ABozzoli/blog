@@ -24,45 +24,41 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+:is(h1, h2, h3, h4, h5, h6),
+:is(.h1, .h2, .h3, .h4, .h5, .h6) {
+  font-family: var(--ff-title);
+}
+
 p,
 li {
   line-height: 1.5;
 }
 
 a {
+  text-decoration-line: none;
   text-decoration-thickness: 0.125em;
   text-underline-offset: 0.125em;
+
+  &[href]:hover {
+    text-decoration-line: underline;
+  }
 }
 
-a:not(p *) {
-  text-decoration-line: none;
-}
-
-a[href]:hover {
-  text-decoration-line: underline;
-}
-
+p,
 :is(h1, h2, h3, h4, h5, h6),
 :is(.h1, .h2, .h3, .h4, .h5, .h6) {
-  font-family: var(--ff-title);
-  text-decoration-skip-ink: none;
-
-  a {
+  a[href] {
     text-decoration-line: underline;
 
     &:hover {
       background-color: black;
       text-decoration-color: black;
       box-shadow:
-        0.125em 0 black,
-        -0.125em 0 black;
+        0.25em 0 black,
+        -0.25em 0 black;
       color: white;
     }
   }
-}
-
-time {
-  font-family: var(--ff-title);
 }
 
 a:not([href], [inert] *) {

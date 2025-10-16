@@ -5,11 +5,7 @@ const articles = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.date(),
-    author: z.string(), //TODO: could reference a json
-    image: z.object({
-      src: z.string(),
-      alt: z.string(),
-    }),
+    update: z.date().optional(),
     description: z.string(),
     draft: z.boolean(),
     category: z.string(), //TODO: could be an array
