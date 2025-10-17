@@ -4,10 +4,11 @@ import ArticleCard from "../../components/ArticleCard.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 import { sortByDate } from "../../js/utils";
 
-const articles = await getCollection("articles", ({ data }) => {
-  return data.draft !== true;
-});
-sortByDate(articles);
+const articles = sortByDate(
+  await getCollection("articles", ({ data }) => {
+    return data.draft !== true;
+  })
+);
 
 const title = "Articles";
 ---

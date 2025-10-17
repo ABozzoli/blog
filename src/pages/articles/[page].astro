@@ -9,10 +9,11 @@ import TagCloud from "../../components/TagCloud.astro";
 import { sortByDate } from "../../js/utils";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const articles = await getCollection("articles", ({ data }) => {
-    return data.draft !== true;
-  });
-  sortByDate(articles);
+  const articles = sortByDate(
+    await getCollection("articles", ({ data }) => {
+      return data.draft !== true;
+    })
+  );
 
   const pages = paginate(articles, { pageSize: 2 });
   return pages;

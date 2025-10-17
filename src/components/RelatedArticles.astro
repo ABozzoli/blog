@@ -4,11 +4,12 @@ import { sortByDate } from "../js/utils";
 
 const { category, title } = Astro.props;
 
-// Note: check on title to exclude current article
-const articles = await getCollection("articles", ({ data }) => {
-  return data.draft !== true && data.category === category && data.title !== title;
-});
-sortByDate(articles);
+const articles = sortByDate(
+  await getCollection("articles", ({ data }) => {
+    // Note: check on title to exclude current article
+    return data.draft !== true && data.category === category && data.title !== title;
+  })
+);
 ---
 
 {
