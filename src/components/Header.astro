@@ -17,19 +17,15 @@ const currentPath = Astro.url.pathname;
   <SkipLinks />
 
   <div class="container">
-    <a class="blog-title" href="" aria-label="A.Bozzoli, Homepage">A.Bozzoli</a>
+    <a class="blog-title" href="" aria-label="ABozzoli, Homepage">ABozzoli</a>
 
     <nav aria-label="Primary">
       <ul role="list">
         {
-          routes.map((route) => (
+          routes.map(({ href, title }) => (
             <li>
-              <a
-                class="nav-link"
-                href={route.href}
-                aria-current={isCurrentPage(currentPath, route.href)}
-              >
-                {route.title}
+              <a class="nav-link" href={href} aria-current={isCurrentPage(currentPath, href)}>
+                {title}
               </a>
             </li>
           ))
