@@ -1,5 +1,9 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
 <div class="skip-links">
-  <a href="#main">Skip to main content</a>
+  <a href={`${currentPath}#main`}>Skip to main content</a>
 </div>
 
 <style lang="scss">
