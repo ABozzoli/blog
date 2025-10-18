@@ -39,7 +39,7 @@ a {
   text-decoration-thickness: 0.125em;
   text-underline-offset: 0.125em;
 
-  &[href]:hover {
+  &[href]:is(:hover, :active) {
     text-decoration-line: underline;
   }
 }
@@ -50,7 +50,7 @@ p,
   a[href] {
     text-decoration-line: underline;
 
-    &:hover {
+    &:is(:hover, :active) {
       background-color: black;
       text-decoration-color: black;
       box-shadow:
@@ -186,4 +186,9 @@ ul.tag-cloud {
     outline-color: transparent;
     outline-offset: 6px;
   }
+}
+
+hr {
+  border: none;
+  border-top: 1px solid black;
 }
