@@ -7,7 +7,7 @@ const { frontmatter } = Astro.props;
 const { title, category, date, update } = frontmatter;
 ---
 
-<MainLayout>
+<MainLayout {title}>
   <div class="flow">
     <hgroup>
       <h1>{title}</h1>

@@ -14,7 +14,11 @@ import "../css/utility.scss";
 import "../css/variables.css";
 
 // Props
-const { title = "Blog" } = Astro.props;
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
 ---
 
 <html lang="en">
@@ -24,7 +28,7 @@ const { title = "Blog" } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <base href={import.meta.env.BASE_URL} />
-    <title>ABozzoli - {title}</title>
+    <title>ABozzoli blog - {title}</title>
   </head>
   <body>
     <Header />
