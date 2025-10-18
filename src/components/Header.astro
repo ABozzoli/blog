@@ -41,6 +41,7 @@ const currentPath = Astro.url.pathname;
     border-bottom: 1px solid black;
     box-shadow: var(--border-shadow);
     position: sticky;
+    z-index: 1; /* Needed to prevent <sup> elements from bleeding over the header */
     top: 0;
     height: var(--header-height);
 
