@@ -1,0 +1,38 @@
+---
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<footer class="footnotes">
+  <h2 class="visually-hidden">Footnotes</h2>
+
+  <ol>
+    {
+      items.map((item, index) => {
+        const n = index + 1;
+
+        return (
+          <li id={`fn${n}`} tabindex="-1">
+            <span set:html={item} />
+            <a href={`${currentPath}#fnref${n}`}>
+              <span aria-hidden="true">↩︎</span>
+              <span class="visually-hidden">Reference {n}</span>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ol>
+</footer>
+
+<style>
+  .footnotes {
+    margin-top: 96px;
+    border-top: 1px solid black;
+    font-size: var(--fs-14px);
+  }
+</style>

@@ -1,0 +1,26 @@
+---
+interface Props {
+  n: number;
+}
+
+const { n } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<sup>
+  <a href={`${currentPath}#fn${n}`} id={`fnref${n}`}>
+    <span aria-hidden="true">[{n}]</span>
+    <span class="visually-hidden">Footnote {n}</span>
+  </a>
+</sup>
+
+<style>
+  sup {
+    display: inline-block;
+    font-weight: bold;
+
+    a {
+      text-decoration-line: none;
+    }
+  }
+</style>
