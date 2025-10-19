@@ -23,7 +23,7 @@ const Heading = hLevel ?? "h2";
       <a href={url}>{title}</a>
     </Heading>
     <p class="ribbon">Posted on {formatDate(date)}</p>
-    <p class="content line-clamp-2">{description}</p>
+    <p class="content line-clamp-2" set:html={description} />
     <a class="badge" href={`category/${slugify(category)}`}>{category}</a>
   </article>
 </li>
