@@ -45,6 +45,7 @@ a {
 }
 
 p,
+:not([role]) > li,
 :is(h1, h2, h3, h4, h5, h6),
 :is(.h1, .h2, .h3, .h4, .h5, .h6) {
   a[href] {
@@ -54,8 +55,8 @@ p,
       background-color: black;
       text-decoration-color: black;
       box-shadow:
-        0.25em 0 black,
-        -0.25em 0 black;
+        0.125em 0 black,
+        -0.125em 0 black;
       color: white;
     }
   }
@@ -168,14 +169,14 @@ ul.tag-cloud {
 }
 
 /* Ref: https://medienbaecker.com/articles/focus-outlines */
-*:focus-visible {
+:focus-visible, :target:focus {
   box-shadow: 0 0 0 3px white;
   outline: 2px solid black;
   outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  *:focus-visible {
+  :focus-visible, :target:focus {
     animation: outline-close-in 0.2s ease-out;
   }
 }
@@ -191,4 +192,9 @@ ul.tag-cloud {
 hr {
   border: none;
   border-top: 1px solid black;
+}
+
+blockquote {
+  font-size: var(--fs-18px);
+  font-style: italic;
 }
