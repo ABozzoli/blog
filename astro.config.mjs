@@ -8,5 +8,9 @@ import icon from 'astro-icon';
 export default defineConfig({
   site: 'https://abozzoli.github.io',
   base: '/blog/',
-  integrations: [mdx(), icon()],
+  integrations: [mdx(), icon({
+    include: {
+      mdi: ['github', 'linkedin'],
+    }
+  })],
 });
