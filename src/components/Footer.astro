@@ -1,14 +1,60 @@
+---
+import ExLink from "./ExLink.astro";
+import { Icon } from "astro-icon/components";
+---
+
 <footer>
-   &copy; {new Date().getFullYear().toString()} Alessandro Bozzoli — All rights reserved.
+  <div class="container">
+    <p class="mb-0">
+      &copy; {new Date().getFullYear().toString()} Alessandro Bozzoli — All rights reserved.
+    </p>
+
+    <ul role="list" aria-label="Social links">
+      <li>
+        <ExLink href="https://www.linkedin.com/in/abozzoli/" label="LinkedIn profile">
+          <Icon name="mdi:linkedin" size="2em" aria-hidden="true" title="LinkedIn profile" />
+        </ExLink>
+      </li>
+      <li>
+        <ExLink href="https://github.com/ABozzoli" label="GitHub profile">
+          <Icon name="mdi:github" size="2em" aria-hidden="true" title="GitHub profile" />
+        </ExLink>
+      </li>
+    </ul>
+  </div>
 </footer>
 
-<style>
+<style lang="scss">
   footer {
-    text-align: center;
-    padding: 24px;
     background-color: black;
     color: white;
     font-size: var(--fs-300);
     box-shadow: var(--border-shadow);
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 1rem;
+      padding: 24px;
+
+      @media (max-width: 768px) {
+        padding-inline: 16px;
+      }
+    }
+
+    p {
+      text-wrap: balance;
+    }
+
+    ul {
+      display: flex;
+      column-gap: 0.5rem;
+
+      li {
+        margin-top: -0.125rem;
+        flex-shrink: 0;
+      }
+    }
   }
 </style>
