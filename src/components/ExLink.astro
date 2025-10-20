@@ -1,9 +1,14 @@
 ---
 interface Props {
   href: string;
+  label?: string;
 }
 
-const { href } = Astro.props;
+const { href, label } = Astro.props;
 ---
 
-<a {href} target="_blank"><slot /><span class="visually-hidden">, opens in a new window</span></a>
+<a {href} target="_blank">
+  <span class="visually-hidden">{label}</span>
+  <slot />
+  <span class="visually-hidden">, opens in a new window</span>
+</a>
