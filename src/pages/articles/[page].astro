@@ -11,7 +11,7 @@ import { sortByDate } from "../../js/utils";
 export const getStaticPaths = (async ({ paginate }) => {
   const articles = sortByDate(
     await getCollection("articles", ({ data }) => {
-      return data.draft !== true;
+      return Boolean(data.publishDate);
     })
   );
 

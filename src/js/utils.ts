@@ -46,7 +46,9 @@ import type { CollectionEntry } from "astro:content";
  * @returns {CollectionEntry<"articles">[]} A new array sorted by date (descending).
  */
 export function sortByDate(articles: CollectionEntry<"articles">[]): CollectionEntry<"articles">[] {
-  return [...articles].sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+  return [...articles].sort(
+    (a, b) => new Date(b.data.publishDate ?? "").getTime() - new Date(a.data.publishDate ?? "").getTime()
+  );
 }
 
 /**

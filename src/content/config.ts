@@ -4,11 +4,10 @@ const articles = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
-    date: z.date(),
-    update: z.date().optional(),
+    publishDate: z.date().nullable(),
+    updateDate: z.date().optional(),
     description: z.string(),
-    draft: z.boolean(),
-    category: z.string(), //TODO: could be an array
+    category: z.string(), //TODO: should be an array
   }),
 });
 

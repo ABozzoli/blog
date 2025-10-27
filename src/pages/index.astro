@@ -6,7 +6,7 @@ import { sortByDate } from "../js/utils";
 
 const articles = sortByDate(
   await getCollection("articles", ({ data }) => {
-    return data.draft !== true;
+    return Boolean(data.publishDate);
   })
 );
 

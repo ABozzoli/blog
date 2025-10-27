@@ -7,7 +7,7 @@ const { category, title } = Astro.props;
 const articles = sortByDate(
   await getCollection("articles", ({ data }) => {
     // Note: check on title to exclude current article
-    return data.draft !== true && data.category === category && data.title !== title;
+    return Boolean(data.publishDate) && data.category === category && data.title !== title;
   })
 );
 ---

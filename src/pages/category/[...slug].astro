@@ -18,7 +18,7 @@ const { category } = Astro.props;
 
 const articles = sortByDate(
   await getCollection("articles", ({ data }) => {
-    return data.draft !== true && data.category === category;
+    return Boolean(data.publishDate) && data.category === category;
   })
 );
 ---
