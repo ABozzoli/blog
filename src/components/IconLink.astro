@@ -20,6 +20,10 @@ const { href, target, name, size, title } = Astro.props;
 
 <style>
   a {
-    display: inline-block;
+    display: block;
+
+    &:hover {
+      opacity: 0.66;
+    }
   }
 </style>
