@@ -4,14 +4,14 @@ import { formatDate } from "../js/utils";
 import RelatedArticles from "../components/RelatedArticles.astro";
 
 const { frontmatter } = Astro.props;
-const { title, category, date, update } = frontmatter;
+const { title, category, publishDate, updateDate } = frontmatter;
 ---
 
 <MainLayout {title}>
   <div class="flow">
     <hgroup>
       <h1>{title}</h1>
-      <p>Posted on {formatDate(date)}{update && `, Last updated on ${formatDate(update)}`}</p>
+      <p>Posted on {formatDate(publishDate)}{updateDate && `, Last updated on ${formatDate(updateDate)}`}</p>
     </hgroup>
 
     <slot />

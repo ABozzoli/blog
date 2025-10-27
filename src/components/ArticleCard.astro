@@ -12,7 +12,7 @@ interface Props {
 }
 
 const { article, index, page, hLevel } = Astro.props;
-const { title, category, date, description } = article.data;
+const { title, category, publishDate, description } = article.data;
 const url = `${article.collection}/${article.slug}`;
 const Heading = hLevel ?? "h2";
 ---
@@ -22,7 +22,7 @@ const Heading = hLevel ?? "h2";
     <Heading id=`article-card-${index}-title` class="h3 mb-4">
       <a href={url}>{title}</a>
     </Heading>
-    <p class="ribbon">Posted on {formatDate(date)}</p>
+    <p class="ribbon">Posted on {publishDate ? formatDate(publishDate) : "MM/DD/YYYY"}</p>
     <p class="content line-clamp-2" set:html={description} />
     <a class="badge" href={`category/${slugify(category)}`}>{category}</a>
   </article>
