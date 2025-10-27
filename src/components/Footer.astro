@@ -1,6 +1,5 @@
 ---
-import ExLink from "./ExLink.astro";
-import { Icon } from "astro-icon/components";
+import IconLink from "./IconLink.astro";
 ---
 
 <footer>
@@ -11,14 +10,22 @@ import { Icon } from "astro-icon/components";
 
     <ul role="list" aria-label="Social links">
       <li>
-        <ExLink href="https://www.linkedin.com/in/abozzoli/" label="LinkedIn profile">
-          <Icon name="mdi:linkedin" size="2em" aria-hidden="true" title="LinkedIn profile" />
-        </ExLink>
+        <IconLink
+          href="https://www.linkedin.com/in/abozzoli/"
+          target="_blank"
+          name="mdi:linkedin"
+          size="2em"
+          title="LinkedIn profile"
+        />
       </li>
       <li>
-        <ExLink href="https://github.com/ABozzoli" label="GitHub profile">
-          <Icon name="mdi:github" size="2em" aria-hidden="true" title="GitHub profile" />
-        </ExLink>
+        <IconLink
+          href="https://github.com/ABozzoli"
+          target="_blank"
+          name="mdi:github"
+          size="2em"
+          title="GitHub profile"
+        />
       </li>
     </ul>
   </div>

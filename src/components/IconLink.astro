@@ -1,0 +1,25 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  href: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  name: string;
+  size?: string | number;
+  title: string;
+}
+
+const { href, target, name, size, title } = Astro.props;
+---
+
+<a {href} {target}>
+  {title && <span class="visually-hidden">{title}</span>}
+  <Icon {name} {size} aria-hidden="true" {title} />
+  {target === "_blank" && <span class="visually-hidden">, opens in a new window</span>}
+</a>
+
+<style>
+  a {
+    display: inline-block;
+  }
+</style>
