@@ -28,13 +28,11 @@ export function slugify(text: string): string {
  * formatDate("2025-10-08") // "10/8/2025"
  * ```
  *
- * @param {string | number | Date} date - The date to format.
+ * @param {string | number | Date | null} date - The date to format.
  * @returns {string} The formatted date string.
  */
-export function formatDate(date: string | number | Date): string {
-  return new Date(date).toLocaleDateString("en-US", {
-    timeZone: "UTC",
-  });
+export function formatDate(date: string | number | Date | null): string {
+  return date ? new Date(date).toLocaleDateString("en-US", { timeZone: "UTC" }) : "MM/DD/YYYY";
 }
 
 import { getCollection } from "astro:content";
