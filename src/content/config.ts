@@ -5,7 +5,7 @@ const articles = defineCollection({
   schema: z.object({
     title: z.string(),
     publishDate: z.date().nullable(),
-    updateDate: z.date().optional(),
+    updateDate: z.date().nullable(),
     description: z.string(),
     category: z.string(), //TODO: should be an array
   }),

@@ -54,7 +54,6 @@ export function sortByDate(articles: CollectionEntry<"articles">[]): CollectionE
 
 /** Options: filter by category, exclude title, limit results, only published by default. */
 export type FetchArticlesOptions = {
-  publishedOnly?: boolean;
   category?: string;
   excludeTitle?: string;
   limit?: number;
@@ -62,10 +61,10 @@ export type FetchArticlesOptions = {
 
 /** Fetch articles with basic filters and newest-first sorting. */
 export async function fetchArticles(options: FetchArticlesOptions = {}): Promise<CollectionEntry<"articles">[]> {
-  const { publishedOnly = true, category, excludeTitle, limit } = options;
+  const { category, excludeTitle, limit } = options;
 
   const entries = await getCollection("articles", (entry) => {
-    if (publishedOnly && !entry.data.publishDate) return false;
+    if (!import.meta.env.DEV && !entry.data.publishDate) return false;
     if (category && entry.data.category !== category) return false;
     if (excludeTitle && entry.data.title === excludeTitle) return false;
     return true;
