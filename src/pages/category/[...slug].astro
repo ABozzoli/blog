@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { slugify, sortByDate } from "../../js/utils";
+import { slugify, fetchArticles } from "../../js/utils";
 import MainLayout from "../../layouts/MainLayout.astro";
 import ArticleCard from "../../components/ArticleCard.astro";
 
@@ -16,11 +16,7 @@ export async function getStaticPaths() {
 
 const { category } = Astro.props;
 
-const articles = sortByDate(
-  await getCollection("articles", ({ data }) => {
-    return Boolean(data.publishDate) && data.category === category;
-  })
-);
+const articles = await fetchArticles({ category });
 ---
 
 <MainLayout title={category}>

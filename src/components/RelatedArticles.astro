@@ -1,15 +1,9 @@
 ---
-import { getCollection } from "astro:content";
-import { sortByDate } from "../js/utils";
+import { fetchArticles } from "../js/utils";
 
 const { category, title } = Astro.props;
 
-const articles = sortByDate(
-  await getCollection("articles", ({ data }) => {
-    // Note: check on title to exclude current article
-    return Boolean(data.publishDate) && data.category === category && data.title !== title;
-  })
-);
+const articles = await fetchArticles({ category, excludeTitle: title, limit: 3 });
 ---
 
 {
@@ -19,7 +13,7 @@ const articles = sortByDate(
         Related articles
       </h2>
       <ul class="tag-cloud" role="list" aria-labelledby="related-articles-title">
-        {articles.slice(0, 3).map((article) => (
+        {articles.map((article) => (
           <li>
             <a class="badge" href={`articles/${article.slug}`}>
               {article.data.title}

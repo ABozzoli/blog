@@ -37,6 +37,7 @@ export function formatDate(date: string | number | Date): string {
   });
 }
 
+import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
 /**
@@ -49,6 +50,30 @@ export function sortByDate(articles: CollectionEntry<"articles">[]): CollectionE
   return [...articles].sort(
     (a, b) => new Date(b.data.publishDate ?? "").getTime() - new Date(a.data.publishDate ?? "").getTime()
   );
+}
+
+/** Options: filter by category, exclude title, limit results, only published by default. */
+export type FetchArticlesOptions = {
+  publishedOnly?: boolean;
+  category?: string;
+  excludeTitle?: string;
+  limit?: number;
+};
+
+/** Fetch articles with basic filters and newest-first sorting. */
+export async function fetchArticles(options: FetchArticlesOptions = {}): Promise<CollectionEntry<"articles">[]> {
+  const { publishedOnly = true, category, excludeTitle, limit } = options;
+
+  const entries = await getCollection("articles", (entry) => {
+    if (publishedOnly && !entry.data.publishDate) return false;
+    if (category && entry.data.category !== category) return false;
+    if (excludeTitle && entry.data.title === excludeTitle) return false;
+    return true;
+  });
+
+  let result = sortByDate(entries);
+  if (typeof limit === "number" && limit >= 0) result = result.slice(0, limit);
+  return result;
 }
 
 /**

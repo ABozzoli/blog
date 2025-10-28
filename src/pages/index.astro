@@ -1,14 +1,9 @@
 ---
-import { getCollection } from "astro:content";
 import MainLayout from "../layouts/MainLayout.astro";
 import ArticleCard from "../components/ArticleCard.astro";
-import { sortByDate } from "../js/utils";
+import { fetchArticles } from "../js/utils";
 
-const articles = sortByDate(
-  await getCollection("articles", ({ data }) => {
-    return Boolean(data.publishDate);
-  })
-);
+const articles = await fetchArticles({ limit: 3 });
 
 const title = "Home";
 ---
@@ -30,7 +25,7 @@ const title = "Home";
 
   <h2 id="latest-articles-title">Latest articles</h2>
   <ul class="card-stack" role="list" aria-labelledby="latest-articles-title">
-    {articles.slice(0, 3).map((article, index) => <ArticleCard {article} {index} hLevel="h3" />)}
+    {articles.map((article, index) => <ArticleCard {article} {index} hLevel="h3" />)}
   </ul>
 </MainLayout>
 

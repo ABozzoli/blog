@@ -6,14 +6,10 @@ import type { GetStaticPaths } from "astro";
 import Pagination from "../../components/Pagination.astro";
 import Spacer from "../../components/Spacer.astro";
 import TagCloud from "../../components/TagCloud.astro";
-import { sortByDate } from "../../js/utils";
+import { fetchArticles } from "../../js/utils";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const articles = sortByDate(
-    await getCollection("articles", ({ data }) => {
-      return Boolean(data.publishDate);
-    })
-  );
+  const articles = await fetchArticles();
 
   const pages = paginate(articles, { pageSize: 2 });
   return pages;

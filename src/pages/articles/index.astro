@@ -2,13 +2,9 @@
 import { getCollection } from "astro:content";
 import ArticleCard from "../../components/ArticleCard.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
-import { sortByDate } from "../../js/utils";
+import { fetchArticles } from "../../js/utils";
 
-const articles = sortByDate(
-  await getCollection("articles", ({ data }) => {
-    return Boolean(data.publishDate);
-  })
-);
+const articles = await fetchArticles();
 
 const title = "Articles";
 ---
