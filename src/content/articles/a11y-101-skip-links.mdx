@@ -1,9 +1,139 @@
 ---
 title: "A11y 101: Skip-links"
-publishDate: null
+publishDate: 2025-10-29
 updateDate: null
-description: "---WIP---"
+description: "Skip-links are hidden links at the top of a webpage that let users jump directly to a specific section (usually the main content). They become visible when focused (via keyboard navigation) and help users skip repetitive elements like navigation menus."
 category: A11y 101
 ---
 
----WIP---
+import Link from "../../components/Link.astro";
+import Callout from "../../components/Callout.astro";
+import ExternalLink from "../../components/ExternalLink.astro";
+import FootnoteRef from "../../components/FootnoteRef.astro";
+import Footnotes from "../../components/Footnotes.astro";
+
+<Callout>
+  In this <a href="category/a11y-101">series</a>, I'll cover the essential components every blog needs! With
+  accessibility as the top priority <span lang="fr">Ça va sans dire</span>.
+</Callout>
+
+Let’s start with one of the simplest and yet most important components: the Skip-links.
+
+## What are Skip-links?
+
+Skip-links are hidden links at the top of a webpage that let users jump directly to a specific section (usually <Link href="#main">the main content</Link>) of the page.
+
+They become visible when focused (via keyboard navigation) and help users skip repetitive elements like navigation menus.
+
+## Why do we need them?
+
+Imagine browsing a site using only your keyboard.
+Every time you load a new page, you’d have to tab through every navigation link before reaching the actual content.
+
+_Ugh_, that gets tiring <a href="">q</a><a href="">u</a><a href="">i</a><a href="">c</a><a href="">k</a><a href="">l</a><a href="">y</a>.
+
+Skip-links solve this problem by letting users jump straight to what matters with (almost) a single keystroke.
+This is better UX not _just_ accessibility.
+
+<Callout>
+  And that's a fundamental truth about accessibility: improving accessibility often enhances usability for _everyone_.
+  Never let these chances go to waste!
+</Callout>
+
+## Building it
+
+First, place the Skip-links inside your `<header>`<FootnoteRef n="1"/>, before the site navigation.
+
+```html
+<header>
+  <div class="skip-links">
+    <a>Skip to main content</a>
+  </div>
+  ...
+</header>
+```
+
+Then simply reference the `id` of the target element in the `href` of the link:
+
+```html
+<header>
+  <div class="skip-links">
+    <a href="#main">Skip to main content</a>
+  </div>
+  ...
+</header>
+<main id="main">...</main>
+```
+
+And <span lang="fr">voilà</span>! That's already a functional Skip-link, **no JavaScript required!**
+
+## Styling it
+
+Now now, we want the skip-link to be hidden until focused:
+
+```css
+.skip-links {
+  position: absolute;
+  transform: translateY(-100%);
+  transition: transform 0.3s;
+}
+
+.skip-links:focus-within {
+  transform: translateY(0);
+}
+```
+
+This ensures the link is off-screen by default and gracefully slides into view when focused.
+
+However, we should also respect users’ preferences by wrapping the transition in a media query,
+disabling the animation for anyone who prefers reduced motion:
+
+```css
+@media (prefers-reduced-motion: no-preference) {
+  .skip-links {
+    transition: transform 0.3s;
+  }
+}
+```
+
+### Where's the focus-indicator?
+
+By default, the `<main>` element isn’t focusable, so while the browser scrolls to it and keyboard focus move there, the focus-indicator doesn't show up.
+This can leave the user disoriented and violates the <Link href="https://www.w3.org/TR/WCAG22/#focus-visible">Success Criterion 2.4.7 Focus Visible</Link> of WCAG 2.1.
+
+To fix that, simply add `tabindex="-1"` to your target:
+
+```html
+<main id="main" tabindex="-1">...</main>
+```
+
+This allows the focus-indicator to move to `<main>` when using the skip-link, without adding it to the normal tab order. Nice!
+
+## Optional: add more skip-links
+
+If your `<footer>` includes interactive elements, consider adding another skip-link to it too:
+
+```html
+<ul class="skip-links">
+  <li><a href="#main">Skip to main content</a></li>
+  <li><a href="#footer">Skip to footer</a></li>
+</ul>
+```
+
+Just remember to use proper semantics! Unordered lists (`<ul>` + `<li>`) are waiting to be used whenever there are multiple items of the same kind.
+
+And why not add add a proper label for it too?
+
+```html
+<ul class="skip-links" aria-label="Skip links">
+  ...
+</ul>
+```
+
+Aaaaand that's it! You now have a simple, accessible Skip-links component for your blog, with not an inch of JavaScript.
+
+<Footnotes
+  items={[
+    "That’s just my preference, though. Since the component it’s usually meant to skip the navigation, it makes sense to keep them together. But feel free to put it elsewhere, just make sure to place it <em>before</em> the navigation to not defeat its purpose.",
+  ]}
+/>
