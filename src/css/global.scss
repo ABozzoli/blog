@@ -169,14 +169,16 @@ ul.tag-cloud {
 }
 
 /* Ref: https://medienbaecker.com/articles/focus-outlines */
-:focus-visible, :target:focus {
+:focus-visible,
+:target:focus {
   box-shadow: 0 0 0 3px white;
   outline: 2px solid black;
   outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  :focus-visible, :target:focus {
+  :focus-visible,
+  :target:focus {
     animation: outline-close-in 0.2s ease-out;
   }
 }
@@ -196,5 +198,22 @@ hr {
 
 blockquote {
   font-size: var(--fs-18px);
+  font-style: italic;
+}
+
+pre {
+  overflow-x: auto;
+  padding: 1lh;
+}
+
+:not(pre) > code {
+  font-weight: bold;
+}
+
+code {
+  font-style: normal; /* Force code to be normal even inside italics */
+}
+
+span[lang] {
   font-style: italic;
 }
