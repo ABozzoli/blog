@@ -206,12 +206,18 @@ pre {
   padding: 1lh;
 }
 
-:not(pre) > code {
-  font-weight: bold;
-}
-
 code {
   font-style: normal; /* Force code to be normal even inside italics */
+}
+
+p code {
+  font-weight: bold;
+  background-color: #f0f0f0;
+  padding: 0.125em 0.25em;
+}
+
+pre code {
+  font-size: var(--fs-14px);
 }
 
 span[lang] {
