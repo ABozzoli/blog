@@ -20,7 +20,7 @@ import Footnotes from "../../components/Footnotes.astro";
 
 Let's start with one of the simplest yet most important components: the Skip-links.
 
-## What are Skip-links?
+## What are the Skip-links?
 
 Skip-links are hidden links at the top of a webpage that let users jump directly to a specific section
 (usually <Link href="#main">the main content</Link>) of the page.
@@ -119,7 +119,7 @@ If your `<footer>` includes interactive elements, consider adding it to the Skip
 </div>
 ```
 
-And while you're at it, why not use proper list semantics and slap an aria-label on it too?
+And while you're at it, why not use proper list semantics and slap an `aria-label` on it too?
 
 ```html
 <ul class="skip-links" aria-label="Skip-links">
@@ -128,4 +128,37 @@ And while you're at it, why not use proper list semantics and slap an aria-label
 </ul>
 ```
 
-Aaaaand that's it! You now have a simple yet accessible Skip-links component for your blog, with not an inch of JavaScript in sight.
+We are almost done, but wait!
+
+### One more tweak: hide non-focused links
+
+Typically, only the focused link is visible. So, how do we achieve that?
+We can leverage a classic accessibility hack:
+the <ExternalLink href="https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html">visually-hidden class</ExternalLink>.
+
+
+```css
+.visually-hidden:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+```
+
+This little beauty hides elements visually while keeping them accessible to assistive technologies and keyboard users.
+When the hidden element receives focus, it becomes visible again thanks to the `:not()` part.
+
+You just need to apply it to both anchor elements:
+
+```html
+<ul class="skip-links" aria-label="Skip-links">
+  <li><a class="visually-hidden" href="#main">Skip to main content</a></li>
+  <li><a class="visually-hidden" href="#footer">Skip to footer</a></li>
+</ul>
+```
+
+And that's it! Now you have a simple yet accessible Skip-links component ready for your blog.
