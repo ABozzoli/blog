@@ -1,0 +1,37 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<div class="back-to-top container">
+  <a href={`${currentPath}#main`} title="Back to top">
+    <span class="visually-hidden">Back to top</span>
+    <span aria-hidden="true">↑</span>
+  </a>
+</div>
+
+<style>
+  .back-to-top {
+    position: sticky;
+    bottom: 0;
+    margin-top: -44px;
+    container-type: scroll-state;
+
+    a {
+      float: right;
+      display: block;
+      width: 44px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      font-weight: bold;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+
+      @container scroll-state(stuck: bottom) {
+        background-color: black;
+        color: white;
+      }
+    }
+  }
+</style>
