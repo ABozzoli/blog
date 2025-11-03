@@ -69,7 +69,7 @@ export async function fetchArticles(options: FetchArticlesOptions = {}): Promise
   });
 
   let result = sortByDate(entries);
-  if (typeof limit === "number" && limit >= 0) result = result.slice(0, limit);
+  if (limit && limit >= 0) result = result.slice(0, limit);
   return result;
 }
 
