@@ -17,13 +17,13 @@
 
 :is(h1, h2, h3, h4, h5, h6),
 :is(.h1, .h2, .h3, .h4, .h5, .h6) {
-  margin-bottom: 0.5em; /* fallback for browsers lh without support */
-  margin-bottom: 0.5lh;
+  margin-bottom: 0.25em; /* fallback for browsers lh without support */
+  margin-bottom: 0.25lh;
 }
 
 /* To make main expand and push footer to the bottom */
 body {
-  min-height: 100svh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -39,11 +39,12 @@ body {
   --header-height: 3.5rem;
 }
 
-*:target {
-  scroll-margin-top: calc(var(--header-height) + 32px);
+/* Ref: https://cssence.com/2025/scroll-margin-scroll-padding/ */
+html {
+  scroll-padding-top: var(--header-height);
 }
 
-/* Grid auto-fill (Ref: https://youtu.be/bj0Z_GncIwY) */
+/* Ref: https://youtu.be/bj0Z_GncIwY */
 .grid-auto-fill {
   --min-size: 120px;
 
