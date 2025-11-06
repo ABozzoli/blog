@@ -1,0 +1,76 @@
+:is(h1, h2, h3, h4, h5, h6),
+:is(.h1, .h2, .h3, .h4, .h5, .h6) {
+  margin-bottom: 0.5rem;
+
+  &:not(:first-child) {
+    margin-top: 2.5rem;
+  }
+}
+
+p:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.footnote > p {
+  display: contents;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid black;
+}
+
+blockquote {
+  font-size: var(--fs-18px);
+  font-style: italic;
+  margin: 1rem 0 1rem 1rem;
+
+  p {
+    &::before {
+      content: "“";
+    }
+
+    &::after {
+      content: "”";
+    }
+  }
+}
+
+pre {
+  overflow-x: auto;
+  padding: 1rem;
+  background-color: black !important;
+}
+
+code {
+  font-style: normal; /* Force code to be normal even inside italics */
+}
+
+p code {
+  font-weight: bold;
+  background-color: #f0f0f0;
+  padding: 0.125em 0.25em;
+  font-size: var(--fs-14px);
+}
+
+pre code {
+  font-size: var(--fs-14px);
+}
+
+span[lang] {
+  font-style: italic;
+}
+
+ol {
+  padding: 0;
+  padding-left: 1rem;
+  margin-left: 1rem;
+}
+
+kbd {
+  border: 1px solid black;
+  border-radius: 0.25em;
+  padding-inline: 0.25em;
+  box-shadow: 0.125em 0.125em 0 0.125em black;
+  margin-inline-end: 0.25em;
+}
