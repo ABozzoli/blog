@@ -9,6 +9,7 @@ category: Ramblings
 import ExternalLink from "../../components/ExternalLink.astro";
 import FootnoteRef from "../../components/FootnoteRef.astro";
 import Footnotes from "../../components/Footnotes.astro";
+import Footnote from "../../components/Footnote.astro";
 
 > "Just do it!"
 
@@ -33,4 +34,8 @@ and all the others will, of course, be *very professional*™ articles.
 
 So, without further ado... let's <a href="articles/a11y-101-skip-links">just do it!</a>
 
-<Footnotes items={['Who am I kidding? The <a href="category/ramblings">Ramblings</a> category exists for a reason.']} />
+<Footnotes>
+  <Footnote n="1">
+    Who am I kidding? The <a href="category/ramblings">Ramblings</a> category exists for a reason.
+  </Footnote>
+</Footnotes>
