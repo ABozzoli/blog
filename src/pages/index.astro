@@ -9,18 +9,16 @@ const title = "Home";
 ---
 
 <MainLayout {title}>
-  <section class="about-me" aria-labelledby="about-me-title">
-    <div class="intro-text">
-      <hgroup>
-        <h2 id="about-me-title" class="mb-0">Alessandro Bozzoli</h2>
-        <p>Frontend Developer</p>
-      </hgroup>
-      <p class="mb-0">
-        Serial overthinker,<br />
-        fervently passionate about<br />
-        <strong>CSS</strong> and <strong>accessibility</strong>.
-      </p>
-    </div>
+  <section aria-labelledby="about-me-title">
+    <hgroup>
+      <h2 id="about-me-title">Alessandro Bozzoli</h2>
+      <p>Frontend Developer</p>
+    </hgroup>
+    <p>
+      Serial overthinker,<br />
+      fervently passionate about<br />
+      <strong>CSS</strong> and <strong>accessibility</strong>.
+    </p>
   </section>
 
   <h2 id="latest-articles-title">Latest articles</h2>
@@ -30,23 +28,19 @@ const title = "Home";
 </MainLayout>
 
 <style lang="scss">
-  .about-me {
-    display: flex;
-    column-gap: 16px;
+  section {
     margin-bottom: 48px;
 
-    .intro-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    hgroup {
+      margin-bottom: 0.5rem;
 
-      > p {
-        font-size: var(--fs-20px);
+      h2 {
+        margin-bottom: 0.125rem;
       }
     }
-  }
 
-  @media (max-width: 576px) {
-    /* TODO */
+    > p {
+      font-size: var(--fs-20px);
+    }
   }
 </style>
