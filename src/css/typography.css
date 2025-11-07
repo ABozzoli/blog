@@ -11,7 +11,7 @@ p:not(:last-child) {
   margin-bottom: 1rem;
 }
 
-.footnote > p {
+:is(.external-link, .footnote) > p {
   display: contents;
 }
 
@@ -46,11 +46,12 @@ code {
   font-style: normal; /* Force code to be normal even inside italics */
 }
 
-p code {
+:is(p, li) code {
   font-weight: bold;
   background-color: #f0f0f0;
   padding: 0.125em 0.25em;
-  font-size: var(--fs-14px);
+  font-size: 0.875em;
+  vertical-align: 0.1em
 }
 
 pre code {
@@ -62,7 +63,6 @@ span[lang] {
 }
 
 ol {
-  padding: 0;
   padding-left: 1rem;
   margin-left: 1rem;
 }
