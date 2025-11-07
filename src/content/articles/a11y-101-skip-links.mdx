@@ -1,7 +1,7 @@
 ---
 title: "A11y 101: Skip-links"
 publishDate: 2025-10-29
-updateDate: 2025-10-31
+updateDate: 2025-11-07
 description: "Skip-links are hidden links at the top of a webpage that let users jump directly to a specific section (usually the main content). They become visible when focused (via keyboard navigation) and help users skip repetitive elements like navigation menus."
 category: A11y 101
 ---
@@ -13,8 +13,8 @@ import FootnoteRef from "../../components/FootnoteRef.astro";
 import Footnotes from "../../components/Footnotes.astro";
 
 <Callout>
-  In <a href="category/a11y-101">this series</a>, I'll try to cover the essential components every blog needs,
-  with a special focus on accessibility, _of course_. To keep things focused, I might skip over some of the less important CSS bits,
+  In <a href="category/a11y-101">this series</a>, I'll try to cover the essential components every blog needs, with a
+  special focus on accessibility, _of course_. To stay on track, I might skip over some of the less important CSS bits,
   so bear with me!
 </Callout>
 
@@ -32,19 +32,14 @@ They become visible when focused (via keyboard navigation) and help users skip r
 Imagine browsing a site using only your keyboard.
 Every time you load a new page, you'd have to tab through every navigation link before reaching the actual content.
 
-_Ugh_, that gets tiring quickly.
+> Ugh, that gets tiring quickly.
 
 Skip-links solve this problem by letting users jump straight to what matters with (almost) a single keystroke.
-This is better UX, not _just_ accessibility.
-
-<Callout>
-  And that's a fundamental truth about accessibility: _improving accessibility often enhances usability for everyone_.
-  Never let these chances go to waste!
-</Callout>
+That’s not just accessibility: _it’s good UX_, plain and simple.
 
 ## How to Build the Skip-links
 
-Start with a simple anchor inside a wrapper.
+Start with a simple anchor inside a wrapper (the wrapper will help you with the styling and also come in handy later):
 
 ```html
 <div class="skip-links">
@@ -96,8 +91,8 @@ by wrapping it in a media query to ensure animations are disabled for those who 
 ## Where's the focus-indicator?
 
 By default, the `<main>` element isn't focusable, so while the browser scrolls to it and the keyboard focus moves there,
-the focus-indicator doesn't show up. This can leave the user disoriented and violates the
-<ExternalLink href="https://www.w3.org/TR/WCAG22/#focus-visible">WCAG 2.2 Success Criterion 2.4.7: Focus Visible</ExternalLink>.
+the focus-indicator doesn't show up. This can leave the user disoriented and violates
+the <ExternalLink href="https://www.w3.org/TR/WCAG22/#focus-visible">WCAG 2.2 Success Criterion 2.4.7: Focus Visible</ExternalLink>.
 
 To fix that, simply add `tabindex="-1"` to your target:
 
@@ -136,7 +131,6 @@ Typically, only the focused link is visible. So, how do we achieve that?
 We can leverage a classic accessibility hack:
 the <ExternalLink href="https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html">visually-hidden class</ExternalLink>.
 
-
 ```css
 .visually-hidden:not(:focus):not(:active) {
   clip: rect(0 0 0 0);
@@ -162,3 +156,4 @@ You just need to apply it to both anchor elements:
 ```
 
 And that's it! Now you have a simple yet accessible Skip-links component ready for your blog.
+Until <a href="articles/ally-101-back-to-top">next time</a>, be (and code) well!
