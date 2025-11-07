@@ -1,0 +1,113 @@
+---
+title: "A11y 101: Back-to-top"
+publishDate: 2025-11-07
+updateDate: null
+description: "Skipping to the main content is important, but what if you want to go back to the top of a long page? Here comes our next (accessible) essential blog component: the Back-to-top."
+category: A11y 101
+---
+
+import Callout from "../../components/Callout.astro";
+import ExternalLink from "../../components/ExternalLink.astro";
+import FootnoteRef from "../../components/FootnoteRef.astro";
+import Footnotes from "../../components/Footnotes.astro";
+import Footnote from "../../components/Footnote.astro";
+
+<a href="articles/a11y-101-skip-links">Skipping to the main content</a> is important, but what if you want to go back to
+the top of a long page? Here comes our next (accessible) essential blog component: the Back-to-top.
+
+## What is the Back-to-top?
+
+The Back-to-top it's a button (at least aesthetically) that allows the user to move its viewport _and focus_ back to the top of the page with a single click.
+
+## Why do we need it?
+
+Browser _do_ provide a built-in way to scroll back to the top (like pressing the <kbd>Home</kbd> key on Windows),
+however:
+
+1. not all users are aware of it, and more importantly...
+2. while it scrolls the page, it doesn't actually move the focus back to the top of the page!
+
+This can be disorienting for keyboard and screen reader users, as they might expect to be back at the beginning of the page _with the focus too_.
+
+## Building an accessible Back-to-top
+
+It all starts with a simple anchor link, placed just before the footer of the page:<FootnoteRef n="1"/>
+
+```html
+<div class="back-to-top">
+  <a>Back to top</a>
+</div>
+```
+
+But what value should the href attribute have you ask?
+Time to dust off our old friend, the (informal) href placeholder: the lonely hash (`#`).
+
+Because yes, while mostly misused as a placeholder for non-functional links (_psst_, `javascript:void(0)` is what you're looking for!),
+the hash alone actually has a defined behavior in HTML: it takes you to the top of the page!<FootnoteRef n="2"/>
+
+But - you guessed it - it still doesn't move the focus.
+So, what's the solution?
+
+Just as we did for the <a href="articles/a11y-101-skip-links">Skip-links</a>, we have to target `<main>`:
+
+```html
+<main id="main" tabindex="-1">...</main>
+<div class="back-to-top">
+  <a href="#main">Back to top</a>
+</div>
+```
+
+<Callout>
+  If you are wondering about the `tabindex="-1"` check out <a href="articles/a11y-101-skip-links">the article</a>!
+</Callout>
+
+And there we go! Both the viewport _and focus_ return to the start of the main content.
+
+## Getting fancy
+
+Want smooth scrolling?
+Set `scroll-behavior: smooth` on your `<html>` element,
+_just be sure to respect user preferences_ to avoid motion sickness:
+
+```css
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+```
+
+Now, you might think itd be _super-duper cool_ to show the Back-to-top button only after scrolling.
+That's fine **as long as you don't hide it while it's focused**.
+
+If an element disappears while it has focus, it disrupts the user's navigation flow: this is a failure
+of <ExternalLink href="https://www.w3.org/TR/WCAG22/#focus-order">WCAG 2.2 Success Criterion 2.4.3: Focus Order</ExternalLink>.
+
+If you really must toggle visibility,
+you can do it safely in pure CSS by hiding it only when the container has `:not(:focus-within)`.
+
+## One last thing
+
+Since you might be using a lonely arrow-up icon and no visible text for your Back-to-top component, be mindful about two things:
+
+1. add an `aria-label` - or better yet - a visually-hidden text to grant an accessible name to the element;
+2. remember to hide the icon with with an empty `alt=""` if it's an `<img>` or with an `aria-hidden="true"` if it's an `<svg>` or a Unicode character.
+
+That's it. The Back-to-top is a deceptively simple feature - it has literally one purpose(!) - but still,
+it's easy to miss the accessibility part by just scrolling the page visually.
+
+Until next time, be (and code) well!
+
+<Footnotes>
+  <Footnote n="1">
+    As always, the position in the DOM is fundamental since it determines the focus order of the elements (yes, even if
+    they're visually floating at the end of the page).
+  </Footnote>
+  <Footnote n="2">
+    It shares this behavior with the _very special_™ `#top` fragment (reference:{" "}
+    <ExternalLink href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a#linking_to_an_element_on_the_same_page">
+      MDN
+    </ExternalLink>
+    ), which is arguably more explicit, and for this reason preferable.
+  </Footnote>
+</Footnotes>
