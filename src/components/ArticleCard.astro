@@ -14,7 +14,7 @@ interface Props {
 const { article, index, page, hLevel } = Astro.props;
 const { title, category, publishDate, description } = article.data;
 const url = `${article.collection}/${article.slug}`;
-const Heading = hLevel ?? "h2";
+const Heading = hLevel ?? "h2"; // Alternatively role="heading" and aria-level="[n]" can be used
 ---
 
 <li aria-setsize={page?.total} aria-posinset={page ? page.start + index + 1 : undefined}>
@@ -40,7 +40,7 @@ const Heading = hLevel ?? "h2";
     }
 
     .content {
-      min-height: 2em; /* fallback for browsers rem without support */
+      min-height: 2em; /* Fallback for browsers without lh support */
       min-height: 2lh;
     }
 
