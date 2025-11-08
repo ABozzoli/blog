@@ -11,6 +11,10 @@ p:not(:last-child) {
   margin-bottom: 1rem;
 }
 
+p {
+  text-wrap: pretty;
+}
+
 :is(.external-link, .footnote) > p {
   display: contents;
 }
