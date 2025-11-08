@@ -30,7 +30,7 @@ however:
 
 This can be disorienting for keyboard and screen reader users, as they might expect to be back at the beginning of the page _with the focus too_.
 
-## Building an accessible Back-to-top
+## How to build it
 
 It all starts with a simple anchor link, placed just before the footer of the page:<FootnoteRef n="1"/>
 
@@ -49,7 +49,7 @@ the hash alone actually has a defined behavior in the browser: it takes you to t
 But - you guessed it - it still doesn't move the focus.
 So, what's the solution?
 
-Just as we did for the <a href="articles/a11y-101-skip-links#how-to-build-the-skip-links">Skip-links</a>, we have to target the `<main>` element:
+Just as we did for the <a href="articles/a11y-101-skip-links#how-to-build-them">Skip-links</a>, we have to target the `<main>` element:
 
 ```html
 <main id="main" tabindex="-1">...</main>
@@ -65,7 +65,7 @@ Just as we did for the <a href="articles/a11y-101-skip-links#how-to-build-the-sk
 
 And there we go! Both the viewport _and focus_ return to the start of the main content.
 
-## Getting fancy
+### Getting fancy
 
 > Smooth scrolling? Yes, please!
 
@@ -89,7 +89,7 @@ of <ExternalLink href="https://www.w3.org/TR/WCAG22/#focus-order">WCAG 2.2 Succe
 If you really must toggle visibility,
 you can do it safely in pure CSS by hiding it only when the container has `:not(:focus-within)`.
 
-## Finishing touches
+### Finishing touches
 
 Since you might be using a solitary _arrow-up_ icon and no visible text for your Back-to-top component, be mindful about two things:
 

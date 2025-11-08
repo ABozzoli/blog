@@ -37,10 +37,10 @@ Every time you load a new page, you'd have to tab through every navigation link 
 Skip-links solve this problem by letting users jump straight to what matters with (almost) a single keystroke.
 That’s not just accessibility: _it’s good UX_, plain and simple.
 
-## How to Build the Skip-links
+## How to build them
 
 Start with a simple anchor inside a wrapper (the wrapper will help you with the styling and
-also <a href="articles/a11y-101-skip-links#optional-add-more-skip-links">come in handy later</a>):
+also <a href="articles/a11y-101-skip-links#optional-add-some-more">come in handy later</a>):
 
 ```html
 <div class="skip-links">
@@ -61,7 +61,7 @@ Then simply reference the `id` of the target element in the `href` of the link:
 
 And <span lang="fr">voilà</span>! That's already a functional Skip-links: no JavaScript required!
 
-## Managing Skip-links visibility
+### Managing visibility
 
 Now, we want the Skip-links to remain hidden until they receive focus:
 
@@ -89,7 +89,7 @@ by wrapping it in a media query to ensure animations are disabled for those who 
 }
 ```
 
-## Where's the focus-indicator?
+### Where's the focus-indicator?
 
 By default, the `<main>` element isn't focusable, so while the browser scrolls to it and the keyboard focus moves there,
 the focus-indicator doesn't show up. This can leave the user disoriented and violates
@@ -104,7 +104,7 @@ To fix that, simply add `tabindex="-1"` to your target:
 This allows the focus-indicator to move to `<main>` when using the Skip-links,
 without adding it to the regular tab order. Nice!
 
-## Optional: add more Skip-links
+## Optional: add some more
 
 If your `<footer>` includes interactive elements, consider adding it to the Skip-links as well:
 
@@ -126,7 +126,7 @@ And while you're at it, why not use proper list semantics and slap an `aria-labe
 
 We are almost done, but wait!
 
-### One more tweak: hide non-focused links
+### Hide non-focused links
 
 Typically, only the focused link is visible. So, how do we achieve that?
 We can leverage a classic accessibility hack:
