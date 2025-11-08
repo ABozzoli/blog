@@ -2,22 +2,16 @@
 import { fetchArticles, slugify } from "../js/utils";
 
 const articles = await fetchArticles();
-
 const tags = articles.map((article) => article.data.category).sort();
 
-// prettier-ignore
-const tagsCount = tags.reduce((acc, category) => {
-  acc[category] = (acc[category] ?? 0) + 1;
-  return acc;
-}, {} as Record<string, number>);
+const tagsCount: Record<string, number> = {};
+tags.forEach((tag) => (tagsCount[tag] = (tagsCount[tag] ?? 0) + 1));
 ---
 
 {
   Object.keys(tagsCount).length > 0 && (
     <aside>
-      <h2 id="tag-cloud-title" class="text-center mt-48">
-        Categories
-      </h2>
+      <h2 id="tag-cloud-title">Categories</h2>
       <ul class="tag-cloud" role="list" aria-labelledby="tag-cloud-title">
         {Object.entries(tagsCount).map(([tag, count]) => (
           <li>
@@ -30,3 +24,10 @@ const tagsCount = tags.reduce((acc, category) => {
     </aside>
   )
 }
+
+<style>
+  aside {
+    text-align: center;
+    margin-top: 56px;
+  }
+</style>

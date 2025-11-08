@@ -9,9 +9,7 @@ const articles = await fetchArticles({ category, excludeTitle: title, limit: 3 }
 {
   articles.length > 0 && (
     <aside>
-      <h2 id="related-articles-title" class="text-center mt-48 mb-12">
-        Related articles
-      </h2>
+      <h2 id="related-articles-title">Related articles</h2>
       <ul class="tag-cloud" role="list" aria-labelledby="related-articles-title">
         {articles.map((article) => (
           <li>
@@ -24,3 +22,10 @@ const articles = await fetchArticles({ category, excludeTitle: title, limit: 3 }
     </aside>
   )
 }
+
+<style>
+  aside {
+    text-align: center;
+    margin-top: 56px;
+  }
+</style>
