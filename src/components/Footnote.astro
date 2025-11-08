@@ -8,9 +8,15 @@ const currentPath = Astro.url.pathname;
 ---
 
 <li class="footnote" id={`fn${n}`} tabindex="-1">
-  <slot />
-  <a href={`${currentPath}#fnref${n}`}>
-    <span aria-hidden="true">↩︎</span>
+  <slot />&nbsp;<a class="icon" href={`${currentPath}#fnref${n}`}
+    ><span aria-hidden="true">↩︎</span>
     <span class="visually-hidden">Reference {n}</span>
   </a>
 </li>
+
+<style>
+  .icon {
+    display: inline;
+    white-space: nowrap;
+  }
+</style>
