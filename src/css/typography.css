@@ -20,6 +20,15 @@ hr {
   border-top: 1px solid black;
 }
 
+span[lang] {
+  font-style: italic;
+}
+
+ol {
+  padding-left: 1rem;
+  margin-left: 1rem;
+}
+
 blockquote {
   font-size: var(--fs-18px);
   font-style: italic;
@@ -46,25 +55,14 @@ code {
   font-style: normal; /* Force code to be normal even inside italics */
 }
 
-:is(p, li) code {
-  font-weight: bold;
-  background-color: #f0f0f0;
-  padding: 0.125em 0.25em;
-  font-size: 0.875em;
-  vertical-align: 0.1em
-}
-
 pre code {
   font-size: var(--fs-14px);
 }
 
-span[lang] {
-  font-style: italic;
-}
-
-ol {
-  padding-left: 1rem;
-  margin-left: 1rem;
+:is(p, li) code {
+  font-weight: bold;
+  background-color: #f0f0f0;
+  padding: 0.125em 0.25em;
 }
 
 kbd {
@@ -73,4 +71,10 @@ kbd {
   padding-inline: 0.25em;
   box-shadow: 0.125em 0.125em 0 0.125em black;
   margin-inline-end: 0.25em;
+}
+
+:is(p, li) code,
+kbd {
+  font-size: 0.875em;
+  vertical-align: 0.0625em;
 }

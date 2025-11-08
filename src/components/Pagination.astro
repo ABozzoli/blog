@@ -103,9 +103,8 @@ const { hiddenBefore, shownPages, hiddenAfter } = ellipsedPageNumbers(1);
       height: 44px;
       width: 44px;
       flex-shrink: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: grid;
+      place-items: center;
 
       &[aria-current="page"] {
         background-color: black;

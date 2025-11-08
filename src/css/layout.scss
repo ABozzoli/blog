@@ -24,7 +24,7 @@ body {
 
 /* Ref: https://cssence.com/2025/scroll-margin-scroll-padding/ */
 html {
-  scroll-padding-top: var(--header-height);
+  scroll-padding-top: calc(var(--header-height) + 1rem);
 }
 
 /* Ref: https://youtu.be/bj0Z_GncIwY */
