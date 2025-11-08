@@ -3,7 +3,6 @@ import ArticleCard from "../../components/ArticleCard.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 import type { GetStaticPaths } from "astro";
 import Pagination from "../../components/Pagination.astro";
-import Spacer from "../../components/Spacer.astro";
 import TagCloud from "../../components/TagCloud.astro";
 import { fetchArticles } from "../../js/utils";
 
@@ -25,9 +24,7 @@ const title = "Articles";
     {page.data.map((article, index) => <ArticleCard {article} {index} {page} hLevel="h3" />)}
   </ul>
 
-  <Spacer height="2rem" />
   <Pagination {page} />
-  <Spacer height="2rem" />
 
   <TagCloud />
 </MainLayout>

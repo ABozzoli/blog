@@ -96,12 +96,13 @@ const { hiddenBefore, shownPages, hiddenAfter } = ellipsedPageNumbers(1);
     display: flex;
     justify-content: center;
     gap: 0.5rem;
+    margin-block: 32px;
 
     a,
     .ellipses {
       display: inline-block;
-      height: 44px;
       width: 44px;
+      aspect-ratio: 1;
       flex-shrink: 0;
       display: grid;
       place-items: center;
