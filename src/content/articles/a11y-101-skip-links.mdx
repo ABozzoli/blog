@@ -14,8 +14,8 @@ import Footnotes from "../../components/Footnotes.astro";
 
 <Callout>
   In <a href="category/a11y-101">this series</a>, I'll try to cover the essential components every blog needs, with a
-  special focus on accessibility, _of course_. To stay on track, I might skip (_pun intended_) over some of the less important CSS bits,
-  so bear with me!
+  special focus on accessibility, _of course_. To stay on track, I might skip (_pun intended_) over some of the less
+  important CSS bits, so bear with me!
 </Callout>
 
 Let's start with one of the simplest yet most important components: the Skip-links.
@@ -49,7 +49,7 @@ also <a href="articles/a11y-101-skip-links#optional-add-some-more">come in handy
 ```
 
 Be sure to place the Skip-links _before_ the site navigation to not defeat its purpose.
-Then simply reference the `id` of the target element in the `href` of the link:
+Then simply reference the `id` of the target element (typically the `<main>` landmark) in the link's `href`:
 
 ```html
 <div class="skip-links">
@@ -63,7 +63,7 @@ And <span lang="fr">voilà</span>! That's already a functional Skip-links: no Ja
 
 ### Managing visibility
 
-Now, we want the Skip-links to remain hidden until they receive focus:
+Now, we want the Skip-links to remain hidden until they receive focus, so we would do something like this:
 
 ```css
 .skip-links {
@@ -102,11 +102,11 @@ To fix that, simply add `tabindex="-1"` to your target:
 ```
 
 This allows the focus-indicator to move to `<main>` when using the Skip-links,
-without adding it to the regular tab order. Nice!
+without adding it to the regular tab order. Neat!
 
 ## Optional: add some more
 
-If your `<footer>` includes interactive elements, consider adding it to the Skip-links as well:
+If your `<footer>` includes interactive elements, consider adding a Skip-link pointing to it as well:
 
 ```html
 <div class="skip-links">
