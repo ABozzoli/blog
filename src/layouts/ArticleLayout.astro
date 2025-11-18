@@ -11,7 +11,7 @@ const { title, category, publishDate, updateDate } = frontmatter;
   <article>
     <hgroup>
       <h1>{title}</h1>
-      <p>Posted on {formatDate(publishDate)}{updateDate && `, Last updated on ${formatDate(updateDate)}`}</p>
+      <p>First posted on {formatDate(publishDate)}{updateDate && ` — last updated on ${formatDate(updateDate)}`}</p>
     </hgroup>
 
     <slot />
@@ -37,6 +37,7 @@ const { title, category, publishDate, updateDate } = frontmatter;
 
     p {
       font-size: var(--fs-14px);
+      text-wrap: balance;
     }
   }
 </style>

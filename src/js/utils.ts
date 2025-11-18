@@ -32,7 +32,9 @@ export function slugify(text: string): string {
  * @returns {string} The formatted date string.
  */
 export function formatDate(date: string | number | Date | null): string {
-  return date ? new Date(date).toLocaleDateString("en-US", { timeZone: "UTC" }) : "MM/DD/YYYY";
+  const options = { timeZone: "UTC", year: "numeric", month: "long", day: "numeric" } as Intl.DateTimeFormatOptions;
+
+  return date ? new Date(date).toLocaleDateString("en-US", options) : "N/D";
 }
 
 import { getCollection } from "astro:content";
