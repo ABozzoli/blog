@@ -17,27 +17,8 @@ html {
   }
 }
 
-body {
-  font-family: var(--ff-base);
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-:is(h1, h2, h3, h4, h5, h6),
-:is(.h1, .h2, .h3, .h4, .h5, .h6) {
-  font-family: var(--ff-title);
-}
-
-p,
-li {
-  line-height: 1.5;
-}
-
 a {
   text-decoration-line: none;
-  text-decoration-thickness: 0.125em;
-  text-underline-offset: 0.125em;
 
   &[href]:is(:hover, :active) {
     text-decoration-line: underline;
