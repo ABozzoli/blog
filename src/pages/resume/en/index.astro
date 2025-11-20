@@ -204,10 +204,10 @@
             <h2 id="awards">Awards</h2>
             <ul aria-labelledby="awards">
               <li>
-                <strong>Carapelli for Art 2018</strong>, 1st prize - Academy section<br />
-                "<a href="https://exibartprize.com/opere/divina-colorum/" target="_blank">
-                  Divina Colorum<span class="visually-hidden"> - opens in a new tab</span></a
-                >"
+                <strong>Carapelli for Art 2018</strong>, 1st prize - Academy section
+                <a href="https://exibartprize.com/opere/divina-colorum/" target="_blank">
+                  "Divina Colorum"<span class="visually-hidden"> - opens in a new tab</span>
+                </a>
                 <span class="details">(digital fine art created with HTML and CSS)</span>
               </li>
             </ul>
@@ -400,7 +400,10 @@
     font-size: 0.8em;
     color: #666;
     text-align: center;
-    text-wrap: balance;
+
+    p {
+      text-wrap: balance;
+    }
   }
 
   .portrait {
@@ -416,6 +419,10 @@
 
   .details {
     font-size: 0.9em;
+  }
+
+  #awards ~ ul li {
+    text-wrap: balance;
   }
 
   @media (max-width: 900px) {

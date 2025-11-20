@@ -200,11 +200,11 @@
             <h2 id="awards">Premi</h2>
             <ul aria-labelledby="awards">
               <li>
-                <strong>Carapelli for Art 2018</strong>, 1° premio sez. accademia<br />
-                "<a href="https://exibartprize.com/opere/divina-colorum/" target="_blank">
-                  Divina Colorum<span class="visually-hidden"> - apre in una nuova scheda</span></a
-                >"
-                <span class="details">(digital fine art realizzata con HTML e CSS)</span>
+                <strong>Carapelli for Art 2018</strong>, 1° premio sez. accademia
+                <a href="https://exibartprize.com/opere/divina-colorum/" target="_blank">
+                  "Divina Colorum"<span class="visually-hidden"> - apre in una nuova scheda</span>
+                </a>
+                <span class="details">(<span lang="en">digital fine art</span> realizzata con HTML e CSS)</span>
               </li>
             </ul>
           </section>
@@ -396,7 +396,10 @@
     font-size: 0.8em;
     color: #666;
     text-align: center;
-    text-wrap: balance;
+
+    p {
+      text-wrap: balance;
+    }
   }
 
   .portrait {
@@ -412,6 +415,10 @@
 
   .details {
     font-size: 0.9em;
+  }
+
+  #awards ~ ul li {
+    text-wrap: balance;
   }
 
   @media (max-width: 900px) {
