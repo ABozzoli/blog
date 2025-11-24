@@ -91,11 +91,11 @@ you can do it safely in pure CSS by hiding it only when the container has `:not(
 
 ### Finishing touches
 
-Since you might be using a solitary _arrow-up_ icon and no visible text for your Back-to-top component, be mindful about two things:
+Since you could be relying on a solitary _arrow-up_ icon and no visible text for your Back-to-top component, be mindful about three things:
 
-1. add an `aria-label` - or better yet - a visually-hidden text to grant an accessible name to the element;
+1. add an `aria-label` - or better yet - a visually-hidden text to grant an _accessible name_ to the element;
 2. hide the icon to assistive technologies with with an empty `alt=""` if it's an `<img>` or with an `aria-hidden="true"` if it's an `<svg>` or a Unicode character;
-3. repeat the label in the `title` attribute<FootnoteRef n="3"/> to add a native tooltip.
+3. repeat the label in the `title` attribute<FootnoteRef n="3"/> to add a native tooltip for sighted users.
 
 The result should be something along these lines:
 
