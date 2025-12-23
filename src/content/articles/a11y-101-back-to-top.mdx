@@ -7,7 +7,7 @@ category: A11y 101
 ---
 
 import Callout from "../../components/Callout.astro";
-import ExternalLink from "../../components/ExternalLink.astro";
+import Link from "../../components/Link.astro";
 import FootnoteRef from "../../components/FootnoteRef.astro";
 import Footnotes from "../../components/Footnotes.astro";
 import Footnote from "../../components/Footnote.astro";
@@ -84,7 +84,7 @@ Now, you might think it'd be _super-duper cool_ to show the Back-to-top button o
 That's fine **as long as you don't hide it while it's focused**.
 
 If an element disappears while it has focus, it disrupts the user's navigation flow: this is a failure
-of <ExternalLink href="https://www.w3.org/TR/WCAG22/#focus-order">WCAG 2.2 Success Criterion 2.4.3: Focus Order</ExternalLink>.
+of <Link href="https://www.w3.org/TR/WCAG22/#focus-order">WCAG 2.2 Success Criterion 2.4.3: Focus Order</Link>.
 
 If you really must toggle visibility,
 you can do it safely in pure CSS by hiding it only when the container has `:not(:focus-within)`.
@@ -120,17 +120,12 @@ Until next time, be (and code) well!
   </Footnote>
   <Footnote n="2">
     It shares this behavior with the _very special_™ `#top` fragment (see{" "}
-    <ExternalLink href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a#linking_to_an_element_on_the_same_page">
-      MDN
-    </ExternalLink>
-    ), which is more explicit and therefore arguably preferable.
+    <Link href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a#linking_to_an_element_on_the_same_page">MDN</Link>), which is more explicit and therefore arguably preferable.
   </Footnote>
   <Footnote n="3">
     Which is usually{" "}
-    <ExternalLink href="https://www.a11yproject.com/posts/title-attributes/">
-      shunned by the accessibility community
-    </ExternalLink>
-    , but it's acceptable in this particular case, since we already provided an accessible name and it doesn't convey
+    <Link href="https://www.a11yproject.com/posts/title-attributes/">shunned by the accessibility community</Link>, but
+    it's acceptable in this particular case, since we already provided an accessible name and it doesn't convey
     additional or critical information.
   </Footnote>
 </Footnotes>

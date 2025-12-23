@@ -5,6 +5,9 @@ interface Props {
 
 const { href, ...props } = Astro.props;
 const currentPath = Astro.url.pathname;
+const isExternal = href.startsWith("http://") || href.startsWith("https://");
 ---
 
-<a href={currentPath + href} {...props}><slot /></a>
+<a href={isExternal ? href : currentPath + href} target={isExternal ? "_blank" : null} {...props}
+  ><slot />{isExternal && <span class="visually-hidden">, opens in a new window</span>}</a
+>

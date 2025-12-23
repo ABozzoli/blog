@@ -8,7 +8,6 @@ category: A11y 101
 
 import Link from "../../components/Link.astro";
 import Callout from "../../components/Callout.astro";
-import ExternalLink from "../../components/ExternalLink.astro";
 import FootnoteRef from "../../components/FootnoteRef.astro";
 import Footnotes from "../../components/Footnotes.astro";
 
@@ -93,7 +92,7 @@ by wrapping it in a media query to ensure animations are disabled for those who 
 
 By default, the `<main>` element isn't focusable, so while the browser scrolls to it and the keyboard focus moves there,
 the focus-indicator doesn't show up. This can leave the user disoriented and violates
-the <ExternalLink href="https://www.w3.org/TR/WCAG22/#focus-visible">WCAG 2.2 Success Criterion 2.4.7: Focus Visible</ExternalLink>.
+the <Link href="https://www.w3.org/TR/WCAG22/#focus-visible">WCAG 2.2 Success Criterion 2.4.7: Focus Visible</Link>.
 
 To fix that, simply add `tabindex="-1"` to your target:
 
@@ -130,7 +129,7 @@ We are almost done, but wait!
 
 Typically, only the focused link is visible. So, how do we achieve that?
 We can leverage a classic accessibility hack:
-the <ExternalLink href="https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html">visually-hidden class</ExternalLink>.
+the <Link href="https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html">visually-hidden class</Link>.
 
 ```css
 .visually-hidden:not(:focus):not(:active) {
