@@ -158,9 +158,9 @@
               presso Accademia di Belle Arti di Brera
               <div class="dates">
                 <span class="visually-hidden">dal</span>
-                <time datetime="2016">ottobre 2016</time>
+                <time datetime="2016-10">ottobre 2016</time>
                 <span class="visually-hidden">al</span>
-                <time datetime="2021">aprile 2021</time>
+                <time datetime="2021-04">aprile 2021</time>
               </div>
             </li>
           </ol>
@@ -169,11 +169,15 @@
         <div class="cols-2">
           <section aria-labelledby="it-skills">
             <h2 id="it-skills">Competenze Informatiche</h2>
-            <ul aria-labelledby="it-skills">
-              <li>Accessibilità digitale</li>
+            <ul aria-labelledby="it-skills" class="list-cols-2">
+              <li>Digital accessibility (WCAG 2.2)</li>
               <li>React</li>
               <li>Angular</li>
-              <li>HTML e CSS</li>
+              <li>HTML5 & CSS3</li>
+              <li>JavaScript ES6+</li>
+              <li>TypeScript</li>
+              <li>Git</li>
+              <li>REST API</li>
             </ul>
           </section>
 
@@ -371,6 +375,11 @@
 
   ol li + li {
     margin-top: 0.5em;
+  }
+
+  .list-cols-2 {
+    columns: 2;
+    column-gap: 2em;
   }
 
   span[lang] {
