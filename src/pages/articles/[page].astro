@@ -14,12 +14,18 @@ export const getStaticPaths = (async ({ paginate }) => {
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props;
+// console.log("🚀 ~ page:", {...page, data: null});
 
 const title = "Articles";
+const subtitle = `Page ${page.currentPage} of ${page.lastPage}`;
 ---
 
-<MainLayout {title}>
-  <h1 id="page-title">{title}</h1>
+<MainLayout title=`${title} - ${subtitle}`>
+  <hgroup>
+    <h1 id="page-title">{title}</h1>
+    <p>{subtitle}</p>
+  </hgroup>
+
   <ul class="card-stack" role="list" aria-labelledby="page-title">
     {page.data.map((article, index) => <ArticleCard {article} {index} {page} hLevel="h3" />)}
   </ul>
@@ -28,3 +34,9 @@ const title = "Articles";
 
   <TagCloud />
 </MainLayout>
+
+<style>
+  hgroup {
+    margin-bottom: 2rem;
+  }
+</style>
