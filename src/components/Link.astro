@@ -1,13 +1,48 @@
 ---
-interface Props {
-  href: string;
+import { Icon } from "astro-icon/components";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"a"> {
+  iconBefore?: string;
+  iconAfter?: string;
+  iconSize?: string | number;
 }
 
-const { href, ...props } = Astro.props;
+const { iconBefore, iconAfter, iconSize = "1em", title, href, ...props } = Astro.props;
 const currentPath = Astro.url.pathname;
-const isExternal = href.startsWith("http://") || href.startsWith("https://");
+const isExternal = String(href).startsWith("http://") || String(href).startsWith("https://");
+
+/* The fragment is needed to prevent additional whitespace (Ref: https://notesofdev.com/blog/fixing-extra-whitespace-in-astro-components) */
 ---
 
-<a href={isExternal ? href : currentPath + href} target={isExternal ? "_blank" : null} {...props}
-  ><slot />{isExternal && <span class="visually-hidden">, opens in a new window</span>}</a
->
+<>
+  <a
+    class={iconBefore || iconAfter ? "has-icon" : ""}
+    href={isExternal ? href : currentPath + href}
+    target={isExternal ? "_blank" : null}
+    {title}
+    {...props}
+    >{iconBefore && <Icon name={iconBefore} size={iconSize} />}<span class="content"><slot /></span>{
+      title && <span class="visually-hidden">{title}</span>
+    }{isExternal && <span class="visually-hidden">, opens in a new window</span>}{
+      iconAfter && <Icon name={iconAfter} size={iconSize} />
+    }</a
+  >
+</>
+
+<style lang="scss">
+  .has-icon {
+    display: flex;
+    align-items: center;
+    column-gap: 1ch;
+    white-space: nowrap;
+
+    .content {
+      margin-top: 0.25em;
+    }
+
+    &:has(.content:empty):hover {
+      opacity: 0.66;
+    }
+  }
+</style>

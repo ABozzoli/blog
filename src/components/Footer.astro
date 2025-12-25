@@ -1,6 +1,6 @@
 ---
 import BackToTop from "./BackToTop.astro";
-import IconLink from "./IconLink.astro";
+import Link from "./Link.astro";
 
 const currentPath = Astro.url.pathname;
 // Checks if the URL is a blog article page with a non-numeric slug; trailing "/" is optional
@@ -15,22 +15,15 @@ const isArticlePage = /^\/blog\/articles\/(?!\d+$)[^/]+\/?$/.test(currentPath);
 
     <ul role="list" aria-label="Social links">
       <li>
-        <IconLink
+        <Link
           href="https://www.linkedin.com/in/abozzoli/"
-          target="_blank"
-          name="mdi:linkedin"
-          size="2em"
           title="LinkedIn profile"
+          iconBefore="mdi:linkedin"
+          iconSize="2em"
         />
       </li>
       <li>
-        <IconLink
-          href="https://github.com/ABozzoli"
-          target="_blank"
-          name="mdi:github"
-          size="2em"
-          title="GitHub profile"
-        />
+        <Link href="https://github.com/ABozzoli" title="GitHub profile" iconBefore="mdi:github" iconSize="2em" />
       </li>
     </ul>
   </div>
