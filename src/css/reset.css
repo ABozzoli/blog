@@ -33,6 +33,7 @@ a {
 button {
   all: unset;
   outline: revert; /* Restore the default focus outline removed by "all: unset" */
+  box-sizing: border-box; /* Ensure the box-sizing reset is applied despite "all: unset" */
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;

@@ -73,7 +73,7 @@ dialog:not([open]) {
   display: none;
 }
 
-/* Ref: https://x.com/argyleink/status/1793302054859063718 */
+/* Ref: https://x.com/argyleink/status/1793302054859063718
 [popover],
 dialog,
 ::backdrop {
@@ -99,10 +99,42 @@ dialog,
     opacity: 0;
   }
 }
+*/
 
-body:has(dialog[open]),
+/* Ref: https://www.htmhell.dev/adventcalendar/2025/9/ */
+body:has(dialog[open]:modal),
 body:has(.scroll-lock) {
-  overflow: hidden;
+  overflow: hidden; /* It hides sticky header if applied to <html> */
+}
+
+html:has(dialog[open]:modal),
+html:has(.scroll-lock) {
+  scrollbar-gutter: stable; /* It doesn't work if applied to <body> */
+}
+
+dialog[open]::backdrop {
+  -webkit-backdrop-filter: blur(0.25rem);
+  backdrop-filter: blur(0.25rem);
+}
+
+.menu-toggle {
+  aspect-ratio: 1;
+  text-align: center;
+}
+
+.menu-toggle,
+.blog-title,
+.nav-link {
+  display: block;
+  padding-inline: 1rem;
+  height: var(--header-height);
+  line-height: var(--header-height);
+
+  &:not(.nav-link):hover {
+    background-color: black;
+    text-decoration-color: black;
+    color: white;
+  }
 }
 
 .badge {

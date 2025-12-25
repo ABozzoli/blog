@@ -1,15 +1,16 @@
 ---
 import DevBanner from "./DevBanner.astro";
+import MenuDialog from "./MenuDialog.astro";
+import NavLinks from "./NavLinks.astro";
 import SkipLinks from "./SkipLinks.astro";
-import { isCurrentPage } from "../js/utils";
-
-export const routes = [
-  { href: "", title: "Home" },
-  { href: "articles", title: "Articles" },
-];
-
-const currentPath = Astro.url.pathname;
 ---
+
+<script>
+  const menuToggle = document.getElementById("menu-toggle") as HTMLButtonElement;
+  const menuDialog = document.getElementById("menu-dialog") as HTMLDialogElement;
+
+  menuToggle?.addEventListener("click", () => menuDialog?.showModal());
+</script>
 
 <DevBanner />
 
@@ -20,17 +21,26 @@ const currentPath = Astro.url.pathname;
     <a class="blog-title" href="" aria-label="ABozzoli, Homepage">ABozzoli</a>
 
     <nav aria-label="Primary">
-      <ul role="list">
-        {
-          routes.map(({ href, title }) => (
-            <li>
-              <a class="nav-link" href={href} aria-current={isCurrentPage(currentPath, href)}>
-                {title}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      <div class="navigation--desktop">
+        <NavLinks />
+      </div>
+
+      <div class="navigation--mobile">
+        <button
+          id="menu-toggle"
+          class="menu-toggle"
+          type="button"
+          title="Open menu"
+          aria-label="Open menu"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-controls="menu-dialog"
+        >
+          ☰
+        </button>
+
+        <MenuDialog />
+      </div>
     </nav>
   </div>
 </header>
@@ -51,33 +61,27 @@ const currentPath = Astro.url.pathname;
       align-items: center;
     }
 
-    a {
-      display: block;
-      padding-inline: 1rem;
-      height: var(--header-height);
-      line-height: var(--header-height);
-    }
-
     .blog-title {
       font-size: var(--fs-600);
       font-weight: bold;
       font-family: var(--ff-title);
-
-      &:hover {
-        background-color: black;
-        text-decoration-color: black;
-        color: white;
-      }
     }
 
-    nav ul {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+    .navigation {
+      &--mobile {
+        display: none;
 
-      [aria-current="page"] {
-        background-color: black;
-        color: white;
+        @media (max-width: 768px) {
+          display: contents;
+        }
+      }
+
+      &--desktop {
+        display: contents;
+
+        @media (max-width: 768px) {
+          display: none;
+        }
       }
     }
   }

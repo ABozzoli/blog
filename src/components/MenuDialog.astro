@@ -1,0 +1,61 @@
+---
+import NavLinks from "./NavLinks.astro";
+---
+
+<dialog id="menu-dialog" class="menu-dialog" aria-label="Menu" closedby="any">
+  <form method="dialog">
+    <button class="menu-toggle" title="Close menu" aria-label="Close menu">🗙</button>
+  </form>
+
+  <NavLinks />
+</dialog>
+
+<style lang="scss">
+  .menu-dialog {
+    position: fixed;
+    height: 100%;
+    width: 320px;
+    max-width: 100%;
+    left: auto;
+    border-left: 1px solid black;
+    box-shadow: var(--border-shadow);
+  }
+
+  /* Ref: https://blog.logrocket.com/animating-dialog-popover-elements-css-starting-style/#advanced-dialog-animations-starting-style */
+  @media (prefers-reduced-motion: no-preference) {
+    .menu-dialog,
+    .menu-dialog::backdrop {
+      transition:
+        display 0.5s allow-discrete,
+        overlay 0.5s allow-discrete,
+        translate 0.5s,
+        background-color 0.5s;
+    }
+  }
+
+  .menu-dialog {
+    translate: 100%;
+
+    &::backdrop {
+      background-color: rgb(0 0 0 / 0);
+    }
+
+    &[open] {
+      translate: 0;
+
+      &::backdrop {
+        background-color: rgb(0 0 0 / 0.5);
+      }
+    }
+
+    @starting-style {
+      &[open] {
+        translate: 100%;
+
+        &::backdrop {
+          background-color: rgb(0 0 0 / 0);
+        }
+      }
+    }
+  }
+</style>
