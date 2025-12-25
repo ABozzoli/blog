@@ -31,18 +31,19 @@ const getSkipText = (pages: number[]) => {
 const { hiddenBefore, shownPages, hiddenAfter } = ellipsedPageNumbers(1);
 
 /* Ref: https://www.htmhell.dev/adventcalendar/2024/14/ */
+/* TODO: review following this https://afixt.com/a-quick-primer-on-accessible-pagination/ */
 ---
 
 <nav aria-label="Pagination" inert={!(page.lastPage > 1)}>
   <ul class="pagination" role="list">
     <li class="arrow">
-      <a role="link" href={page.url.first} aria-disabled={!page.url.first ? "true" : "false"}>
+      <a role="link" href={page.url.first} aria-disabled={!page.url.first ? "true" : "false"} title="First page">
         <span class="visually-hidden">First page</span>
         <span aria-hidden="true">❮❮</span>
       </a>
     </li>
     <li class="arrow">
-      <a role="link" href={page.url.prev} aria-disabled={!page.url.prev ? "true" : "false"}>
+      <a role="link" href={page.url.prev} aria-disabled={!page.url.prev ? "true" : "false"} title="Previous page">
         <span class="visually-hidden">Previous page</span>
         <span aria-hidden="true">❮</span>
       </a>
@@ -77,13 +78,13 @@ const { hiddenBefore, shownPages, hiddenAfter } = ellipsedPageNumbers(1);
       )
     }
     <li class="arrow">
-      <a role="link" href={page.url.next} aria-disabled={!page.url.next ? "true" : "false"}>
+      <a role="link" href={page.url.next} aria-disabled={!page.url.next ? "true" : "false"} title="Next page">
         <span class="visually-hidden">Next page</span>
         <span aria-hidden="true">❯</span>
       </a>
     </li>
     <li class="arrow">
-      <a role="link" href={page.url.last} aria-disabled={!page.url.last ? "true" : "false"}>
+      <a role="link" href={page.url.last} aria-disabled={!page.url.last ? "true" : "false"} title="Last page">
         <span class="visually-hidden">Last page</span>
         <span aria-hidden="true">❯❯</span>
       </a>
