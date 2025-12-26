@@ -117,18 +117,16 @@ dialog[open]::backdrop {
   backdrop-filter: blur(0.25rem);
 }
 
-.menu-toggle {
-  aspect-ratio: 1;
-  text-align: center;
-}
-
 .menu-toggle,
 .blog-title,
 .nav-link {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding-inline: 1rem;
   height: var(--header-height);
   line-height: var(--header-height);
+  min-width: var(--header-height);
 
   &:not(.nav-link):hover {
     background-color: black;

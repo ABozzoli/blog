@@ -10,7 +10,7 @@ export default defineConfig({
   base: '/blog/',
   integrations: [mdx(), icon({
     include: {
-      mdi: ['github', 'linkedin'],
+      mdi: ['github', 'linkedin', 'close'],
     }
   })],
 });

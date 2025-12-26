@@ -1,10 +1,13 @@
 ---
+import { Icon } from "astro-icon/components";
 import NavLinks from "./NavLinks.astro";
 ---
 
 <dialog id="menu-dialog" class="menu-dialog" aria-label="Menu" closedby="any">
   <form method="dialog">
-    <button class="menu-toggle" title="Close menu" aria-label="Close menu">🗙</button>
+    <button class="menu-toggle" title="Close menu" aria-label="Close menu">
+      <Icon name="mdi:close" size="1.5em" />
+    </button>
   </form>
 
   <NavLinks />
