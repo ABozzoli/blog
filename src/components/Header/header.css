@@ -1,0 +1,17 @@
+.menu-toggle,
+.blog-title,
+.nav-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 1rem;
+  height: var(--header-height);
+  line-height: var(--header-height);
+  min-width: var(--header-height);
+
+  &:not(.nav-link):hover {
+    background-color: black;
+    text-decoration-color: black;
+    color: white;
+  }
+}
