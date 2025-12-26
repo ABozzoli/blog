@@ -4,6 +4,7 @@ import HeaderDialog from "./HeaderDialog.astro";
 import HeaderLinks from "./HeaderLinks.astro";
 import SkipLinks from "../SkipLinks.astro";
 import "./header.css";
+import { Icon } from "astro-icon/components";
 ---
 
 <script>
@@ -27,15 +28,9 @@ import "./header.css";
       </div>
 
       <div class="navigation--mobile">
-        <button
-          id="menu-toggle"
-          class="menu-toggle"
-          type="button"
-          title="Open menu"
-          aria-label="Open menu"
-          aria-haspopup="dialog"
-        >
-          ☰
+        <button id="menu-toggle" class="menu-toggle" type="button" title="Open menu" aria-haspopup="dialog">
+          <span class="visually-hidden">Open menu</span>
+          <Icon name="mdi:hamburger-menu" size="1.5em" />
         </button>
 
         <HeaderDialog />
