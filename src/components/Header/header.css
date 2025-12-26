@@ -9,9 +9,8 @@
   line-height: var(--header-height);
   min-width: var(--header-height);
 
-  &:not(.nav-link):hover {
+  &:is(:hover, :active) {
     background-color: black;
-    text-decoration-color: black;
     color: white;
   }
 }

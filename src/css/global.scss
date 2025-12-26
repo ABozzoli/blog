@@ -20,7 +20,7 @@ html {
 a {
   text-decoration-line: none;
 
-  &[href]:is(:hover, :active) {
+  &[href]:not(header *):is(:hover, :active) {
     text-decoration-line: underline;
   }
 }
