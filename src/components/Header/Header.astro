@@ -1,8 +1,8 @@
 ---
-import DevBanner from "./DevBanner.astro";
-import MenuDialog from "./MenuDialog.astro";
-import NavLinks from "./NavLinks.astro";
-import SkipLinks from "./SkipLinks.astro";
+import DevBanner from "../DevBanner.astro";
+import HeaderDialog from "./HeaderDialog.astro";
+import HeaderLinks from "./HeaderLinks.astro";
+import SkipLinks from "../SkipLinks.astro";
 ---
 
 <script>
@@ -22,7 +22,7 @@ import SkipLinks from "./SkipLinks.astro";
 
     <nav aria-label="Primary">
       <div class="navigation--desktop">
-        <NavLinks />
+        <HeaderLinks />
       </div>
 
       <div class="navigation--mobile">
@@ -39,7 +39,7 @@ import SkipLinks from "./SkipLinks.astro";
           ☰
         </button>
 
-        <MenuDialog />
+        <HeaderDialog />
       </div>
     </nav>
   </div>
