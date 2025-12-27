@@ -39,10 +39,15 @@ const isExternal = String(href).startsWith("http://") || String(href).startsWith
 
     .content {
       margin-top: 0.25em;
+
+      &:empty {
+        position: absolute; /* Fix flex gap from showing up when there's no content */
+      }
     }
 
     &:has(.content:empty):hover {
-      opacity: 0.66;
+      background-color: white;
+      color: black;
     }
   }
 </style>
