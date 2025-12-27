@@ -5,14 +5,18 @@ interface Props {
 
 const { n } = Astro.props;
 const currentPath = Astro.url.pathname;
+
+/* The fragment is needed to prevent additional whitespace (Ref: https://notesofdev.com/blog/fixing-extra-whitespace-in-astro-components) */
 ---
 
-<sup>
-  <a href={`${currentPath}#fn${n}`} id={`fnref${n}`}>
-    <span aria-hidden="true">[{n}]</span>
-    <span class="visually-hidden">Footnote {n}</span>
-  </a>
-</sup>
+<>
+  <sup>
+    <a href={`${currentPath}#fn${n}`} id={`fnref${n}`}>
+      <span aria-hidden="true">[{n}]</span>
+      <span class="visually-hidden">Footnote {n}</span>
+    </a>
+  </sup>
+</>
 
 <style>
   sup {
