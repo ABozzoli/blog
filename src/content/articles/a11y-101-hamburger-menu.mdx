@@ -34,9 +34,9 @@ It should also have:
 </button>
 ```
 
-You could also add `aria-expanded`, but it only makes sense if you are using a _non-modal_ dialog.
+You could also add `aria-expanded`, but it would only makes sense if you are using a _non-modal_ dialog.
 
-Here we are using a _modal_ dialog, which focus-traps the user and makes the rest of the page inert.
+In our case we will be using a _modal_ dialog, which focus-traps the user and makes the rest of the page inert.
 This creates a new interaction context rather than expanding the existing one, so an expanded state wouldn't be appropriate.
 
 ## The modal dialog
@@ -54,7 +54,7 @@ Then comes the actual content of the `<dialog>`, which would be an exact copy of
 ```html
 <dialog aria-label="Menu" closedby="any">
   <form method="dialog">
-    <button title="Close menu" aria-label="Close menu">
+    <button title="Close menu">
       <span class="visually-hidden">Close menu</span>
       <span aria-hidden="true">×</span>
     </button>
@@ -81,11 +81,11 @@ const menuDialog = document.getElementById("menu-dialog");
 menuToggle?.addEventListener("click", () => menuDialog?.showModal());
 ```
 
-Well, ain't that bad.
+Well, it ain't that bad.
 
 ### Styling it as a sidebar
 
-I would like to style it as a sidebar, blurring the content of the page beneath it, so let us do that:
+I would like to style it as a sidebar while blurring the content of the page beneath it, so let us do that:
 
 ```css
 .menu-dialog {
@@ -144,8 +144,34 @@ But what about the animation? Here, take a look at this:
 ```
 
 There is a bunch of weird stuff in there, but suffice you to know that the `allow-discrete` plus `@starting-style` combo
-is needed to enable transitions on properties that do not really have intermediate states,
+is what's needed to enable transitions on properties that do not really have intermediate states,
 and even if Firefox support is still lacking, this is another case of _progressive enhancement_, so no problem.
+
+## The final structure
+
+```html
+<header>
+  <nav aria-label="Primary">
+    <!-- Navigation links -->
+
+    <button type="button" title="Open menu" aria-haspopup="dialog">
+      <span class="visually-hidden">Open menu</span>
+      <span aria-hidden="true">☰</span>
+    </button>
+
+    <dialog aria-label="Menu" closedby="any">
+      <form method="dialog">
+        <button title="Close menu">
+          <span class="visually-hidden">Close menu</span>
+          <span aria-hidden="true">×</span>
+        </button>
+      </form>
+
+      <!-- Navigation links -->
+    </dialog>
+  </nav>
+</header>
+```
 
 What a gift! The web platform really handles most of the heavy lifting, and you end up with a nicely animated and accessible hamburger menu (with very little JavaScript code nevertheless).
 
