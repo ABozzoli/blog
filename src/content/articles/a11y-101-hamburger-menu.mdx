@@ -1,0 +1,174 @@
+---
+title: "A11y 101: Hamburger Menu"
+publishDate: 2025-12-27
+updateDate: null
+description: "Skipping to the main content is important, but what if you want to go back to the top of a long page? Here comes our next (accessible) essential blog component: the Back-to-top."
+category: A11y 101
+---
+
+import Callout from "../../components/Callout.astro";
+import Link from "../../components/Link.astro";
+import FootnoteRef from "../../components/FootnoteRef.astro";
+import Footnotes from "../../components/Footnotes.astro";
+import Footnote from "../../components/Footnote.astro";
+
+The Hamburger Menu is a common mobile navigation pattern, but it's implementation can be tricky.
+This post walks through a minimal, mostly native approach based on the `<dialog>` element.
+
+## The open button
+
+The open `<button>` should live inside the `<nav>` landmark to define its purpose and enhance its discoverability.
+
+It should also have:
+
+- `type="button"`, otherwise it would default to `"submit"`<FootnoteRef n="1"/>;
+- a visually hidden text to provide an accessible name;
+- a `title` with the same value, as a nice addition for sighted users<FootnoteRef n="2"/>;
+- `aria-haspopup="dialog"` to provide more information to assistive technologies<FootnoteRef n="3"/>;
+- the icon (I'm using a character here for simplicity).
+
+```html
+<button type="button" title="Open menu" aria-haspopup="dialog">
+  <span class="visually-hidden">Open menu</span>
+  <span aria-hidden="true">☰</span>
+</button>
+```
+
+You could also add `aria-expanded`, but it only makes sense if you are using a _non-modal_ dialog.
+
+Here we are using a _modal_ dialog, which focus-traps the user and makes the rest of the page inert.
+This creates a new interaction context rather than expanding the existing one, so an expanded state wouldn't be appropriate.
+
+## The modal dialog
+
+The modal `<dialog>` should have:
+
+- an accessible name, provided via `aria-label` or `aria-labelledby`;
+- `closedby="any"` to enable _light dismiss_ behavior<FootnoteRef n="4"/>.
+
+Inside it, as the first element, there should be a `<button>` for closing it.
+This can work with zero JavaScript if you enclose it in a `<form>` with `method="dialog"`<FootnoteRef n="5"/>.
+
+Then comes the actual content of the `<dialog>`, which would be an exact copy of the list of links in your `<nav>` (but without the `<nav>` itself).
+
+```html
+<dialog aria-label="Menu" closedby="any">
+  <form method="dialog">
+    <button title="Close menu" aria-label="Close menu">
+      <span class="visually-hidden">Close menu</span>
+      <span aria-hidden="true">×</span>
+    </button>
+  </form>
+
+  <!-- Navigation links -->
+</dialog>
+```
+
+With the structure in place, only one thing is missing.
+
+### Opening the dialog
+
+In the near future, we will be able to open the dialog without a single line of JavaScript thanks to the
+
+<Link href="https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API">Invoker Commands API</Link>, which
+has just entered baseline
+<FootnoteRef n="6" />. For now, let us sprinkle in a bit of JavaScript:
+
+```js
+const menuToggle = document.getElementById("menu-toggle");
+const menuDialog = document.getElementById("menu-dialog");
+
+menuToggle?.addEventListener("click", () => menuDialog?.showModal());
+```
+
+Well, ain't that bad.
+
+### Styling it as a sidebar
+
+I would like to style it as a sidebar, blurring the content of the page beneath it, so let us do that:
+
+```css
+.menu-dialog {
+  position: fixed;
+  height: 100%;
+  width: 320px;
+  max-width: 100%;
+  left: auto;
+}
+
+.menu-dialog::backdrop {
+  -webkit-backdrop-filter: blur(0.25rem);
+  backdrop-filter: blur(0.25rem);
+}
+```
+
+But what about the animation? Here, take a look at this:
+
+```css
+@media (prefers-reduced-motion: no-preference) {
+  .menu-dialog,
+  .menu-dialog::backdrop {
+    transition:
+      display 0.5s allow-discrete,
+      overlay 0.5s allow-discrete,
+      translate 0.5s,
+      background-color 0.5s;
+  }
+}
+
+.menu-dialog {
+  translate: 100%;
+
+  &::backdrop {
+    background-color: rgb(0 0 0 / 0);
+  }
+
+  &[open] {
+    translate: 0;
+
+    &::backdrop {
+      background-color: rgb(0 0 0 / 0.5);
+    }
+  }
+
+  @starting-style {
+    &[open] {
+      translate: 100%;
+
+      &::backdrop {
+        background-color: rgb(0 0 0 / 0);
+      }
+    }
+  }
+}
+```
+
+There is a bunch of weird stuff in there, but suffice you to know that the `allow-discrete` plus `@starting-style` combo
+is needed to enable transitions on properties that do not really have intermediate states,
+and even if Firefox support is still lacking, this is another case of _progressive enhancement_, so no problem.
+
+What a gift! The web platform really handles most of the heavy lifting, and you end up with a nicely animated and accessible hamburger menu (with very little JavaScript code nevertheless).
+
+Now go, be (and code) well!
+
+<Footnotes>
+  <Footnote n="1">
+    Not that it changes anything in this case; it's just about being deliberate.
+  </Footnote>
+  <Footnote n="2">
+    Be mindful it's not advised to rely on it alone to convey critical information, but that's not the case here.
+  </Footnote>
+  <Footnote n="3">
+    Not mandatory, it does not even appear in the <Link href="https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/">W3C pattern for modal dialogs</Link>,
+    but it provides extra context to assistive technologies with very little effort.
+  </Footnote>
+    <Footnote n="4">
+    At the time of writing, Safari still does not support it, but it's a good example of _progressive enhancement_, as long as you provide other ways to close the modal (which you should anyway).
+  </Footnote>
+  <Footnote n="5">
+    In this case, it's important _not_ to override the default `type="submit"` value of the `<button>`, because that's exactly what makes it work, dismissing the dialog when the form is submitted (to nowhere).
+  </Footnote>
+  <Footnote n="6">
+    If you are really eager to use it, there is a <Link href="https://github.com/keithamus/invokers-polyfill">polyfill</Link> available.
+  </Footnote>
+</Footnotes>
