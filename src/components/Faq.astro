@@ -1,0 +1,64 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  question: string;
+  answer: string;
+}
+
+const { question, answer } = Astro.props;
+---
+
+<details name="faq">
+  <summary>{question}<Icon name="mdi:chevron-down" size="2rem" /></summary>
+  <p>{answer}</p>
+</details>
+
+<style>
+  summary {
+    display: flex; /* Anything but "list-item" will remove the ::marker */
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 1rem;
+    padding: 1rem;
+  }
+
+  details {
+    outline: 1px solid black; /* Used this instead of border to keep it visible within the focus indicator */
+    outline-offset: -1px;
+  }
+
+  details + details {
+    margin-top: -1px; /* To collapse the borders between two details */
+  }
+
+  details > p {
+    padding: 0.75rem 1rem; /* It must be padding, margin breaks the animation */
+    font-size: var(--fs-14px);
+  }
+
+  details summary:hover {
+    text-decoration-line: underline;
+  }
+
+  details summary {
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  details[open] summary {
+    background-color: black;
+    color: white;
+  }
+
+  details summary svg {
+    flex-shrink: 0; /* Prevent the icon from shrinking when there's a lot of text */
+    margin: -0.5rem; /* Compensate for whitespace around the icon */
+    transition: rotate 0.3s ease;
+  }
+
+  details[open] summary svg {
+    rotate: -180deg;
+  }
+</style>

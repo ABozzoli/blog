@@ -117,6 +117,22 @@ dialog[open]::backdrop {
   backdrop-filter: blur(0.25rem);
 }
 
+/* Ref: https://youtu.be/Vzj3jSUbMtI?t=510 */
+details::details-content {
+  overflow: hidden; /* Ref: https://youtu.be/idoaw75xjhU?t=630 */
+  height: 0;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition-property: content-visibility, height;
+    transition-duration: 0.3s;
+    transition-behavior: allow-discrete;
+  }
+}
+
+details[open]::details-content {
+  height: auto;
+}
+
 .badge {
   display: inline-block;
   max-width: -moz-fit-content;

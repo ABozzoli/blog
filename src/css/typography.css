@@ -28,7 +28,7 @@ li {
   line-height: 1.5;
 }
 
-a {
+* {
   text-decoration-thickness: 0.125em;
   text-underline-offset: 0.125em;
 }
