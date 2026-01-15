@@ -56,10 +56,14 @@ a:not([href], [inert] *) {
   opacity: 0.5;
 }
 
-ul[role="list"] {
+[role="list"] {
   list-style: none;
   margin: 0;
   padding: 0;
+
+  &:empty {
+    display: none;
+  }
 }
 
 dialog {
@@ -69,7 +73,8 @@ dialog {
   max-height: none;
 }
 
-dialog:not([open]) {
+dialog:not([open]),
+:popover-open {
   display: none;
 }
 
@@ -102,14 +107,14 @@ dialog,
 */
 
 /* Ref: https://www.htmhell.dev/adventcalendar/2025/9/ */
-body:has(dialog[open]:modal),
-body:has(.scroll-lock) {
-  overflow: hidden; /* It hides sticky header if applied to <html> */
-}
-
 html:has(dialog[open]:modal),
 html:has(.scroll-lock) {
   scrollbar-gutter: stable; /* It doesn't work if applied to <body> */
+}
+
+body:has(dialog[open]:modal),
+body:has(.scroll-lock) {
+  overflow: hidden; /* It hides sticky header if applied to <html> */
 }
 
 dialog[open]::backdrop {
