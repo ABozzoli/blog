@@ -19,7 +19,7 @@ const isExternal = String(href).startsWith("http://") || String(href).startsWith
   <a
     class={iconBefore || iconAfter ? "has-icon" : ""}
     href={isExternal ? href : currentPath + href}
-    target={isExternal ? "_blank" : null}
+    target={isExternal ? "_blank" : undefined}
     {title}
     {...props}
     >{iconBefore && <Icon name={iconBefore} size={iconSize} />}<span class="content"><slot /></span>{
@@ -35,13 +35,13 @@ const isExternal = String(href).startsWith("http://") || String(href).startsWith
     display: flex;
     align-items: center;
     column-gap: 1ch;
-    white-space: nowrap;
+    /* white-space: nowrap; */
 
     .content {
       margin-top: 0.25em;
 
       &:empty {
-        position: absolute; /* Fix flex gap from showing up when there's no content */
+        display: none;
       }
     }
 
