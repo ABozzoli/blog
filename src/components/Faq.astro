@@ -1,15 +1,16 @@
 ---
 import { Icon } from "astro-icon/components";
+import type { HTMLAttributes } from "astro/types";
 
-interface Props {
+interface Props extends HTMLAttributes<"details"> {
   question: string;
   answer: string;
 }
 
-const { question, answer } = Astro.props;
+const { question, answer, ...props } = Astro.props;
 ---
 
-<details name="faq">
+<details name="faq" {...props}>
   <summary>{question}<Icon name="mdi:chevron-down" size="2rem" /></summary>
   <p>{answer}</p>
 </details>
