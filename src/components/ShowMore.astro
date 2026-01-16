@@ -1,0 +1,53 @@
+---
+interface Props {
+  lines?: number;
+}
+
+const { lines = 3 } = Astro.props;
+---
+
+<show-more class="show-more" data-line-clamp={lines}>
+  <p tabindex="-1" style={`--lines: ${lines}`}>
+    <slot />
+  </p>
+
+  <button>Show more</button>
+</show-more>
+
+<style>
+  .show-more {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+  }
+
+  p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    &:not(.expanded) {
+      -webkit-line-clamp: var(--lines);
+    }
+  }
+</style>
+
+<script>
+  /* Ref: https://docs.astro.build/en/guides/client-side-scripts/#web-components-with-custom-elements */
+  class ShowMore extends HTMLElement {
+    connectedCallback() {
+      const button = this.querySelector("button");
+      const paragraph = this.querySelector("p");
+      let isExpanded = false;
+
+      button?.addEventListener("click", () => {
+        isExpanded = !isExpanded;
+        paragraph?.classList.toggle("expanded");
+        button.textContent = isExpanded ? "Show less" : "Show more";
+        if (isExpanded) paragraph?.focus();
+      });
+    }
+  }
+
+  customElements.define("show-more", ShowMore);
+</script>
