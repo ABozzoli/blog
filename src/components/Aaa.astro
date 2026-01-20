@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"details"> {
+  title: string;
+}
+
+const { title, ...props } = Astro.props;
+---
+
+<details class="aaa" {...props}>
+  <summary>{title}</summary>
+  <slot />
+</details>
+
+<style lang="scss">
+  .aaa {
+    background-color: red;
+  }
+</style>
