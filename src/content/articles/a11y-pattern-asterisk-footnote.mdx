@@ -1,0 +1,57 @@
+---
+title: "A11y pattern: asterisk footnote"
+publishDate: 2026-01-24
+updateDate: null
+description: "Sometimes the design calls for footnotes indicated by an asterisk (*), and while providing a two-way connection (with jump-links) between the footnote reference and the footnote itself might be the best solution for everyone, it is not always possible."
+category: A11y pattern
+---
+
+Sometimes the design calls for footnotes indicated by an asterisk (<span aria-hidden="true">\*</span>), and while providing a two-way connection (with jump-links) between the footnote reference and the footnote itself might be the best solution for everyone, it is not always possible because:
+
+> The design has already been approved, sorry.
+
+While researching solutions that do not interfere with the design as-is, I stumbled upon `aria-details`, which seemed perfect for the job since it optionally provides additional details on demand, instead of forcing the user to read them (as `aria-describedby` would do).
+
+However, I soon discovered that `aria-details` is not widely supported yet and also needs to be applied to an interactive element to work properly (the latter constraint also applies to `aria-describedby`).
+
+So instead, the solution I found was faking the connection by adding the footnote content directly as a visually hidden `<span>` right after the asterisk, while marking the asterisk itself as `aria-hidden="true"`.
+
+```html
+<p>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis orci magna<span aria-hidden="true">*</span
+  ><span class="visually-hidden">I'm the definition of the element</span>. Maecenas fermentum euismod eros, ut commodo
+  nulla dictum sed.
+</p>
+
+<p>*I'm the definition of the element.</p>
+```
+
+This approach will force the user to read the footnote right away and also requires content duplication, which I'm not fond of, but that's what we can do given the limitations imposed by design constraints.
+
+To enhance it, I would add `aria-hidden="true"` to the footnote itself so the screen reader doesn't read it twice, and to ensure the footnote is read separately from the main content, enclose it in parentheses (so screen readers add a small pause before and after it).
+
+The `::before` and `::after` pseudo-elements are perfect for the job:
+
+```css
+.footnote::before {
+  content: "(";
+}
+
+.footnote::after {
+  content: ")";
+}
+```
+
+Here's the final result:
+
+```html
+<p>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis orci magna<span aria-hidden="true">*</span
+  ><span class="visually-hidden footnote">I'm the definition of the element</span>. Maecenas fermentum euismod eros, ut
+  commodo nulla dictum sed.
+</p>
+
+<p aria-hidden="true">*I'm the definition of the element.</p>
+```
+
+Do I like this solution? Meh, not really, but it works and is better than nothing.
