@@ -8,9 +8,7 @@ category: A11y 101
 
 import Callout from "../../components/Callout.astro";
 import Link from "../../components/Link.astro";
-import FootnoteRef from "../../components/FootnoteRef.astro";
-import Footnotes from "../../components/Footnotes.astro";
-import Footnote from "../../components/Footnote.astro";
+import { Footnote, FootnoteRef, Footnotes } from "../../components/Footnotes";
 
 <a href="articles/a11y-101-skip-links">Skipping to the main content</a> is important, but what if you want to go back to
 the top of a long page? Here comes our next <a href="category/a11y-101">(accessible) essential blog component</a>: the
@@ -120,7 +118,10 @@ Until next time, be (and code) well!
   </Footnote>
   <Footnote n="2">
     It shares this behavior with the _very special_™ `#top` fragment (see{" "}
-    <Link href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a#linking_to_an_element_on_the_same_page">MDN</Link>), which is more explicit and therefore arguably preferable.
+    <Link href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a#linking_to_an_element_on_the_same_page">
+      MDN
+    </Link>
+    ), which is more explicit and therefore arguably preferable.
   </Footnote>
   <Footnote n="3">
     Which is usually{" "}
