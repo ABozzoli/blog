@@ -61,7 +61,7 @@ const { hiddenBefore, shownPages, hiddenAfter } = ellipsedPageNumbers(1);
     {
       shownPages.map((pageNumber) => (
         <li>
-          <a href={`${root}/${pageNumber}`} aria-current={`${root}/${pageNumber}` === currentUrl ? "page" : undefined}>
+          <a href=`${root}/${pageNumber}` aria-current={`${root}/${pageNumber}` === currentUrl ? "page" : undefined}>
             {pageNumber}
           </a>
         </li>

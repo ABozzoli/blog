@@ -8,7 +8,7 @@ const { lines = 3 } = Astro.props;
 ---
 
 <show-more class="show-more" data-line-clamp={lines}>
-  <p tabindex="-1" style={`--lines: ${lines}`}>
+  <p tabindex="-1" style=`--lines: ${lines}`>
     <slot />
   </p>
 
