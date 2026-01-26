@@ -8,8 +8,6 @@ interface Props {
 
 const { headings } = Astro.props;
 const currentPath = Astro.url.pathname;
-
-/* Ref: https://una.im/scroll-target-group/ */
 ---
 
 <script>
@@ -48,8 +46,7 @@ const currentPath = Astro.url.pathname;
     position: absolute;
     right: calc(100% + var(--content-inline-padding));
     margin-top: -1px; /* Compensate for the border when sticky */
-    scroll-target-group: auto;
-    min-width: 200px; /* Magic number alert */
+    min-width: 200px;
 
     ol {
       display: flex;
@@ -63,14 +60,9 @@ const currentPath = Astro.url.pathname;
       font-size: var(--fs-14px);
       line-height: 1.2;
       margin-left: calc(1ch * (attr(data-heading-level number) - 2));
-
-      &:target-current {
-        font-weight: bold;
-      }
     }
   }
 
-  /* Magic number alert */
   @media (max-width: 1200px) {
     .sticky-wrapper {
       position: static;
@@ -79,6 +71,18 @@ const currentPath = Astro.url.pathname;
 
     .table-of-contents {
       position: static;
+    }
+  }
+
+  /* Highlight current section only when sticky */
+  @media (min-width: 1200px) {
+    .table-of-contents {
+      /* Ref: https://una.im/scroll-target-group/ */
+      scroll-target-group: auto;
+
+      a:target-current {
+        font-weight: bold;
+      }
     }
   }
 </style>
