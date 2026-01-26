@@ -7,6 +7,7 @@ interface Props {
 }
 
 const { headings } = Astro.props;
+const currentPath = Astro.url.pathname;
 
 /* Ref: https://una.im/scroll-target-group/ */
 ---
@@ -19,7 +20,7 @@ const { headings } = Astro.props;
           <ol role="list">
             {headings.map(({ slug, depth, text }) => (
               <li>
-                <a href={`#${slug}`} data-heading-level={depth}>
+                <a href=`${currentPath}#${slug}` data-heading-level={depth}>
                   {text}
                 </a>
               </li>
