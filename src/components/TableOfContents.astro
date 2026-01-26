@@ -1,0 +1,82 @@
+---
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+
+/* Ref: https://una.im/scroll-target-group/ */
+---
+
+{
+  headings.length > 0 && (
+    <div class="sticky-wrapper">
+      <nav class="table-of-contents" aria-labelledby="toc-title">
+        <h2 id="toc-title">Table of contents</h2>
+        <ol role="list">
+          {headings.map((heading) => (
+            <li>
+              <a href={`#${heading.slug}`} data-heading-level={heading.depth}>
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </div>
+  )
+}
+
+<style lang="scss">
+  .sticky-wrapper {
+    position: sticky;
+    top: var(--header-height);
+  }
+
+  .table-of-contents {
+    --toc-spacing: 16px;
+
+    position: absolute;
+    right: calc(100% + var(--content-inline-padding));
+    background-color: white;
+    border: 1px solid black;
+    margin-top: -1px; /* Compensate for the border when sticky */
+    box-shadow: var(--border-shadow);
+    padding: var(--toc-spacing);
+    scroll-target-group: auto;
+
+    h2 {
+      font-size: var(--fs-18px);
+      line-height: 0.9;
+      margin-bottom: var(--toc-spacing);
+      background-color: color-mix(in srgb, black 5%, white);
+      box-shadow: 0 0 0 var(--toc-spacing) color-mix(in srgb, black 5%, white); /* Used to escape content-box */
+      min-width: max-content;
+    }
+
+    ol {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-top: var(--toc-spacing); /* Used padding to avoid margin-collapsing */
+    }
+
+    a {
+      display: block; /* Make the whole line clickable */
+      font-size: var(--fs-14px);
+      line-height: 1.2;
+      margin-left: calc(1ch * (attr(data-heading-level number) - 2));
+
+      &:target-current {
+        font-weight: bold;
+      }
+    }
+
+    /* Magic number to hide TOC on smaller screens */
+    @media (max-width: 1214px) {
+      display: none;
+    }
+  }
+</style>

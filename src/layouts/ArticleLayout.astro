@@ -2,8 +2,9 @@
 import MainLayout from "./MainLayout.astro";
 import { formatDate } from "../js/utils";
 import RelatedArticles from "../components/RelatedArticles.astro";
+import TableOfContents from "../components/TableOfContents.astro";
 
-const { frontmatter } = Astro.props;
+const { frontmatter, headings } = Astro.props;
 const { title, category, publishDate, updateDate } = frontmatter;
 ---
 
@@ -13,6 +14,8 @@ const { title, category, publishDate, updateDate } = frontmatter;
       <h1>{title}</h1>
       <p>First posted on {formatDate(publishDate)}{updateDate && ` — last updated on ${formatDate(updateDate)}`}</p>
     </hgroup>
+
+    <TableOfContents {headings} />
 
     <slot />
 

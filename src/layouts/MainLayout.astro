@@ -56,14 +56,19 @@ const { title } = Astro.props;
   }
 
   .content-wrapper {
+    --content-inline-padding: 24px;
+
+    position: relative; /* Needed for table-of-contents positioning */
     width: 100%;
-    padding: 48px 24px 96px;
+    padding: 48px var(--content-inline-padding) 96px;
     background-color: white;
     border-inline: 1px solid black;
     box-shadow: var(--border-shadow);
 
     @media (max-width: 768px) {
-      padding: 32px 16px 64px;
+      --content-inline-padding: 16px;
+
+      padding: 32px var(--content-inline-padding) 64px;
       border-inline: none;
     }
   }
