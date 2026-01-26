@@ -3,16 +3,15 @@ import { Icon } from "astro-icon/components";
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"details"> {
-  question: string;
-  answer: string;
+  title: string;
 }
 
-const { question, answer, ...props } = Astro.props;
+const { title, ...props } = Astro.props;
 ---
 
-<details name="faq" {...props}>
-  <summary>{question}<Icon name="mdi:chevron-down" size="2rem" /></summary>
-  <p>{answer}</p>
+<details {...props}>
+  <summary>{title}<Icon name="mdi:chevron-down" size="2rem" /></summary>
+  <slot />
 </details>
 
 <style lang="scss">
@@ -22,6 +21,10 @@ const { question, answer, ...props } = Astro.props;
     justify-content: space-between;
     column-gap: 1rem;
     padding: 1rem;
+    cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
   }
 
   details {
@@ -33,24 +36,12 @@ const { question, answer, ...props } = Astro.props;
     margin-top: -1px; /* To collapse the borders between two details */
   }
 
-  details > p {
-    padding: 0.75rem 1rem; /* It must be padding, margin breaks the animation */
-    font-size: var(--fs-14px);
-  }
-
   details summary:hover {
     text-decoration-line: underline;
   }
 
-  details summary {
-    transition:
-      background-color 0.3s ease,
-      color 0.3s ease;
-  }
-
   details[open] summary {
-    background-color: black;
-    color: white;
+    background-color: color-mix(in srgb, black 5%, white);
   }
 
   details summary svg {
