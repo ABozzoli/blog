@@ -73,10 +73,17 @@ const { headings } = Astro.props;
         font-weight: bold;
       }
     }
+  }
 
-    /* Magic number to hide TOC on smaller screens */
-    @media (max-width: 1214px) {
-      display: none;
+  /* Magic number alert */
+  @media (max-width: 1214px) {
+    .sticky-wrapper {
+      position: static;
+      margin-bottom: 40px;
+    }
+
+    .table-of-contents {
+      position: static;
     }
   }
 </style>
