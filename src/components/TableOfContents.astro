@@ -16,10 +16,10 @@ const { headings } = Astro.props;
       <nav class="table-of-contents" aria-labelledby="toc-title">
         <h2 id="toc-title">Table of contents</h2>
         <ol role="list">
-          {headings.map((heading) => (
+          {headings.map(({ slug, depth, text }) => (
             <li>
-              <a href={`#${heading.slug}`} data-heading-level={heading.depth}>
-                {heading.text}
+              <a href={`#${slug}`} data-heading-level={depth}>
+                {text}
               </a>
             </li>
           ))}
