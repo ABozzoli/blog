@@ -5,6 +5,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Faux bold detection animation (Ref: https://clagnut.com/blog/2438/) */
+@keyframes flip-synthesis {
+  0% {
+    font-synthesis: none;
+  }
+  100% {
+    font-synthesis: initial;
+  }
+}
+
+body {
+  animation: 3s infinite flip-synthesis;
+}
+
 :is(h1, h2, h3, h4, h5, h6),
 :is(.h1, .h2, .h3, .h4, .h5, .h6) {
   font-family: var(--ff-title);
