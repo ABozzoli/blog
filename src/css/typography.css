@@ -84,7 +84,6 @@ blockquote {
 pre {
   overflow-x: auto;
   padding: 1rem;
-  background-color: var(--foreground) !important;
 }
 
 code {
@@ -97,7 +96,7 @@ pre code {
 
 :is(p, li) code {
   font-weight: bold;
-  background-color: #f0f0f0;
+  background-color: color-mix(in srgb, var(--foreground) 5%, var(--background));
   padding: 0.125em 0.25em;
 }
 
