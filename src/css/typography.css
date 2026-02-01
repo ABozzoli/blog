@@ -45,6 +45,8 @@ li {
 * {
   text-decoration-thickness: 0.125em;
   text-underline-offset: 0.125em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 :is(a[target="_blank"], .footnote) > p {
