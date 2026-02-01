@@ -31,10 +31,20 @@ const isArticlePage = /^\/blog\/articles\/(?!\d+$)[^/]+\/?$/.test(currentPath);
 
 <style lang="scss">
   footer {
-    background-color: var(--foreground);
-    color: var(--background);
-    font-size: var(--fs-300);
+    background-color: light-dark(var(--foreground), var(--background));
+    color: light-dark(var(--background), var(--foreground));
+    font-size: var(--fs-14px);
+    border-top: 1px solid var(--foreground);
     box-shadow: var(--border-shadow);
+
+    @media (prefers-color-scheme: dark) {
+      background-image: var(--striped-background);
+
+      .container > * {
+        background-color: var(--background);
+        box-shadow: 0 0 0 6px var(--background); /* Don't use outline, it breaks focus styles */
+      }
+    }
 
     .container {
       display: flex;

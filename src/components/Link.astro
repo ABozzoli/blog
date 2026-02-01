@@ -46,8 +46,8 @@ const isExternal = String(href).startsWith("http://") || String(href).startsWith
     }
 
     &:has(.content:empty):hover {
-      background-color: var(--background);
-      color: var(--foreground);
+      background-color: light-dark(var(--background), var(--foreground));
+      color: light-dark(var(--foreground), var(--background));
     }
   }
 </style>
