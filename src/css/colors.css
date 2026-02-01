@@ -1,4 +1,14 @@
-/* https://tailwindcss.com/docs/background-color */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+/* Ref: https://tailwindcss.com/docs/background-color */
 :root {
   --clr-black: rgb(0 0 0);
   --clr-white: rgb(255 255 255);

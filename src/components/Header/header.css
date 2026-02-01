@@ -10,7 +10,7 @@
   min-width: var(--header-height);
 
   &:is(:hover, :active) {
-    background-color: black;
-    color: white;
+    background-color: var(--foreground);
+    color: var(--background);
   }
 }

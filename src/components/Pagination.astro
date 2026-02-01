@@ -109,14 +109,14 @@ const { hiddenBefore, shownPages, hiddenAfter } = ellipsedPageNumbers(1);
       place-items: center;
 
       &[aria-current="page"] {
-        background-color: black;
-        color: white;
+        background-color: var(--foreground);
+        color: var(--background);
         font-weight: bold;
       }
 
       &:not([aria-disabled="true"]):hover {
-        background-color: black;
-        color: white;
+        background-color: var(--foreground);
+        color: var(--background);
         text-decoration-line: none;
       }
     }

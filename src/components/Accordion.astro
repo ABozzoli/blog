@@ -28,9 +28,9 @@ const { title, ...props } = Astro.props;
   }
 
   details {
-    outline: 1px solid black; /* Used this instead of border to keep it visible within the focus indicator */
+    outline: 1px solid var(--foreground); /* Used this instead of border to keep it visible within the focus indicator */
     outline-offset: -1px;
-    background-color: white;
+    background-color: var(--background);
   }
 
   details + details {
@@ -42,7 +42,7 @@ const { title, ...props } = Astro.props;
   }
 
   details[open] summary {
-    background-color: color-mix(in srgb, black 5%, white);
+    background-color: color-mix(in srgb, var(--foreground) 5%, var(--background));
   }
 
   details summary svg {

@@ -33,12 +33,12 @@ p,
     text-decoration-line: underline;
 
     &:is(:hover, :active) {
-      background-color: black;
-      text-decoration-color: black;
+      background-color: var(--foreground);
+      text-decoration-color: var(--foreground);
       box-shadow:
-        0.125em 0 black,
-        -0.125em 0 black;
-      color: white;
+        0.125em 0 var(--foreground),
+        -0.125em 0 var(--foreground);
+      color: var(--background);
     }
   }
 }
@@ -148,8 +148,8 @@ details[open]::details-content {
   font-weight: 500;
   letter-spacing: 0.0625em;
   text-transform: uppercase;
-  background-color: black;
-  color: white;
+  background-color: var(--foreground);
+  color: var(--background);
   white-space: nowrap;
 }
 
@@ -160,8 +160,8 @@ ul.card-stack {
 }
 
 .block-shadow {
-  border: 1px solid black;
-  box-shadow: 12px 12px 0 black;
+  border: 1px solid var(--foreground);
+  box-shadow: 12px 12px 0 var(--foreground);
   margin: 0 12px 12px 0;
 }
 
@@ -185,8 +185,8 @@ ul.tag-cloud {
 /* Ref: https://medienbaecker.com/articles/focus-outlines */
 :focus-visible,
 :target:focus {
-  box-shadow: 0 0 0 3px white;
-  outline: 2px solid black;
+  box-shadow: 0 0 0 3px var(--background);
+  outline: 2px solid var(--foreground);
   outline-offset: 2px;
 }
 
