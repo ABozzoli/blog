@@ -48,6 +48,10 @@ select {
   word-spacing: inherit;
 }
 
+textarea {
+  resize: vertical;
+}
+
 a:where([href]),
 button,
 .button,
