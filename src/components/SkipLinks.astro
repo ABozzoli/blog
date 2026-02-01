@@ -2,10 +2,10 @@
 const currentPath = Astro.url.pathname;
 ---
 
-<div class="skip-links">
+<div class="skip-links striped-background">
   <ul role="list" aria-label="Skip-links">
-    <li><a class="visually-hidden" href=`${currentPath}#main`>Skip to main content</a></li>
-    <li><a class="visually-hidden" href=`${currentPath}#footer`>Skip to footer</a></li>
+    <li><a class="visually-hidden preserve-background" href=`${currentPath}#main`>Skip to main content</a></li>
+    <li><a class="visually-hidden preserve-background" href=`${currentPath}#footer`>Skip to footer</a></li>
   </ul>
 </div>
 
@@ -13,13 +13,13 @@ const currentPath = Astro.url.pathname;
   .skip-links {
     position: absolute;
     inset-inline: 0;
+    z-index: 1; /* Prevent header links from being hoverable when skip-links are visible */
     text-align: center;
     padding-inline: 1rem;
     align-content: center;
     height: inherit;
-    background-color: var(--foreground);
-    color: var(--background);
-    font-size: var(--fs-400);
+    border-bottom: 1px solid var(--foreground);
+    box-shadow: var(--border-shadow);
     transform: translateY(-100%);
 
     @media (prefers-reduced-motion: no-preference) {

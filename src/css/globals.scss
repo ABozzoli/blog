@@ -183,6 +183,20 @@ ul.card-stack {
   }
 }
 
+.striped-background {
+  background-color: light-dark(var(--foreground), var(--background));
+  color: light-dark(var(--background), var(--foreground));
+
+  @media (prefers-color-scheme: dark) {
+    background-image: var(--striped-background);
+
+    .preserve-background {
+      background-color: var(--background);
+      box-shadow: 0 0 0 6px var(--background); /* Don't use outline, it breaks focus styles */
+    }
+  }
+}
+
 ul.tag-cloud {
   display: flex;
   justify-content: center;

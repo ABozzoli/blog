@@ -9,11 +9,13 @@ const isArticlePage = /^\/blog\/articles\/(?!\d+$)[^/]+\/?$/.test(currentPath);
 
 {isArticlePage && <BackToTop />}
 
-<footer id="footer" tabindex="-1">
+<footer id="footer" class="striped-background" tabindex="-1">
   <div class="container">
-    <p>&copy; {new Date().getFullYear().toString()} Alessandro Bozzoli — All rights reserved.</p>
+    <p class="preserve-background">
+      &copy; {new Date().getFullYear().toString()} Alessandro Bozzoli — All rights reserved.
+    </p>
 
-    <ul role="list" aria-label="Social links">
+    <ul class="preserve-background" role="list" aria-label="Social links">
       <li>
         <Link
           href="https://www.linkedin.com/in/abozzoli/"
@@ -31,20 +33,9 @@ const isArticlePage = /^\/blog\/articles\/(?!\d+$)[^/]+\/?$/.test(currentPath);
 
 <style lang="scss">
   footer {
-    background-color: light-dark(var(--foreground), var(--background));
-    color: light-dark(var(--background), var(--foreground));
     font-size: var(--fs-14px);
     border-top: 1px solid var(--foreground);
     box-shadow: var(--border-shadow);
-
-    @media (prefers-color-scheme: dark) {
-      background-image: var(--striped-background);
-
-      .container > * {
-        background-color: var(--background);
-        box-shadow: 0 0 0 6px var(--background); /* Don't use outline, it breaks focus styles */
-      }
-    }
 
     .container {
       display: flex;
