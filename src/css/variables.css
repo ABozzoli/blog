@@ -1,3 +1,13 @@
 :root {
   --border-shadow: 0 0 4px color-mix(in srgb, var(--foreground) 25%, transparent);
+  /* Ref: https://css-tricks.com/why-do-we-have-repeating-linear-gradient-anyway/ */
+  --stripe-width: 1px;
+  --striped-background: repeating-linear-gradient(
+    135deg,
+    transparent 0,
+    var(--foreground) 1px,
+    var(--foreground) var(--stripe-width),
+    transparent calc(var(--stripe-width) + 1px),
+    transparent 8px
+  );
 }

@@ -160,9 +160,27 @@ ul.card-stack {
 }
 
 .block-shadow {
+  --shadow-thickness: 12px;
+
   border: 1px solid var(--foreground);
-  box-shadow: 12px 12px 0 var(--foreground);
-  margin: 0 12px 12px 0;
+  box-shadow: var(--shadow-thickness) var(--shadow-thickness) 0 var(--foreground);
+  margin: 0 var(--shadow-thickness) var(--shadow-thickness) 0;
+
+  @media (prefers-color-scheme: dark) {
+    position: relative;
+    box-shadow: unset;
+    background-color: var(--background);
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      translate: var(--shadow-thickness) var(--shadow-thickness);
+      border: 1px solid var(--foreground);
+      background-image: var(--striped-background);
+    }
+  }
 }
 
 ul.tag-cloud {

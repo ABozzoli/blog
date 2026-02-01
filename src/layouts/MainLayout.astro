@@ -60,6 +60,7 @@ const { title } = Astro.props;
     --content-inline-padding: 24px;
 
     position: relative; /* Needed for table-of-contents positioning */
+    isolation: isolate; /* Keeps striped-shadow on top of this area */
     width: 100%;
     padding: 48px var(--content-inline-padding) 96px;
     background-color: var(--background);
