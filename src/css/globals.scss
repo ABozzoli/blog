@@ -138,6 +138,18 @@ details[open]::details-content {
   height: auto;
 }
 
+/* Ref: https://matuzo.at/blog/2026/better-defaults-for-popovers */
+@supports (position-area: end) {
+  [popover] {
+    margin: 0;
+    position-area: end span-end;
+    position-try-fallbacks:
+      flip-block,
+      flip-inline,
+      flip-block flip-inline;
+  }
+}
+
 .badge {
   display: inline-block;
   max-width: -moz-fit-content;
