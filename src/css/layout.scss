@@ -2,6 +2,7 @@
 .container {
   width: min(768px, 100%);
   margin-inline: auto;
+  isolation: isolate; /* Prevents TOC from ending behind the container */
 }
 
 /* To make main expand and push footer to the bottom */

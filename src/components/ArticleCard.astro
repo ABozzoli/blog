@@ -37,6 +37,10 @@ const Heading = hLevel ?? "h2"; // Alternatively role="heading" and aria-level="
 </li>
 
 <style lang="scss">
+  li {
+    isolation: isolate; /* Prevents striped-shadow from ending behind the container */
+  }
+
   .article-card {
     min-height: 160px;
     padding: 16px;

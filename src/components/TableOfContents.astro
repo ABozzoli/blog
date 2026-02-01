@@ -40,13 +40,24 @@ const currentPath = Astro.url.pathname;
   .sticky-wrapper {
     position: sticky;
     top: var(--header-height);
+    z-index: -1;
   }
 
   .table-of-contents {
+    --open-width: 200px;
+    --closed-width: 50px;
+
     position: absolute;
-    right: calc(100% + var(--content-inline-padding));
+    left: calc(100% + var(--content-inline-padding) - (var(--open-width) - var(--closed-width)));
     margin-top: -1px; /* Compensate for the border when sticky */
-    min-width: 200px;
+    min-width: var(--open-width);
+    transition: left 0.3s ease-in-out;
+
+    &:hover,
+    &:focus-within,
+    &:has([open]) {
+      left: calc(100% + var(--content-inline-padding));
+    }
 
     ol {
       display: flex;
