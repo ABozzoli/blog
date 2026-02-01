@@ -9,9 +9,10 @@ interface Props {
     start: number;
   };
   hLevel?: `h${2 | 3 | 4 | 5 | 6}`;
+  isClickable?: boolean;
 }
 
-const { article, index, page, hLevel } = Astro.props;
+const { article, index, page, hLevel, isClickable } = Astro.props;
 const { title, category, publishDate, description } = article.data;
 const url = `${article.collection}/${article.slug}`;
 const Heading = hLevel ?? "h2"; // Alternatively role="heading" and aria-level="[n]" can be used
@@ -19,7 +20,10 @@ const Heading = hLevel ?? "h2"; // Alternatively role="heading" and aria-level="
 ---
 
 <li aria-setsize={page?.total} aria-posinset={page ? page.start + index + 1 : undefined}>
-  <article class="article-card block-shadow" aria-labelledby=`article-card-${slugify(title)}-title`>
+  <article
+    class=`article-card block-shadow ${isClickable ? 'is-clickable' : ''}`
+    aria-labelledby=`article-card-${slugify(title)}-title`
+  >
     <hgroup class="mb-16">
       <Heading id=`article-card-${slugify(title)}-title` class="h3 mb-4">
         <a href={url}>{title}</a>
@@ -38,6 +42,23 @@ const Heading = hLevel ?? "h2"; // Alternatively role="heading" and aria-level="
     padding: 16px;
     display: flex;
     flex-direction: column;
+    position: relative;
+
+    /* Ref: https://piccalil.li/blog/accessible-faux-nested-interactive-controls/ */
+    /* Ref: https://inclusive-components.design/cards/ */
+    &.is-clickable {
+      .h3 a::before {
+        content: "";
+        display: block;
+        position: absolute;
+        inset: 0;
+      }
+
+      a,
+      button {
+        z-index: 1; /* Ensure links and buttons are above the ::before overlay */
+      }
+    }
 
     small {
       font-size: var(--fs-14px);
