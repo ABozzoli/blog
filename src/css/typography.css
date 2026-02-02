@@ -7,10 +7,10 @@ body {
 
 /* Faux bold detection animation (Ref: https://clagnut.com/blog/2438/) */
 @keyframes flip-synthesis {
-  0% {
+  from {
     font-synthesis: none;
   }
-  100% {
+  to {
     font-synthesis: initial;
   }
 }
@@ -97,7 +97,7 @@ pre code {
 }
 
 :is(p, li) code {
-  font-weight: bold;
+  font-weight: 600;
   background-color: color-mix(in srgb, var(--foreground) 5%, var(--background));
   padding: 0.125em 0.25em;
 }
