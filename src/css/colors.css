@@ -1,6 +1,9 @@
 :root {
   --background: #f0f0f0;
   --foreground: #1a1a1a;
+
+  --background-inverted: var(--foreground);
+  --foreground-inverted: var(--background);
 }
 
 html {
