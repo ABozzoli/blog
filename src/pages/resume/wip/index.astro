@@ -52,14 +52,12 @@ const education: ResumeExperienceI[] = [
 
 <MainLayout {title}>
   <div class="grid-layout">
-    <div class="portrait">
-      <img
-        class="portrait card-shadow"
-        src=`${import.meta.env.BASE_URL}/images/portrait-cv-2026.jpg`
-        alt="Professional headshot of a smiling young man with short brown hair, a well-groomed beard, wearing round metal-framed glasses, a light collared shirt, dark sweater, and jacket, against a neutral textured background in warm natural light"
-        title="Professional headshot of a smiling young man with short brown hair, a well-groomed beard, wearing round metal-framed glasses, a light collared shirt, dark sweater, and jacket, against a neutral textured background in warm natural light"
-      />
-    </div>
+    <img
+      class="portrait"
+      src=`${import.meta.env.BASE_URL}/images/portrait-cv-2026.jpg`
+      alt="Professional headshot of a smiling young man with short brown hair, a well-groomed beard, wearing round metal-framed glasses, a light collared shirt, dark sweater, and jacket, against a neutral textured background in warm natural light"
+      title="Professional headshot of a smiling young man with short brown hair, a well-groomed beard, wearing round metal-framed glasses, a light collared shirt, dark sweater, and jacket, against a neutral textured background in warm natural light"
+    />
 
     <hgroup>
       <h1>Alessandro Bozzoli</h1>
@@ -90,7 +88,7 @@ const education: ResumeExperienceI[] = [
 
         <div>
           <dt><Icon name="mdi:github" size="1.5em" title="GitHub profile" /></dt>
-          <dd><Link href="https://github.com/ABozzoli">/Abozzoli</Link></dd>
+          <dd><Link href="https://github.com/ABozzoli">/abozzoli</Link></dd>
         </div>
 
         <div>
@@ -167,7 +165,7 @@ const education: ResumeExperienceI[] = [
   .grid-layout {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 16px;
+    gap: 24px 16px;
 
     .col-span-2 {
       grid-column: span 2;
@@ -177,36 +175,28 @@ const education: ResumeExperienceI[] = [
       grid-row: span 2;
     }
 
-    > :nth-child(1),
-    > :nth-child(2) {
-      margin-bottom: 16px;
-    }
-
     @media (max-width: 768px) {
       display: flex;
       flex-direction: column;
       row-gap: 32px;
 
-      > :nth-child(1) {
+      .portrait {
         margin-bottom: -16px;
-      }
-      > :nth-child(2) {
-        margin-bottom: 0;
       }
 
       hgroup {
         text-align: center;
-        text-wrap: balance;
 
         h1 {
           width: auto;
         }
       }
+    }
+  }
 
-      ul,
-      dl {
-        margin-bottom: 0;
-      }
+  @media print {
+    .summary {
+      text-wrap: balance;
     }
   }
 
@@ -218,7 +208,8 @@ const education: ResumeExperienceI[] = [
   }
 
   hgroup {
-    align-self: flex-end;
+    margin-top: auto;
+    text-wrap: balance;
 
     h1 {
       font-size: var(--fs-40px);
@@ -228,10 +219,6 @@ const education: ResumeExperienceI[] = [
     p {
       font-size: var(--fs-16px);
     }
-  }
-
-  .summary {
-    text-wrap: balance;
   }
 
   footer {
@@ -250,6 +237,11 @@ const education: ResumeExperienceI[] = [
   ul,
   dl {
     font-size: var(--fs-14px);
+  }
+
+  ul,
+  dl {
+    margin-bottom: 0;
   }
 
   dt,
