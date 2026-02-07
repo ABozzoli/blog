@@ -129,13 +129,11 @@ const education: ResumeExperienceI[] = [
       </ul>
     </ResumeSection>
 
-    <div class="row-span-2">
-      <ResumeSection title="Experience" icon="mdi:briefcase-outline">
-        <ol role="list" reversed>
-          {experience.map((item) => <ResumeExperience {...item} />)}
-        </ol>
-      </ResumeSection>
-    </div>
+    <ResumeSection title="Experience" icon="mdi:briefcase-outline" class="row-span-2">
+      <ol role="list" reversed>
+        {experience.map((item) => <ResumeExperience {...item} />)}
+      </ol>
+    </ResumeSection>
 
     <ResumeSection title="Languages" icon="mdi:language">
       <dl>
@@ -150,13 +148,11 @@ const education: ResumeExperienceI[] = [
       </dl>
     </ResumeSection>
 
-    <div class="col-span-2">
-      <ResumeSection title="Education" icon="mdi:academic-cap-outline">
-        <ol role="list" reversed>
-          {education.map((item) => <ResumeExperience {...item} />)}
-        </ol>
-      </ResumeSection>
-    </div>
+    <ResumeSection title="Education" icon="mdi:academic-cap-outline" class="col-span-2">
+      <ol role="list" reversed>
+        {education.map((item) => <ResumeExperience {...item} />)}
+      </ol>
+    </ResumeSection>
 
     <footer role="region" class="col-span-2">
       <small>
@@ -181,8 +177,36 @@ const education: ResumeExperienceI[] = [
       grid-row: span 2;
     }
 
-    > :nth-child(1), > :nth-child(2) {
+    > :nth-child(1),
+    > :nth-child(2) {
       margin-bottom: 16px;
+    }
+
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      row-gap: 32px;
+
+      > :nth-child(1) {
+        margin-bottom: -16px;
+      }
+      > :nth-child(2) {
+        margin-bottom: 0;
+      }
+
+      hgroup {
+        text-align: center;
+        text-wrap: balance;
+
+        h1 {
+          width: auto;
+        }
+      }
+
+      ul,
+      dl {
+        margin-bottom: 0;
+      }
     }
   }
 
