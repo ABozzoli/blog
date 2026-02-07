@@ -49,17 +49,18 @@ const duration = formatDuration(calcMonths(startDate, endDate));
   <hgroup>
     <h3 lang="en">{title}</h3>
     <div class="location">
-      <Icon name="mdi:at" aria-hidden="true" focusable="false" />
+      <span aria-hidden="true">@</span>
+      <span class="visually-hidden">at</span>
       {location}
     </div>
-    <small>
+    <div class="date-range">
       <span class="visually-hidden">from</span>
       <time datetime={startDate}>{formatDate(startDate)}</time>
       <span aria-hidden="true">&mdash;</span>
       <span class="visually-hidden">to</span>
       <time datetime={endDate}>{formatDate(endDate) || "Present"}</time>
       {hours ? `(${hours}h)` : hours === null ? "" : `(${duration})`}
-    </small>
+    </div>
   </hgroup>
   {description && <p>{description}</p>}
 </li>
@@ -70,22 +71,17 @@ const duration = formatDuration(calcMonths(startDate, endDate));
   }
 
   h3 {
+    display: inline;
     line-height: 1.2;
-    margin-bottom: 0.25em;
   }
 
   .location {
-    display: flex;
-    column-gap: 0.25rem;
+    display: inline-block;
     font-style: italic;
-
-    svg {
-      margin-top: 0.125em; /* Fallback for browsers without lh support */
-      margin-top: 0.125lh;
-    }
   }
 
-  small {
+  .date-range {
+    font-size: var(--fs-14px);
     color: var(--foreground-muted);
   }
 

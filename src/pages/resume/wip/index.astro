@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
+import Link from "../../../components/Link.astro";
 import ResumeExperience, { type ResumeExperienceI } from "../../../components/Resume/ResumeExperience.astro";
 import ResumeSection from "../../../components/Resume/ResumeSection.astro";
 import MainLayout from "../../../layouts/MainLayout.astro";
@@ -58,43 +60,139 @@ const education: ResumeExperienceI[] = [
 ---
 
 <MainLayout {title}>
-  <hgroup>
-    <h1>Alessandro Bozzoli</h1>
-    <p>Frontend Developer & Web Accessibility Specialist</p>
-  </hgroup>
+  <div class="grid-layout">
+    <div>
+      <div class="portrait">
+        <img
+          class="portrait card-shadow"
+          src=`${import.meta.env.BASE_URL}/images/portrait-cv-2025.jpg`
+          alt="Professional portrait of a young smiling man with short brown hair, a well-groomed beard, and glasses, wearing a white blue-striped shirt, in front of a white background"
+        />
+      </div>
+    </div>
 
-  <ResumeSection title="Summary" icon="mdi:person-outline">
-    <p>
-      Passionate Frontend Developer & Web Accessibility Specialist committed to creating solid and inclusive digital
-      experiences through user-friendly, accessible web applications.
-    </p>
-    <ul>
-      <li>Proficient in HTML5, CSS3, JavaScript, and modern frontend frameworks (React, Angular)</li>
-      <li>
-        Experienced in conducting web accessibility audits, implementing WCAG 2.2 guidelines, and ensuring EN 301 549
-        compliance
-      </li>
-      <li>Skilled in building responsive, mobile-first interfaces with consistent cross-browser compatibility</li>
-      <li>Quality-oriented approach with strong problem-solving abilities and collaborative team mindset</li>
-    </ul>
-  </ResumeSection>
+    <hgroup>
+      <h1>Alessandro Bozzoli</h1>
+      <p>Frontend Developer & Web Accessibility Specialist</p>
+    </hgroup>
 
-  <ResumeSection title="Experience" icon="mdi:briefcase-outline">
-    <ol role="list" reversed>
-      {experience.map((item) => <ResumeExperience {...item} />)}
-    </ol>
-  </ResumeSection>
+    <div class="side-column">
+      <ResumeSection title="Info" icon="mdi:information-outline">
+        <dl>
+          <div>
+            <dt><Icon name="mdi:location-on-outline" size="1.5em" title="Address" /></dt>
+            <dd>Viale Campania, 5 20133 Milan</dd>
+          </div>
 
-  <ResumeSection title="Education" icon="mdi:academic-cap-outline">
-    <ol role="list" reversed>
-      {education.map((item) => <ResumeExperience {...item} />)}
-    </ol>
-  </ResumeSection>
+          <div>
+            <dt><Icon name="mdi:telephone" size="1.5em" title="Phone" /></dt>
+            <dd><a href="tel:+39 348 481 9116">+39 348 481 9116</a></dd>
+          </div>
+
+          <div>
+            <dt><Icon name="mdi:email-outline" size="1.5em" title="E-mail" /></dt>
+            <dd><a href="mailto:abozzoli.dev@gmail.com">abozzoli.dev@gmail.com</a></dd>
+          </div>
+
+          <div>
+            <dt><Icon name="mdi:linkedin" size="1.5em" title="LinkedIn profile" /></dt>
+            <dd><Link href="https://www.linkedin.com/in/abozzoli/">/abozzoli</Link></dd>
+          </div>
+
+          <div>
+            <dt><Icon name="mdi:github" size="1.5em" title="GitHub profile" /></dt>
+            <dd><Link href="https://github.com/ABozzoli">/Abozzoli</Link></dd>
+          </div>
+
+          <div>
+            <dt><Icon name="mdi:web" size="1.5em" title="Personal blog" /></dt>
+            <dd><Link href="https://abozzoli.github.io/blog/">abozzoli.github.io/blog</Link></dd>
+          </div>
+        </dl>
+      </ResumeSection>
+
+      <ResumeSection title="Skills" icon="mdi:hammer-wrench">
+        <ul>
+          <li>Digital accessibility (WCAG 2.2)</li>
+          <li>React</li>
+          <li>Angular</li>
+          <li>HTML5 & CSS3</li>
+          <li>JavaScript ES6+</li>
+          <li>TypeScript</li>
+          <li>RESTful API</li>
+          <li>Git</li>
+        </ul>
+      </ResumeSection>
+
+      <ResumeSection title="Languages" icon="mdi:language">
+        <dl>
+          <div>
+            <dt>Italian</dt>
+            <dd>Native</dd>
+          </div>
+          <div>
+            <dt>English</dt>
+            <dd>Advanced</dd>
+          </div>
+        </dl>
+      </ResumeSection>
+    </div>
+
+    <div class="main-column">
+      <ResumeSection title="Summary" icon="mdi:note-text-outline">
+        <p>
+          Passionate Frontend Developer & Web Accessibility Specialist committed to creating solid and inclusive digital
+          experiences through user-friendly, accessible web applications.
+        </p>
+        <ul>
+          <li>Proficient in HTML5, CSS3, JavaScript, and modern frontend frameworks (React, Angular)</li>
+          <li>
+            Experienced in conducting web accessibility audits, implementing WCAG 2.2 guidelines, and ensuring EN 301
+            549 compliance
+          </li>
+          <li>Skilled in building responsive, mobile-first interfaces with consistent cross-browser compatibility</li>
+          <li>Quality-oriented approach with strong problem-solving abilities and collaborative team mindset</li>
+        </ul>
+      </ResumeSection>
+
+      <ResumeSection title="Experience" icon="mdi:briefcase-outline">
+        <ol role="list" reversed>
+          {experience.map((item) => <ResumeExperience {...item} />)}
+        </ol>
+      </ResumeSection>
+
+      <ResumeSection title="Education" icon="mdi:academic-cap-outline">
+        <ol role="list" reversed>
+          {education.map((item) => <ResumeExperience {...item} />)}
+        </ol>
+      </ResumeSection>
+    </div>
+  </div>
 </MainLayout>
 
 <style lang="scss">
+  .grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 16px;
+  }
+
+  .portrait {
+    width: 140px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    margin-inline: auto;
+  }
+
   hgroup {
-    margin-bottom: 32px;
+    h1 {
+      font-size: var(--fs-40px);
+      width: min-content;
+    }
+
+    p {
+      font-size: var(--fs-16px);
+    }
   }
 
   section:not(:last-of-type) {
@@ -108,7 +206,27 @@ const education: ResumeExperienceI[] = [
   }
 
   p,
-  ul {
+  ul,
+  dl {
     font-size: var(--fs-14px);
+  }
+
+  dt,
+  dd {
+    display: inline;
+  }
+
+  dt {
+    font-weight: 600;
+  }
+
+  dl > div {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+
+    &:not(:last-child) {
+      margin-bottom: 8px;
+    }
   }
 </style>
