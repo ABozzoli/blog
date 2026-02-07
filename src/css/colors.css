@@ -4,6 +4,8 @@
 
   --background-inverted: var(--foreground);
   --foreground-inverted: var(--background);
+
+  --foreground-muted: color-mix(in srgb, var(--foreground), var(--background) 40%);
 }
 
 html {

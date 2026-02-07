@@ -1,0 +1,41 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { slugify } from "../../js/utils";
+import { Icon } from "astro-icon/components";
+
+interface Props extends HTMLAttributes<"section"> {
+  title: string;
+  icon: string;
+}
+
+const { title, icon, ...props } = Astro.props;
+---
+
+<section aria-labelledby=`section-${slugify(title)}-title` {...props}>
+  <div class="title-wrapper">
+    <Icon name={icon} size="1.5em" aria-hidden="true" focusable="false" />
+    <h2 id=`section-${slugify(title)}-title`>{title}</h2>
+  </div>
+  <slot />
+</section>
+
+<style lang="scss">
+  .title-wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+    padding-inline: 0.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--foreground);
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    margin: 0;
+    text-transform: uppercase;
+    font-family: var(--ff-allcaps);
+    font-size: var(--fs-20px);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+</style>

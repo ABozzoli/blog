@@ -1,0 +1,95 @@
+---
+import { Icon } from "astro-icon/components";
+
+export interface ResumeExperienceI {
+  title: string;
+  location: string;
+  startDate: string;
+  endDate?: string;
+  description?: string;
+  hours?: number | null;
+}
+
+interface Props extends ResumeExperienceI {}
+
+const { title, location, startDate, endDate, description, hours } = Astro.props;
+
+function formatDate(date?: string | number | Date | null): string {
+  const options = { timeZone: "UTC", year: "numeric", month: "long" } as Intl.DateTimeFormatOptions;
+  return date ? new Date(date).toLocaleDateString("en-US", options) : "";
+}
+
+function calcMonths(startDate: string, endDate?: string): number {
+  const start = new Date(startDate);
+  const end = endDate ? new Date(endDate) : new Date();
+
+  // +1 to include both the start and end months in the count
+  return (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth()) + 1;
+}
+
+function plural(value: number): string {
+  return value === 1 ? "" : "s";
+}
+
+function formatDuration(months: number): string {
+  if (months < 12) return `${months} month${plural(months)}`;
+
+  const years = Math.floor(months / 12);
+  const remainingMonths = months % 12;
+
+  if (remainingMonths === 0) return `${years} year${plural(years)}`;
+
+  return `${years} year${plural(years)} ${remainingMonths} month${plural(remainingMonths)}`;
+}
+
+const duration = formatDuration(calcMonths(startDate, endDate));
+---
+
+<li>
+  <hgroup>
+    <h3 lang="en">{title}</h3>
+    <div class="location">
+      <Icon name="mdi:at" aria-hidden="true" focusable="false" />
+      {location}
+    </div>
+    <small>
+      <span class="visually-hidden">from</span>
+      <time datetime={startDate}>{formatDate(startDate)}</time>
+      <span aria-hidden="true">&mdash;</span>
+      <span class="visually-hidden">to</span>
+      <time datetime={endDate}>{formatDate(endDate) || "Present"}</time>
+      {hours ? `(${hours}h)` : hours === null ? "" : `(${duration})`}
+    </small>
+  </hgroup>
+  {description && <p>{description}</p>}
+</li>
+
+<style lang="scss">
+  hgroup {
+    margin-bottom: 8px;
+  }
+
+  h3 {
+    line-height: 1.2;
+    margin-bottom: 0.25em;
+  }
+
+  .location {
+    display: flex;
+    column-gap: 0.25rem;
+    font-style: italic;
+
+    svg {
+      margin-top: 0.125em; /* Fallback for browsers without lh support */
+      margin-top: 0.125lh;
+    }
+  }
+
+  small {
+    color: var(--foreground-muted);
+  }
+
+  p {
+    font-size: var(--fs-14px);
+  }
+</style>
