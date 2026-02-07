@@ -62,5 +62,9 @@ const { title, lang = "en" } = Astro.props;
       padding: 32px var(--content-inline-padding) 64px;
       border-inline: none;
     }
+
+    @media print {
+      border: none;
+    }
   }
 </style>

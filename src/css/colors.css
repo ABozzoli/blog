@@ -24,6 +24,13 @@ html {
   }
 }
 
+@media print {
+  :root {
+    --background: #ffffff;
+    --foreground: #000000;
+  }
+}
+
 /* Ref: https://tailwindcss.com/docs/background-color */
 :root {
   --clr-black: rgb(0 0 0);

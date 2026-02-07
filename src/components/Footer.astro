@@ -64,5 +64,9 @@ const isArticlePage = /^\/blog\/articles\/(?!\d+$)[^/]+\/?$/.test(currentPath);
         flex-shrink: 0;
       }
     }
+
+    @media print {
+      display: none;
+    }
   }
 </style>

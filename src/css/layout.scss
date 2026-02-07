@@ -3,6 +3,10 @@
   width: min(768px, 100%);
   margin-inline: auto;
   isolation: isolate; /* Prevents TOC from ending behind the container */
+
+  @media print {
+    width: 100%;
+  }
 }
 
 /* To make main expand and push footer to the bottom */
