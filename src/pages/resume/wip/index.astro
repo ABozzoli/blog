@@ -1,0 +1,114 @@
+---
+import ResumeExperience, { type ResumeExperienceI } from "../../../components/Resume/ResumeExperience.astro";
+import ResumeSection from "../../../components/Resume/ResumeSection.astro";
+import MainLayout from "../../../layouts/MainLayout.astro";
+
+const title = `Alessandro Bozzoli resume ${new Date().getFullYear().toString()}`;
+
+const experience: ResumeExperienceI[] = [
+  {
+    title: "Web Accessibility Specialist",
+    location: "Accenture Song",
+    startDate: "2025-05",
+    description:
+      "Conducting accessibility assessments on numerous websites (with automated tests, manual tests, and screen reader), mainly for the Public Administration and multinational banks, producing detailed reports and providing operational guidance for regulatory compliance.",
+  },
+  {
+    title: "Frontend Developer",
+    location: "Accenture Italy",
+    startDate: "2024-11",
+    endDate: "2025-04",
+    description:
+      "Development and maintenance of web apps in React and Angular for public sector clients, with strong attention to accessibility requirements and a central role in prevention and remediation efforts.",
+  },
+  {
+    title: "Junior Frontend Developer",
+    location: "Accenture Italy",
+    startDate: "2022-05",
+    endDate: "2024-10",
+    description:
+      "Development and maintenance of web apps in React for public and private sector clients and customization of Drupal-based back-office systems, including theming and templating with Twig.",
+  },
+];
+
+const education: ResumeExperienceI[] = [
+  {
+    title: "Java AEM Developer Course",
+    location: "Adecco Academy",
+    startDate: "2022-02",
+    endDate: "2022-04",
+    hours: 200,
+  },
+  {
+    title: "Intensive Java Developer Course",
+    location: "Generation Italy",
+    startDate: "2021-10",
+    endDate: "2022-02",
+    hours: 480,
+  },
+  {
+    title: "Bachelor's Degree in Graphic Arts and Printmaking",
+    location: "Accademia di Belle Arti di Brera",
+    startDate: "2016-10",
+    endDate: "2021-04",
+    description: "Final grade: 110/110 cum laude",
+    hours: null,
+  },
+];
+---
+
+<MainLayout {title}>
+  <hgroup>
+    <h1>Alessandro Bozzoli</h1>
+    <p>Frontend Developer & Web Accessibility Specialist</p>
+  </hgroup>
+
+  <ResumeSection title="Summary" icon="mdi:person-outline">
+    <p>
+      Passionate Frontend Developer & Web Accessibility Specialist committed to creating solid and inclusive digital
+      experiences through user-friendly, accessible web applications.
+    </p>
+    <ul>
+      <li>Proficient in HTML5, CSS3, JavaScript, and modern frontend frameworks (React, Angular)</li>
+      <li>
+        Experienced in conducting web accessibility audits, implementing WCAG 2.2 guidelines, and ensuring EN 301 549
+        compliance
+      </li>
+      <li>Skilled in building responsive, mobile-first interfaces with consistent cross-browser compatibility</li>
+      <li>Quality-oriented approach with strong problem-solving abilities and collaborative team mindset</li>
+    </ul>
+  </ResumeSection>
+
+  <ResumeSection title="Experience" icon="mdi:briefcase-outline">
+    <ol role="list" reversed>
+      {experience.map((item) => <ResumeExperience {...item} />)}
+    </ol>
+  </ResumeSection>
+
+  <ResumeSection title="Education" icon="mdi:academic-cap-outline">
+    <ol role="list" reversed>
+      {education.map((item) => <ResumeExperience {...item} />)}
+    </ol>
+  </ResumeSection>
+</MainLayout>
+
+<style lang="scss">
+  hgroup {
+    margin-bottom: 32px;
+  }
+
+  section:not(:last-of-type) {
+    margin-bottom: 32px;
+  }
+
+  ol {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+  }
+
+  p,
+  ul {
+    font-size: var(--fs-14px);
+  }
+</style>
