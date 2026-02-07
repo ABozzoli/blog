@@ -25,7 +25,7 @@ export function slugify(text: string): string {
  *
  * Example:
  * ```ts
- * formatDate("2025-10-08") // "10/8/2025"
+ * formatDate("2025-10-08") // "October 8, 2025"
  * ```
  *
  * @param {string | number | Date | null} date - The date to format.
@@ -48,7 +48,7 @@ import type { CollectionEntry } from "astro:content";
  */
 export function sortByDate(articles: CollectionEntry<"articles">[]): CollectionEntry<"articles">[] {
   return [...articles].sort(
-    (a, b) => new Date(b.data.publishDate ?? "").getTime() - new Date(a.data.publishDate ?? "").getTime()
+    (a, b) => new Date(b.data.publishDate ?? "").getTime() - new Date(a.data.publishDate ?? "").getTime(),
   );
 }
 
