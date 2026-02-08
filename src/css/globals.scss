@@ -17,6 +17,10 @@ html {
   }
 }
 
+* {
+  scrollbar-color: var(--foreground-muted) var(--background);
+}
+
 a {
   text-decoration-line: none;
 
