@@ -188,8 +188,10 @@ const education: ResumeExperienceI[] = [
 
     .print-button {
       position: absolute;
-      top: -1px;
-      right: -1px;
+      top: 0;
+      right: 0;
+      border-top: none; /* Better then -1px at mobile */
+      border-right: none; /* Better then -1px at mobile */
     }
 
     @media screen and (max-width: 768px) {
