@@ -46,6 +46,7 @@ const education: ResumeExperienceI[] = [
     startDate: "2016-10",
     endDate: "2021-04",
     hours: null,
+    description: "Final grade: 110/110 with honors.",
   },
 ];
 ---
@@ -224,7 +225,14 @@ const education: ResumeExperienceI[] = [
   footer {
     display: none;
     text-align: center;
+    text-wrap: balance;
     color: var(--foreground-muted);
+
+    @media print {
+      display: block;
+      position: absolute;
+      bottom: 32px;
+    }
   }
 
   ol {
