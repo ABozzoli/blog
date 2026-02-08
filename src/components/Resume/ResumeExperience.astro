@@ -1,6 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
-
 export interface ResumeExperienceI {
   title: string;
   location: string;
@@ -47,11 +45,13 @@ const duration = formatDuration(calcMonths(startDate, endDate));
 
 <li>
   <hgroup>
-    <h3 lang="en">{title}</h3>
-    <div class="location">
-      <span aria-hidden="true">@</span>
-      <span class="visually-hidden">at</span>
-      {location}
+    <div>
+      <h3 lang="en">{title}</h3>
+      <div class="location">
+        <span aria-hidden="true">@</span>
+        <span class="visually-hidden">at</span>
+        {location}
+      </div>
     </div>
     <div class="date-range">
       <span class="visually-hidden">from</span>
@@ -66,13 +66,26 @@ const duration = formatDuration(calcMonths(startDate, endDate));
 </li>
 
 <style lang="scss">
-  hgroup:not(:last-child) {
-    margin-bottom: 8px;
+  hgroup {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    column-gap: 16px;
+    flex-wrap: wrap;
+
+    &:last-child {
+      margin-bottom: -8px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 8px;
+    }
   }
 
   h3 {
     display: inline;
     line-height: 1.2;
+    font-size: 1.0625rem; // 17px
   }
 
   .location {
