@@ -190,8 +190,12 @@ const education: ResumeExperienceI[] = [
       position: absolute;
       top: 0;
       right: 0;
-      border-top: none; /* Better then -1px at mobile */
-      border-right: none; /* Better then -1px at mobile */
+      column-gap: 4px;
+      border-top-color: transparent; /* Better then -1px at mobile */
+
+      &:not(:focus-visible) {
+        border-right-color: transparent; /* Better then -1px at mobile */
+      }
     }
 
     @media screen and (max-width: 768px) {
