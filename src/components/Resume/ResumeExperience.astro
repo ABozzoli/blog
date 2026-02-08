@@ -5,12 +5,12 @@ export interface ResumeExperienceI {
   startDate: string;
   endDate?: string;
   description?: string;
-  hours?: number | null;
+  durationOverride?: string;
 }
 
 interface Props extends ResumeExperienceI {}
 
-const { title, location, startDate, endDate, description, hours } = Astro.props;
+const { title, location, startDate, endDate, description, durationOverride } = Astro.props;
 
 function formatDate(date?: string | number | Date | null): string {
   const options = { timeZone: "UTC", year: "numeric", month: "long" } as Intl.DateTimeFormatOptions;
@@ -46,7 +46,7 @@ const duration = formatDuration(calcMonths(startDate, endDate));
 <li>
   <hgroup>
     <div>
-      <h3 lang="en">{title}</h3>
+      <h3>{title}</h3>
       <div class="location">
         <span aria-hidden="true">@</span>
         <span class="visually-hidden">at</span>
@@ -59,7 +59,7 @@ const duration = formatDuration(calcMonths(startDate, endDate));
       <span aria-hidden="true">&mdash;</span>
       <span class="visually-hidden">to</span>
       <time datetime={endDate}>{formatDate(endDate) || "Present"}</time>
-      {hours ? `(${hours}h)` : hours === null ? "" : `(${duration})`}
+      {durationOverride ?? `(${duration})`}
     </div>
   </hgroup>
   {description && <p>{description}</p>}
@@ -74,7 +74,7 @@ const duration = formatDuration(calcMonths(startDate, endDate));
     flex-wrap: wrap;
 
     &:last-child {
-      margin-bottom: -8px;
+      margin-bottom: -8px; /* If there's no description */
     }
 
     &:not(:last-child) {
@@ -85,7 +85,7 @@ const duration = formatDuration(calcMonths(startDate, endDate));
   h3 {
     display: inline;
     line-height: 1.2;
-    font-size: 1.0625rem; // 17px
+    font-size: 1.0625rem; /* 17px */
   }
 
   .location {
@@ -100,5 +100,11 @@ const duration = formatDuration(calcMonths(startDate, endDate));
 
   p {
     font-size: var(--fs-14px);
+  }
+
+  @media (min-width: 768px) {
+    li:nth-child(3) p {
+      margin-top: -8px; /* Specifically target "Final grade" */
+    }
   }
 </style>

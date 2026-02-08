@@ -13,7 +13,7 @@ const experience: ResumeExperienceI[] = [
     location: "Accenture Song",
     startDate: "2025-05",
     description:
-      "Conducting accessibility assessments on numerous websites (with automated tests, manual tests, and screen reader), mainly for the Public Administration and multinational banks, producing detailed reports and providing operational guidance for regulatory compliance.",
+      "Conducting accessibility assessments on numerous websites (with screen reader, automated, and manual tests), mainly for the Public Administration and multinational banks, producing detailed reports and providing operational guidance for regulatory compliance.",
   },
   {
     title: "Frontend Developer",
@@ -31,21 +31,21 @@ const education: ResumeExperienceI[] = [
     location: "Adecco Academy",
     startDate: "2022-02",
     endDate: "2022-04",
-    hours: 200,
+    durationOverride: "(200h)",
   },
   {
     title: "Java Developer Course",
     location: "Generation Italy",
     startDate: "2021-10",
     endDate: "2022-02",
-    hours: 480,
+    durationOverride: "(480h)",
   },
   {
-    title: "Bachelor's Degree in Graphic Arts and Printmaking",
-    location: "Accademia di Belle Arti di Brera",
+    title: "Graphic Arts Bachelor's Degree",
+    location: "Brera Academy",
     startDate: "2016-10",
     endDate: "2021-04",
-    hours: null,
+    durationOverride: "",
     description: "Final grade: 110/110 with honors.",
   },
 ];
@@ -105,19 +105,19 @@ const education: ResumeExperienceI[] = [
         web applications.
       </p>
       <ul>
-        <li>Proficient in HTML5, CSS3, and frontend frameworks (React, Angular)</li>
+        <li>Proficient in HTML5, CSS3, and frontend frameworks (React, Angular);</li>
         <li>
           Experienced in conducting web accessibility audits, implementing WCAG&nbsp;2.2 guidelines, and ensuring EN 301
-          549 compliance
+          549 compliance;
         </li>
-        <li>Create responsive web apps with consistent behavior across browsers</li>
-        <li>Quality-oriented, proactive problem-solver, and fast learner</li>
+        <li>Create responsive web apps with consistent behavior across browsers;</li>
+        <li>Quality-oriented, proactive problem-solver and fast learner.</li>
       </ul>
     </ResumeSection>
 
     <ResumeSection title="Skills" icon="mdi:hammer-wrench">
       <ul>
-        <li>Digital accessibility (WCAG 2.2)</li>
+        <li>Accessibility (WCAG 2.2)</li>
         <li>React</li>
         <li>Angular</li>
         <li>HTML5 & CSS3</li>
@@ -176,12 +176,18 @@ const education: ResumeExperienceI[] = [
       grid-row: span 2;
     }
 
+    .portrait,
+    hgroup {
+      margin-bottom: 8px;
+    }
+
     @media (max-width: 768px) {
       display: flex;
       flex-direction: column;
       row-gap: 32px;
 
       .portrait {
+        margin-top: 16px;
         margin-bottom: -16px;
       }
 
@@ -198,6 +204,10 @@ const education: ResumeExperienceI[] = [
   @media print {
     .summary {
       text-wrap: balance;
+    }
+
+    a {
+      text-decoration: none !important;
     }
   }
 
