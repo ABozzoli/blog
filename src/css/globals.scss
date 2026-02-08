@@ -249,3 +249,50 @@ ul.tag-cloud {
     outline-offset: 6px;
   }
 }
+
+.button {
+  --button-min-size: var(--fs-40px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 1ch;
+  padding-inline: 11px;
+  height: var(--button-min-size);
+  line-height: var(--button-min-size);
+  min-width: var(--button-min-size);
+  border: 1px solid var(--foreground);
+  font-weight: 500;
+  letter-spacing: 0.0625em;
+  /* text-transform: uppercase; */
+  white-space: nowrap;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.primary {
+  background-color: var(--foreground);
+  color: var(--background);
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--foreground), var(--background) 15%);
+  }
+
+  &:active {
+    background-color: color-mix(in srgb, var(--foreground), var(--background) 30%);
+  }
+}
+
+.secondary {
+  background-color: var(--background);
+  color: var(--foreground);
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--foreground) 10%, var(--background));
+  }
+
+  &:active {
+    background-color: color-mix(in srgb, var(--foreground) 20%, var(--background));
+  }
+}

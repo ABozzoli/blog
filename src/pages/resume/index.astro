@@ -65,6 +65,11 @@ const education: ResumeExperienceI[] = [
       <p>Frontend Developer & Web Accessibility Specialist</p>
     </hgroup>
 
+    <button type="button" class="print-button button secondary" aria-label="Print resume" onclick="window.print()">
+      <Icon name="mdi:printer-outline" size="1.25rem" aria-hidden="true" focusable="false" />
+      <span>Print</span>
+    </button>
+
     <ResumeSection title="Contacts" icon="mdi:information-outline">
       <dl>
         <div>
@@ -181,7 +186,13 @@ const education: ResumeExperienceI[] = [
       margin-bottom: 8px;
     }
 
-    @media (max-width: 768px) {
+    .print-button {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+    }
+
+    @media screen and (max-width: 768px) {
       display: flex;
       flex-direction: column;
       row-gap: 32px;
@@ -202,6 +213,15 @@ const education: ResumeExperienceI[] = [
   }
 
   @media print {
+    @page {
+      size: auto;
+      margin: 16px;
+    }
+
+    .print-button {
+      display: none;
+    }
+
     .summary {
       text-wrap: balance;
     }
