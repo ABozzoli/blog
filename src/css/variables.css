@@ -10,4 +10,8 @@
     transparent calc(var(--stripe-width) + 1px),
     transparent 8px
   );
+
+  @media (prefers-color-scheme: dark) {
+    --border-shadow: none;
+  }
 }
