@@ -52,8 +52,6 @@ const { title, lang = "en" } = Astro.props;
   .content-wrapper {
     --content-inline-padding: 24px;
 
-    position: relative; /* Needed for table-of-contents positioning */
-    /* isolation: isolate; Prevents striped-shadow from ending behind the container but breaks TOC */
     width: 100%;
     padding: 48px var(--content-inline-padding) 96px;
     background-color: var(--background);
