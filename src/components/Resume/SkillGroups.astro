@@ -1,0 +1,38 @@
+---
+export interface Props {
+  groups: string[][];
+}
+
+const { groups } = Astro.props;
+---
+
+<ul class="skill-groups">
+  {
+    groups.map((group) => (
+      <li>
+        {group.map((skill) => (
+          <span>{skill}</span>
+        ))}
+      </li>
+    ))
+  }
+</ul>
+
+<style lang="scss">
+  .skill-groups {
+    font-size: var(--fs-14px);
+    margin-bottom: 0;
+
+    /* Replaces the "|" separator, as it was sometimes announced by assistive technologies and did not create the intended pause between elements */
+    span:not(:last-child) {
+      padding-right: 1ch;
+      border-right: 1px solid;
+      margin-right: 1ch;
+
+      &::after {
+        content: ", ";
+        font-size: 0; /* Used instead of "visually-hidden" because NVDA would collapses the whitespace after the comma and read it without any pauses */
+      }
+    }
+  }
+</style>

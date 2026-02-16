@@ -3,6 +3,7 @@ import { Icon } from "astro-icon/components";
 import Link from "../../components/Link.astro";
 import ResumeExperience, { type ResumeExperienceI } from "../../components/Resume/ResumeExperience.astro";
 import ResumeSection from "../../components/Resume/ResumeSection.astro";
+import SkillGroups from "../../components/Resume/SkillGroups.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 
 const title = `Alessandro Bozzoli resume ${new Date().getFullYear().toString()}`;
@@ -48,6 +49,16 @@ const education: ResumeExperienceI[] = [
     durationOverride: "",
     description: "Final grade: 110/110 with honors.",
   },
+];
+
+const skills: string[][] = [
+  ["Accessibility (WCAG 2.2)"],
+  ["React", "Next.js", "Angular"],
+  ["Zustand", "Redux", "RxJS"],
+  ["HTML5", "CSS3", "ARIA"],
+  ["JavaScript ES6+", "TypeScript"],
+  ["PHP", "Drupal", "Twig"],
+  ["RESTful API", "Git"],
 ];
 ---
 
@@ -121,14 +132,7 @@ const education: ResumeExperienceI[] = [
     </ResumeSection>
 
     <ResumeSection title="Skills" icon="mdi:hammer-wrench">
-      <ul>
-        <li>Accessibility (WCAG 2.2)</li>
-        <li>React | Next.js | Angular</li>
-        <li>HTML5 | CSS3 | ARIA</li>
-        <li>JavaScript ES6+ | TypeScript</li>
-        <li>PHP | Drupal | Twig</li>
-        <li>RESTful API | Git</li>
-      </ul>
+      <SkillGroups groups={skills} />
     </ResumeSection>
 
     <ResumeSection title="Experience" icon="mdi:briefcase-outline" class="row-span-2">
