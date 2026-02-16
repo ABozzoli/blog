@@ -52,6 +52,7 @@ const { title, lang = "en" } = Astro.props;
   .content-wrapper {
     --content-inline-padding: 24px;
 
+    position: relative; /* Needed for the print button */
     width: 100%;
     padding: 48px var(--content-inline-padding) 96px;
     background-color: var(--background);
