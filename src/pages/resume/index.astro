@@ -3,7 +3,7 @@ import { Icon } from "astro-icon/components";
 import Link from "../../components/Link.astro";
 import ResumeExperience, { type ResumeExperienceI } from "../../components/Resume/ResumeExperience.astro";
 import ResumeSection from "../../components/Resume/ResumeSection.astro";
-import SkillGroups from "../../components/Resume/SkillGroups.astro";
+import ResumeSkills from "../../components/Resume/ResumeSkills.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 
 const title = `Alessandro Bozzoli resume ${new Date().getFullYear().toString()}`;
@@ -132,7 +132,7 @@ const skills: string[][] = [
     </ResumeSection>
 
     <ResumeSection title="Skills" icon="mdi:hammer-wrench">
-      <SkillGroups groups={skills} />
+      <ResumeSkills groups={skills} />
     </ResumeSection>
 
     <ResumeSection title="Experience" icon="mdi:briefcase-outline" class="row-span-2">
