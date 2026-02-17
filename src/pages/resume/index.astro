@@ -17,7 +17,7 @@ const experience: ResumeExperienceI[] = [
       "Conducting accessibility assessments on numerous websites (using screen readers, plus automated and manual testing), mainly for the Public Administration and multinational banks, producing detailed reports and providing operational guidance for regulatory compliance.",
   },
   {
-    title: "Frontend Developer",
+    title: "Front-end Developer",
     location: "Accenture Italy",
     startDate: "2022-05",
     endDate: "2025-04",
@@ -72,8 +72,8 @@ const skills: string[][] = [
     />
 
     <hgroup>
-      <h1>Alessandro Bozzoli</h1>
-      <p>Frontend Developer & Web Accessibility Specialist</p>
+      <h1>Alessandro Bozzoli <span class="visually-hidden">resume</span></h1>
+      <p>Front-end Developer & Web Accessibility Specialist</p>
     </hgroup>
 
     <button type="button" class="print-button button secondary" aria-label="Print resume" onclick="window.print()">
@@ -121,12 +121,13 @@ const skills: string[][] = [
         web applications.
       </p>
       <ul>
-        <li>Proficient in HTML5, CSS3, and frontend frameworks (React, Angular);</li>
+        <li>Proficient in HTML5, CSS3, and front-end frameworks (React, Angular);</li>
         <li>
           Experienced in conducting web accessibility audits, implementing WCAG&nbsp;2.2 guidelines, and ensuring EN 301
           549 compliance;
         </li>
-        <li>Create responsive web apps with consistent behavior across browsers;</li>
+        <li>Collaborates effectively with designers and back-end developers;</li>
+        <li>Crafts responsive web apps with consistent behavior across browsers;</li>
         <li>Quality-oriented, proactive problem-solver and fast learner.</li>
       </ul>
     </ResumeSection>
@@ -281,6 +282,11 @@ const skills: string[][] = [
   }
 
   p,
+  ul {
+    margin: 0;
+  }
+
+  p,
   ul,
   dl {
     font-size: var(--fs-14px);
@@ -289,6 +295,12 @@ const skills: string[][] = [
   ul,
   dl {
     margin-bottom: 0;
+  }
+
+  dl {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
   }
 
   dt,
@@ -304,9 +316,5 @@ const skills: string[][] = [
     display: flex;
     align-items: center;
     column-gap: 8px;
-
-    &:not(:last-child) {
-      margin-bottom: 8px;
-    }
   }
 </style>
