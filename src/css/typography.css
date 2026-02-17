@@ -29,12 +29,20 @@ body {
   }
 }
 
-p {
+p, ul, ol {
   text-wrap: pretty;
 
-  &:not(:last-child) {
+  &:where(:not(:last-child)) {
     margin-bottom: 1em;
   }
+}
+
+p:has(+ ul, + ol) {
+  margin-bottom: 0;
+}
+
+ul, ol {
+  margin-top: 0;
 }
 
 p,
