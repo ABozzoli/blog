@@ -36,6 +36,7 @@ const isArticlePage = /^\/blog\/articles\/(?!\d+$)[^/]+\/?$/.test(currentPath);
     font-size: var(--fs-14px);
     border-top: 1px solid var(--foreground);
     box-shadow: var(--border-shadow);
+    z-index: 1; /* Ensure it's above the shadow of `<main>` */
 
     .container {
       display: flex;

@@ -19,15 +19,17 @@ const currentPath = Astro.url.pathname;
     align-content: center;
     height: inherit;
     border-bottom: 1px solid var(--foreground);
-    box-shadow: var(--border-shadow);
     transform: translateY(-100%);
 
     @media (prefers-reduced-motion: no-preference) {
-      transition: transform 0.3s;
+      transition:
+        transform 0.3s,
+        box-shadow 0.3s;
     }
 
     &:focus-within {
       transform: translateY(0%);
+      box-shadow: var(--border-shadow);
     }
 
     a {

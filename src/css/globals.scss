@@ -193,7 +193,7 @@ ul.card-stack {
       position: absolute;
       inset: 0;
       z-index: -1;
-      translate: var(--shadow-thickness) var(--shadow-thickness);
+      transform: translate(var(--shadow-thickness), var(--shadow-thickness));
       border: 1px solid var(--foreground);
       background-image: var(--striped-background);
     }
@@ -201,10 +201,12 @@ ul.card-stack {
 }
 
 .striped-background {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: var(--background-inverted);
+  color: var(--foreground-inverted);
 
   @media (prefers-color-scheme: dark) {
+    background-color: var(--background);
+    color: var(--foreground);
     background-image: var(--striped-background);
 
     .preserve-background {
