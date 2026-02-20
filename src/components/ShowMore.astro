@@ -7,12 +7,12 @@ const { lines = 3 } = Astro.props;
 /* Ref: https://www.accede-web.com/en/guidelines/rich-interface-components/show-more-buttons/ */
 ---
 
-<show-more class="show-more" data-line-clamp={lines}>
+<show-more class="show-more">
   <p tabindex="-1" style=`--lines: ${lines}`>
     <slot />
   </p>
 
-  <button>Show more</button>
+  <button aria-expanded="false">Show more</button>
 </show-more>
 
 <style lang="scss">
@@ -27,7 +27,7 @@ const { lines = 3 } = Astro.props;
     -webkit-box-orient: vertical;
     overflow: hidden;
 
-    &:not(.expanded) {
+    &:has(+ button[aria-expanded="false"]) {
       -webkit-line-clamp: var(--lines);
     }
   }
@@ -43,7 +43,7 @@ const { lines = 3 } = Astro.props;
 
       button?.addEventListener("click", () => {
         isExpanded = !isExpanded;
-        paragraph?.classList.toggle("expanded");
+        button?.setAttribute("aria-expanded", String(isExpanded));
         button.textContent = isExpanded ? "Show less" : "Show more";
         if (isExpanded) paragraph?.focus();
       });
