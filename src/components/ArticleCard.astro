@@ -32,7 +32,10 @@ const Heading = hLevel ?? "h2"; // Alternatively role="heading" and aria-level="
     </hgroup>
 
     <p class="content line-clamp-2" set:html={description} />
-    <a class="badge" href=`category/${slugify(category)}`>{category}</a>
+    <div>
+      <span class="visually-hidden">Category:</span>
+      <a class="badge" href=`category/${slugify(category)}`>{category}</a>
+    </div>
   </article>
 </li>
 
