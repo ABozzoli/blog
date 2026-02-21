@@ -54,22 +54,20 @@ const { title, lang = "en" } = Astro.props;
 
     position: relative; /* Needed for the print-button in resume */
     width: 100%;
-    padding: 48px var(--content-inline-padding) 96px;
+    padding-inline: var(--content-inline-padding);
+    padding-block: 48px 96px;
     background-color: var(--background);
-    border-inline: 1px solid var(--foreground);
+    outline: 1px solid var(--foreground);
     box-shadow: var(--border-shadow);
 
     @media (max-width: 768px) {
       --content-inline-padding: 16px;
 
-      padding: 32px var(--content-inline-padding) 64px;
-      border-inline: none;
+      padding-block: 32px 64px;
     }
 
     @media print {
-      padding: 48px var(--content-inline-padding);
-      border: none;
-      box-shadow: none;
+      padding-block: 48px;
     }
   }
 </style>

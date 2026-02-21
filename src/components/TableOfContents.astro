@@ -49,7 +49,6 @@ const currentPath = Astro.url.pathname;
 
     position: absolute;
     left: calc(100% + var(--content-inline-padding) - (var(--open-width) - var(--closed-width)));
-    margin-top: -1px; /* Compensate for the border when sticky */
     min-width: var(--open-width);
     transition: left 0.3s ease-in-out;
 
