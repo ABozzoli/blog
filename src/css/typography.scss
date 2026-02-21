@@ -22,6 +22,7 @@ body {
 :is(h1, h2, h3, h4, h5, h6),
 :is(.h1, .h2, .h3, .h4, .h5, .h6) {
   font-family: var(--ff-title);
+  text-decoration-thickness: 0.125em;
   margin-bottom: 0.5rem;
 
   &:where(:not(:first-child)) {
@@ -29,7 +30,9 @@ body {
   }
 }
 
-p, ul, ol {
+p,
+ol,
+ul {
   text-wrap: pretty;
 
   &:where(:not(:last-child)) {
@@ -37,12 +40,14 @@ p, ul, ol {
   }
 }
 
-p:has(+ ul, + ol) {
+p:has(+ ol, + ul) {
   margin-bottom: 0;
 }
 
-ul, ol {
+ol,
+ul {
   margin-top: 0;
+  padding-left: 2ch;
 }
 
 p,
@@ -51,7 +56,6 @@ li {
 }
 
 * {
-  text-decoration-thickness: 0.125em;
   text-underline-offset: 0.125em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
@@ -68,11 +72,6 @@ hr {
 
 span[lang] {
   font-style: italic;
-}
-
-ol,
-ul {
-  padding-left: 2ch;
 }
 
 blockquote {

@@ -9,7 +9,7 @@
   }
 }
 
-/* To make main expand and push footer to the bottom */
+/* To make `<main>` expand and push footer to the bottom */
 body {
   min-height: 100dvh;
   display: flex;
@@ -29,7 +29,7 @@ body {
 
 /* Ref: https://cssence.com/2025/scroll-margin-scroll-padding/ */
 html {
-  scroll-padding-top: calc(var(--header-height) + 1rem);
+  scroll-padding-top: calc(var(--header-height) + 16px);
 }
 
 /* Ref: https://youtu.be/bj0Z_GncIwY */
@@ -37,6 +37,6 @@ html {
   --min-size: 120px;
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(var(--min-size, 16rem), 100%), 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--min-size), 100%), 1fr));
+  gap: 16px;
 }

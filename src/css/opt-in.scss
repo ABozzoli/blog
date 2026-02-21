@@ -1,0 +1,124 @@
+/* Ref: https://www.scottohara.me/blog/2023/03/21/visually-hidden-hack.html */
+.visually-hidden:not(:focus, :active, :focus-within) {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.badge {
+  display: inline-block;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  padding: 0.5em;
+  line-height: 1;
+  font-size: var(--fs-12px);
+  font-weight: 500;
+  letter-spacing: 0.0625em;
+  text-transform: uppercase;
+  background-color: var(--foreground);
+  color: var(--background);
+  white-space: nowrap;
+}
+
+ul.card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+ul.tag-cloud {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.block-shadow {
+  --shadow-thickness: 12px;
+
+  border: 1px solid var(--foreground);
+  box-shadow: var(--shadow-thickness) var(--shadow-thickness) 0 var(--foreground);
+  margin: 0 var(--shadow-thickness) var(--shadow-thickness) 0;
+
+  @media (prefers-color-scheme: dark) {
+    position: relative;
+    box-shadow: unset;
+    background-color: var(--background);
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      transform: translate(var(--shadow-thickness), var(--shadow-thickness));
+      border: 1px solid var(--foreground);
+      background-image: var(--striped-background);
+    }
+  }
+}
+
+.striped-background {
+  background-color: var(--background-inverted);
+  color: var(--foreground-inverted);
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--background);
+    color: var(--foreground);
+    background-image: var(--striped-background);
+
+    .preserve-background {
+      background-color: var(--background);
+      box-shadow: 0 0 0 6px var(--background); /* Don't use outline, it breaks focus styles */
+    }
+  }
+}
+
+.button {
+  --button-min-size: var(--fs-40px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 1ch;
+  padding-inline: 11px;
+  height: var(--button-min-size);
+  line-height: var(--button-min-size);
+  min-width: var(--button-min-size);
+  border: 1px solid var(--foreground);
+  font-weight: 500;
+  letter-spacing: 0.0625em;
+  /* text-transform: uppercase; */
+  white-space: nowrap;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+
+  &.primary {
+    background-color: var(--foreground);
+    color: var(--background);
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--foreground), var(--background) 15%);
+    }
+
+    &:active {
+      background-color: color-mix(in srgb, var(--foreground), var(--background) 30%);
+    }
+  }
+
+  &.secondary {
+    background-color: var(--background);
+    color: var(--foreground);
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--foreground) 10%, var(--background));
+    }
+
+    &:active {
+      background-color: color-mix(in srgb, var(--foreground) 20%, var(--background));
+    }
+  }
+}

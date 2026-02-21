@@ -1,9 +1,10 @@
-import "./colors.css";
-import "./fonts.css";
+import "./colors.scss";
+import "./fonts.scss";
 import "./globals.scss";
 import "./layout.scss";
 import "./normalize.css";
-import "./reset.css";
-import "./typography.css";
-import "./utility.scss";
-import "./variables.css";
+import "./opt-in.scss";
+import "./reset.scss";
+import "./typography.scss";
+import "./utils.scss";
+import "./variables.scss";
