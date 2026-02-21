@@ -119,8 +119,8 @@ body:has(.scroll-lock) {
 }
 
 dialog[open]::backdrop {
-  -webkit-backdrop-filter: blur(0.25rem);
-  backdrop-filter: blur(0.25rem);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 }
 
 /* Ref: https://youtu.be/Vzj3jSUbMtI?t=510 */
