@@ -36,6 +36,17 @@ ul.tag-cloud {
   gap: 8px;
 }
 
+aside.callout {
+  border: 1px solid var(--foreground);
+  border-left: 12px solid var(--foreground);
+  padding: 1rem;
+  margin-bottom: 1rem;
+
+  p {
+    margin: 0;
+  }
+}
+
 .block-shadow {
   --shadow-thickness: 12px;
 

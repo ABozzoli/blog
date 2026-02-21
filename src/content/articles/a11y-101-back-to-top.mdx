@@ -6,7 +6,6 @@ description: "Skipping to the main content is important, but what if you want to
 category: A11y 101
 ---
 
-import Callout from "../../components/Callout.astro";
 import Link from "../../components/Link.astro";
 import { Footnote, FootnoteRef, Footnotes } from "../../components/Footnotes";
 
@@ -56,10 +55,10 @@ Just as we did for the <a href="articles/a11y-101-skip-links#how-to-build-them">
 </div>
 ```
 
-<Callout>
+<aside class="callout">
   If you are wondering about the `tabindex="-1"` check out my article about
   <a href="articles/a11y-101-skip-links#wheres-the-focus-indicator">Skip-links</a> for the details!
-</Callout>
+</aside>
 
 And there we go! Both the viewport _and focus_ return to the start of the main content.
 
