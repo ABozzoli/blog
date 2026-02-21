@@ -22,11 +22,14 @@ body {
 :is(h1, h2, h3, h4, h5, h6),
 :is(.h1, .h2, .h3, .h4, .h5, .h6) {
   font-family: var(--ff-title);
-  text-decoration-thickness: 0.125em;
   margin-bottom: 0.5rem;
 
   &:where(:not(:first-child)) {
     margin-top: 2.5rem;
+  }
+
+  &:has(+ .card-stack) {
+    margin-bottom: 1em;
   }
 }
 
@@ -56,9 +59,14 @@ li {
 }
 
 * {
+  text-decoration-thickness: 0.125em;
   text-underline-offset: 0.125em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
+}
+
+p a {
+  text-decoration-thickness: 1px;
 }
 
 :is(a[target="_blank"], .footnote) > p {
@@ -93,6 +101,7 @@ blockquote {
 pre {
   overflow-x: auto;
   padding: 1rem;
+  margin-block: 1rem;
 }
 
 code {
