@@ -35,6 +35,7 @@ button {
   all: unset;
   outline: revert; /* Restore the default focus outline removed by "all: unset" */
   box-sizing: border-box; /* Ensure the box-sizing reset is applied despite "all: unset" */
+  text-decoration-thickness: 0.125em;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;

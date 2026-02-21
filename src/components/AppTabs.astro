@@ -1,0 +1,103 @@
+---
+import { slugify } from "../js/utils";
+
+interface Tab {
+  label: string;
+  content: string;
+}
+
+interface Props {
+  tabs: Tab[];
+}
+
+const { tabs } = Astro.props;
+---
+
+<app-tabs>
+  <ul role="tablist">
+    {
+      tabs.map(({ label }, index) => (
+        <li role="none">
+          <button
+            type="button"
+            id={`tab-${slugify(label)}-id`}
+            class="button secondary"
+            role="tab"
+            aria-controls={`tabpanel-${slugify(label)}-id`}
+            aria-selected={index === 0 ? "true" : "false"}
+          >
+            {label}
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+  {
+    tabs.map(({ label, content }, index) => (
+      <section
+        id={`tabpanel-${slugify(label)}-id`}
+        role="tabpanel"
+        aria-labelledby={`tab-${slugify(label)}-id`}
+        hidden={index === 0 ? false : true}
+      >
+        {content}
+      </section>
+    ))
+  }
+</app-tabs>
+
+<style lang="scss">
+  [role="tablist"] {
+    display: flex;
+
+    button:focus-visible {
+      position: relative;
+      z-index: 1; /* Ensure the focused button is above other elements */
+    }
+
+    li + li {
+      margin-left: -1px; /* Compensate for border */
+    }
+
+    button[aria-selected="true"] {
+      text-decoration-line: underline;
+
+      &:not(:focus-visible) {
+        border-bottom-color: transparent;
+      }
+    }
+  }
+
+  [role="tabpanel"] {
+    border: 1px solid;
+    padding: 16px;
+    margin-top: -1px; /* Compensate for border */
+  }
+</style>
+
+<script>
+  class AppTabs extends HTMLElement {
+    connectedCallback() {
+      const buttons = this.querySelectorAll('[role="tab"]') as NodeListOf<HTMLButtonElement>;
+      const panels = this.querySelectorAll('[role="tabpanel"]') as NodeListOf<HTMLElement>;
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          const tabId = button.getAttribute("aria-controls");
+
+          buttons.forEach((button) => {
+            const isSelected = button === e.target;
+            button.setAttribute("aria-selected", String(isSelected));
+          });
+
+          panels.forEach((panel) => {
+            const isActive = panel.id === tabId;
+            panel.hidden = !isActive;
+          });
+        });
+      });
+    }
+  }
+
+  customElements.define("app-tabs", AppTabs);
+</script>
