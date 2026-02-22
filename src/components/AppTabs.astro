@@ -11,13 +11,16 @@ interface Props {
 }
 
 const { tabs } = Astro.props;
+
+/* Why the `<li role="presentation">`: https://inclusive-components.design/tabbed-interfaces/ */
+/* Why the `tabindex` on the panels: https://daveden.co.uk/blog/recipe-for-an-accessible-tab-pattern#focus-management */
 ---
 
 <app-tabs>
   <ul role="tablist">
     {
       tabs.map(({ label }, index) => (
-        <li role="none">
+        <li role="presentation">
           <button
             type="button"
             id={`tab-${slugify(label)}-id`}
@@ -40,6 +43,7 @@ const { tabs } = Astro.props;
         role="tabpanel"
         aria-labelledby={`tab-${slugify(label)}-id`}
         hidden={index === 0 ? false : true}
+        tabindex="0"
       >
         {content}
       </section>
