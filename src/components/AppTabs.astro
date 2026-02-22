@@ -81,13 +81,16 @@ const { tabs } = Astro.props;
     connectedCallback() {
       const buttons = this.querySelectorAll('[role="tab"]') as NodeListOf<HTMLButtonElement>;
       const panels = this.querySelectorAll('[role="tabpanel"]') as NodeListOf<HTMLElement>;
+      let activeIndex = 0;
 
       buttons.forEach((button) => {
         button.addEventListener("click", (e) => {
-          const tabId = button.getAttribute("aria-controls");
+          const clickedButton = e.currentTarget as HTMLButtonElement;
+          const tabId = clickedButton.getAttribute("aria-controls");
+          activeIndex = Array.from(buttons).indexOf(clickedButton);
 
           buttons.forEach((button) => {
-            const isSelected = button === e.target;
+            const isSelected = button === clickedButton;
             button.setAttribute("aria-selected", String(isSelected));
             button.setAttribute("tabindex", isSelected ? "0" : "-1");
           });
@@ -100,7 +103,6 @@ const { tabs } = Astro.props;
       });
 
       // Roving tabindex implementation for keyboard navigation
-      let activeIndex = 0;
       buttons.forEach((button) => {
         button.addEventListener("keydown", (e) => {
           if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(e.key)) return;
