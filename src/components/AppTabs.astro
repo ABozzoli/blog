@@ -81,18 +81,18 @@ const { tabs } = Astro.props;
     connectedCallback() {
       const buttons = this.querySelectorAll('[role="tab"]') as NodeListOf<HTMLButtonElement>;
       const panels = this.querySelectorAll('[role="tabpanel"]') as NodeListOf<HTMLElement>;
-      let activeIndex = 0;
+      let focusIndex = 0;
 
       buttons.forEach((button) => {
         button.addEventListener("click", (e) => {
           const clickedButton = e.currentTarget as HTMLButtonElement;
           const tabId = clickedButton.getAttribute("aria-controls");
-          activeIndex = Array.from(buttons).indexOf(clickedButton);
+          focusIndex = Array.from(buttons).indexOf(clickedButton);
 
           buttons.forEach((button) => {
-            const isSelected = button === clickedButton;
-            button.setAttribute("aria-selected", String(isSelected));
-            button.setAttribute("tabindex", isSelected ? "0" : "-1");
+            const isActive = button === clickedButton;
+            button.setAttribute("aria-selected", String(isActive));
+            button.setAttribute("tabindex", isActive ? "0" : "-1");
           });
 
           panels.forEach((panel) => {
@@ -109,16 +109,16 @@ const { tabs } = Astro.props;
           e.preventDefault();
 
           // Go to the first or last tab
-          if (e.key === "Home") activeIndex = 0;
-          if (e.key === "End") activeIndex = buttons.length - 1;
+          if (e.key === "Home") focusIndex = 0;
+          if (e.key === "End") focusIndex = buttons.length - 1;
           // Move to the next or previous tab
-          if (e.key === "ArrowRight") activeIndex++;
-          if (e.key === "ArrowLeft") activeIndex--;
+          if (e.key === "ArrowRight") focusIndex++;
+          if (e.key === "ArrowLeft") focusIndex--;
           // Loop around the tabs
-          if (activeIndex < 0) activeIndex = buttons.length - 1;
-          if (activeIndex >= buttons.length) activeIndex = 0;
+          if (focusIndex < 0) focusIndex = buttons.length - 1;
+          if (focusIndex >= buttons.length) focusIndex = 0;
 
-          buttons[activeIndex].focus();
+          buttons[focusIndex].focus();
         });
       });
     }
