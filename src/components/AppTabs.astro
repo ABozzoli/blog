@@ -25,6 +25,7 @@ const { tabs } = Astro.props;
             role="tab"
             aria-controls={`tabpanel-${slugify(label)}-id`}
             aria-selected={index === 0 ? "true" : "false"}
+            tabindex={index === 0 ? "0" : "-1"}
           >
             {label}
           </button>
@@ -88,12 +89,34 @@ const { tabs } = Astro.props;
           buttons.forEach((button) => {
             const isSelected = button === e.target;
             button.setAttribute("aria-selected", String(isSelected));
+            button.setAttribute("tabindex", isSelected ? "0" : "-1");
           });
 
           panels.forEach((panel) => {
             const isActive = panel.id === tabId;
             panel.hidden = !isActive;
           });
+        });
+      });
+
+      // Roving tabindex implementation for keyboard navigation
+      let activeIndex = 0;
+      buttons.forEach((button) => {
+        button.addEventListener("keydown", (e) => {
+          if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(e.key)) return;
+          e.preventDefault();
+
+          // Go to the first or last tab
+          if (e.key === "Home") activeIndex = 0;
+          if (e.key === "End") activeIndex = buttons.length - 1;
+          // Move to the next or previous tab
+          if (e.key === "ArrowRight") activeIndex++;
+          if (e.key === "ArrowLeft") activeIndex--;
+          // Loop around the tabs
+          if (activeIndex < 0) activeIndex = buttons.length - 1;
+          if (activeIndex >= buttons.length) activeIndex = 0;
+
+          buttons[activeIndex].focus();
         });
       });
     }
