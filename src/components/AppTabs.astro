@@ -112,15 +112,17 @@ const { tabs } = Astro.props;
           if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(e.key)) return;
           e.preventDefault();
 
+          const minIndex = 0;
+          const maxIndex = buttons.length - 1;
           // Go to the first or last tab
-          if (e.key === "Home") focusIndex = 0;
-          if (e.key === "End") focusIndex = buttons.length - 1;
+          if (e.key === "Home") focusIndex = minIndex;
+          if (e.key === "End") focusIndex = maxIndex;
           // Move to the next or previous tab
           if (e.key === "ArrowRight") focusIndex++;
           if (e.key === "ArrowLeft") focusIndex--;
           // Loop around the tabs
-          if (focusIndex < 0) focusIndex = buttons.length - 1;
-          if (focusIndex >= buttons.length) focusIndex = 0;
+          if (focusIndex < minIndex) focusIndex = maxIndex;
+          if (focusIndex > maxIndex) focusIndex = minIndex;
 
           buttons[focusIndex].focus();
         });
