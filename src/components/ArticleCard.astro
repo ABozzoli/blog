@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { article, index, page, hLevel, isClickable } = Astro.props;
-const { title, category, publishDate, description } = article.data;
+const { title, categories, publishDate, description } = article.data;
 const url = `${article.collection}/${article.slug}`;
 const Heading = hLevel ?? "h2"; // Alternatively role="heading" and aria-level="[n]" can be used
 // OR as a bolder strategy: always use <h6> (skipping heading levels is fine if page hierarchy is correct)
@@ -24,7 +24,7 @@ const Heading = hLevel ?? "h2"; // Alternatively role="heading" and aria-level="
     class=`article-card block-shadow ${isClickable ? 'is-clickable' : ''}`
     aria-labelledby=`article-card-${slugify(title)}-title`
   >
-    <hgroup class="mb-16">
+    <hgroup>
       <Heading id=`article-card-${slugify(title)}-title` class="h3 mb-4">
         <a href={url}>{title}</a>
       </Heading>
@@ -32,10 +32,18 @@ const Heading = hLevel ?? "h2"; // Alternatively role="heading" and aria-level="
     </hgroup>
 
     <p class="content line-clamp-2" set:html={description} />
-    <div>
-      <span class="visually-hidden">Category:</span>
-      <a class="badge" href=`category/${slugify(category)}`>{category}</a>
-    </div>
+
+    <ul role="list" aria-label="Categories">
+      {
+        categories.map((category) => (
+          <li>
+            <a class="badge" href={`categories/${slugify(category)}`}>
+              {category}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </article>
 </li>
 
@@ -49,6 +57,7 @@ const Heading = hLevel ?? "h2"; // Alternatively role="heading" and aria-level="
     padding: 16px;
     display: flex;
     flex-direction: column;
+    row-gap: 16px;
     position: relative;
 
     /* Ref: https://piccalil.li/blog/accessible-faux-nested-interactive-controls/ */
@@ -76,7 +85,10 @@ const Heading = hLevel ?? "h2"; // Alternatively role="heading" and aria-level="
       min-height: 2lh;
     }
 
-    .badge {
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
       margin-top: auto; /* Push it to the bottom */
     }
   }

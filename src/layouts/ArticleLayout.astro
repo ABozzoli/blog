@@ -5,7 +5,7 @@ import RelatedArticles from "../components/RelatedArticles.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 
 const { frontmatter, headings } = Astro.props;
-const { title, category, publishDate, updateDate } = frontmatter;
+const { title, categories, publishDate, updateDate } = frontmatter;
 ---
 
 <MainLayout {title}>
@@ -19,7 +19,7 @@ const { title, category, publishDate, updateDate } = frontmatter;
 
     <slot />
 
-    <RelatedArticles {category} {title} />
+    <RelatedArticles {categories} {title} />
   </article>
 </MainLayout>
 

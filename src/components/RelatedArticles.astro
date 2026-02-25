@@ -1,9 +1,9 @@
 ---
 import { fetchArticles } from "../js/utils";
 
-const { category, title } = Astro.props;
+const { categories, title } = Astro.props;
 
-const articles = await fetchArticles({ category, excludeTitle: title, limit: 3 });
+const articles = await fetchArticles({ categories, excludeTitle: title, limit: 3 });
 ---
 
 {

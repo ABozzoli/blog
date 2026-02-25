@@ -2,7 +2,7 @@
 import { fetchArticles, slugify } from "../js/utils";
 
 const articles = await fetchArticles();
-const tags = articles.map((article) => article.data.category).sort();
+const tags = articles.flatMap((article) => article.data.categories).sort();
 
 const tagsCount: Record<string, number> = {};
 tags.forEach((tag) => (tagsCount[tag] = (tagsCount[tag] ?? 0) + 1));
@@ -15,7 +15,7 @@ tags.forEach((tag) => (tagsCount[tag] = (tagsCount[tag] ?? 0) + 1));
       <ul class="tag-cloud" role="list" aria-labelledby="tag-cloud-title">
         {Object.entries(tagsCount).map(([tag, count]) => (
           <li>
-            <a class="badge" href={`category/${slugify(tag)}`}>
+            <a class="badge" href={`categories/${slugify(tag)}`}>
               {tag} ({count})
             </a>
           </li>

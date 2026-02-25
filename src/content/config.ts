@@ -7,7 +7,7 @@ const articles = defineCollection({
     publishDate: z.date().nullable(),
     updateDate: z.date().nullable(),
     description: z.string(),
-    category: z.string(), //TODO: should be an array
+    categories: z.array(z.string()).min(1),
   }),
 });
 

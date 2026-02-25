@@ -5,7 +5,7 @@ import ArticleCard from "../../components/ArticleCard.astro";
 
 export async function getStaticPaths() {
   const articles = await fetchArticles();
-  const categories = [...new Set(articles.map(({ data }) => data.category))];
+  const categories = [...new Set(articles.flatMap(({ data }) => data.categories))];
 
   return categories.map((category) => ({
     params: { slug: slugify(category) },
@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 
 const { category } = Astro.props;
 const title = `${category} category`;
-const articles = await fetchArticles({ category });
+const articles = await fetchArticles({ categories: [category] });
 ---
 
 <MainLayout {title}>

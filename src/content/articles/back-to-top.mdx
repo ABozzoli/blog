@@ -1,16 +1,16 @@
 ---
-title: "A11y 101: Back-to-top"
+title: "Back-to-top"
 publishDate: 2025-11-07
 updateDate: 2025-11-08
 description: "Skipping to the main content is important, but what if you want to go back to the top of a long page? Here comes our next (accessible) essential blog component: the Back-to-top."
-category: A11y 101
+categories: ["A11y", "Components"]
 ---
 
 import Link from "../../components/Link.astro";
 import { Footnote, FootnoteRef, Footnotes } from "../../components/Footnotes";
 
 <a href="articles/a11y-101-skip-links">Skipping to the main content</a> is important, but what if you want to go back to
-the top of a long page? Here comes our next <a href="category/a11y-101">(accessible) essential blog component</a>: the
+the top of a long page? Here comes our next <a href="categories/a11y-101">(accessible) essential blog component</a>: the
 Back-to-top.
 
 ## What is the Back-to-top?
@@ -116,9 +116,11 @@ Until next time, be (and code) well!
     by the fact that you'll likely want to make it look like it's floating in the bottom corner of the viewport.
   </Footnote>
   <Footnote n="2">
-    It shares this behavior with the _very special_™ `#top` fragment
-    (see <Link href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a#linking_to_an_element_on_the_same_page">MDN</Link>),
-    which is more explicit and therefore arguably preferable.
+    It shares this behavior with the _very special_™ `#top` fragment (see{" "}
+    <Link href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a#linking_to_an_element_on_the_same_page">
+      MDN
+    </Link>
+    ), which is more explicit and therefore arguably preferable.
   </Footnote>
   <Footnote n="3">
     Which is usually{" "}
