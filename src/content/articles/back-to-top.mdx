@@ -9,8 +9,8 @@ categories: ["A11y", "Components"]
 import Link from "../../components/Link.astro";
 import { Footnote, FootnoteRef, Footnotes } from "../../components/Footnotes";
 
-<a href="articles/a11y-101-skip-links">Skipping to the main content</a> is important, but what if you want to go back to
-the top of a long page? Here comes our next <a href="categories/a11y-101">(accessible) essential blog component</a>: the
+<a href="articles/skip-links">Skipping to the main content</a> is important, but what if you want to go back to the top
+of a long page? Here comes our next <a href="categories/a11y-101">(accessible) essential blog component</a>: the
 Back-to-top.
 
 ## What is the Back-to-top?
@@ -46,7 +46,7 @@ the hash alone actually has a defined behavior in the browser: it takes you to t
 But - you guessed it - it still doesn't move the focus.
 So, what's the solution?
 
-Just as we did for the <a href="articles/a11y-101-skip-links#how-to-build-them">Skip-links</a>, we have to target the `<main>` element:
+Just as we did for the <a href="articles/skip-links#how-to-build-them">Skip-links</a>, we have to target the `<main>` element:
 
 ```html
 <main id="main" tabindex="-1">...</main>
@@ -57,7 +57,7 @@ Just as we did for the <a href="articles/a11y-101-skip-links#how-to-build-them">
 
 <aside class="callout">
   If you are wondering about the `tabindex="-1"` check out my article about
-  <a href="articles/a11y-101-skip-links#wheres-the-focus-indicator">Skip-links</a> for the details!
+  <a href="articles/skip-links#wheres-the-focus-indicator">Skip-links</a> for the details!
 </aside>
 
 And there we go! Both the viewport _and focus_ return to the start of the main content.
