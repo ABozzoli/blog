@@ -24,7 +24,7 @@ const isExternal = String(href).startsWith("http://") || String(href).startsWith
     {...props}
     >{iconBefore && <Icon name={iconBefore} size={iconSize} />}<span class="content"><slot /></span>{
       title && <span class="visually-hidden">{title}</span>
-    }{isExternal && <span class="visually-hidden">, opens in a new window</span>}{
+    }{isExternal && <span class="visually-hidden">&nbsp;(opens in a new window)</span>}{
       iconAfter && <Icon name={iconAfter} size={iconSize} />
     }</a
   >

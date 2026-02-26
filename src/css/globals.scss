@@ -25,6 +25,11 @@ a {
   }
 }
 
+/* Flatten nested <p> in anchors automatically inserted by markdown processors */
+a p {
+  display: contents;
+}
+
 p,
 dd,
 :not([role]) > li,
