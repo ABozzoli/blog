@@ -1,0 +1,29 @@
+---
+import { slugify } from "../js/utils";
+
+interface Props {
+  categories: string[];
+}
+
+const { categories } = Astro.props;
+---
+
+<ul role="list" aria-label="Categories">
+  {
+    categories.map((category) => (
+      <li>
+        <a class="badge" href={`categories/${slugify(category)}`}>
+          {category}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style lang="scss">
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+</style>

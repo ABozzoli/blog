@@ -1,5 +1,6 @@
 ---
 import { formatDate, slugify } from "../js/utils";
+import CategoryList from "./CategoryList.astro";
 
 interface Props {
   article: import("astro:content").CollectionEntry<"articles">;
@@ -33,17 +34,7 @@ const Heading = hLevel ?? "h2"; // Alternatively role="heading" and aria-level="
 
     <p class="content line-clamp-2" set:html={description} />
 
-    <ul role="list" aria-label="Categories">
-      {
-        categories.map((category) => (
-          <li>
-            <a class="badge" href={`categories/${slugify(category)}`}>
-              {category}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <CategoryList categories={categories} />
   </article>
 </li>
 
@@ -83,13 +74,6 @@ const Heading = hLevel ?? "h2"; // Alternatively role="heading" and aria-level="
     .content {
       min-height: 2em; /* Fallback for browsers without lh support */
       min-height: 2lh;
-    }
-
-    ul {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: auto; /* Push it to the bottom */
     }
   }
 </style>
