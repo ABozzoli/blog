@@ -78,7 +78,7 @@ Following the `tablist`, we define the panels:
 <section role="tabpanel">Tabpanel 3</section>
 ```
 
-Again, we are using semantic HTML; isn't it the best? With that, our base structure and roles are in place.
+Again, we are using semantic HTML (`<section>` is the element that more closely resembles `tabpanel`), and with that, our base structure and roles are in place.
 
 ## Binding the Elements Together
 
@@ -121,8 +121,8 @@ We are just missing a couple more attributes before adding JavaScript:
 ```
 
 <aside class="callout" aria-label="Note about inline conditionals">
-  The inline conditionals and template literals are used for the sake of brevity. They illustrate how the initial state would be derived
-  dynamically, but the resulting markup is equivalent to static HTML with fixed values.
+  The inline conditionals and template literals are used for the sake of brevity. They illustrate how the initial state
+  would be derived dynamically, but the resulting markup is equivalent to static HTML with fixed values.
 </aside>
 
 Assuming the first tab is active, we set:
@@ -133,7 +133,7 @@ Assuming the first tab is active, we set:
 
 Using the `hidden` attribute achieves the same visual result as `display: none`, but it encodes the visibility state directly in the markup.
 
-This makes the intent clearer, simplifies JavaScript interaction, and keeps the state declarative rather than relying on imperative style changes, closely following the <Link href="https://en.wikipedia.org/wiki/Rule_of_least_power">Rule of Least Power</Link>.
+This makes the intent clearer, simplifies JavaScript interaction, and keeps the state declarative rather than relying on imperative style changes, closely following the <Link href="https://en.wikipedia.org/wiki/Rule_of_least_power">Rule of Least Power</Link> too.
 
 ## Making it Functional
 
