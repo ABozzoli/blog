@@ -3,7 +3,7 @@ title: "Accessible Tabs"
 publishDate: 2026-03-01
 updateDate: null
 description: "Tabs, love them (designers <em>do</em> love them) or hate them, they are here to stay. So we might as well make their stay a bit more <em>accessible</em>."
-categories: ["A11Y", "Component"]
+categories: ["A11Y", "Components"]
 ---
 
 import Link from "../../components/Link.astro";
@@ -108,7 +108,7 @@ We are just missing a couple more attributes before adding JavaScript:
 >
   Tab {index}
 </button>
-
+<!-- ... -->
 <section
   id={`tabpanel-${index}`}
   role="tabpanel"
@@ -119,14 +119,21 @@ We are just missing a couple more attributes before adding JavaScript:
 </section>
 ```
 
+<aside class="callout" aria-label="Note about inline conditionals">
+  The inline conditionals are used for the sake of brevity. They illustrate how the initial state would be derived
+  dynamically, but the resulting markup is equivalent to static HTML with fixed values.
+</aside>
+
 Assuming the first tab is active:
 
 - We set `aria-selected="true"` on it and `"false"` on the others.
 - We set `hidden` on all `tabpanel` elements except the active one.
 
-Attributing `hidden` has a similar effect to setting `display: none`, but it keeps the state in the HTML, which I find more explicit and easier to manage with JavaScript.
+Using the `hidden` attribute achieves the same visual result as `display: none`, but it encodes the visibility state directly in the markup.
 
-## Making It Functional
+This makes the intent clearer, simplifies JavaScript interaction, and keeps the state declarative rather than relying on imperative style changes, adhering to <Link href="https://en.wikipedia.org/wiki/Rule_of_least_power">the Rule of Least Power</Link>.
+
+## Making it Functional
 
 First, select the buttons and panels:
 
