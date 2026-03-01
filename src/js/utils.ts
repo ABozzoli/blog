@@ -63,10 +63,10 @@ export type FetchArticlesOptions = {
 export async function fetchArticles(options: FetchArticlesOptions = {}): Promise<CollectionEntry<"articles">[]> {
   const { categories, excludeTitle, limit } = options;
 
-  const entries = await getCollection("articles", (entry) => {
-    if (!import.meta.env.DEV && !entry.data.publishDate) return false;
-    if (categories && !categories.some((category) => entry.data.categories.includes(category))) return false;
-    if (excludeTitle && entry.data.title === excludeTitle) return false;
+  const entries = await getCollection("articles", ({ data }) => {
+    if (!import.meta.env.DEV && !data.publishDate) return false;
+    if (categories?.length && !categories.some((category) => data.categories.includes(category))) return false;
+    if (excludeTitle && data.title === excludeTitle) return false;
     return true;
   });
 
