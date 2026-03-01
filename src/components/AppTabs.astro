@@ -110,7 +110,6 @@ const { tabs } = Astro.props;
       buttons.forEach((button) => {
         button.addEventListener("keydown", (e) => {
           if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(e.key)) return;
-          e.preventDefault();
 
           const minIndex = 0;
           const maxIndex = buttons.length - 1;
