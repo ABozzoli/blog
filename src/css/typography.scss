@@ -116,18 +116,22 @@ pre code {
   font-weight: 600;
   background-color: color-mix(in srgb, var(--foreground) 5%, var(--background));
   padding: 0.125em 0.25em;
+  font-size: var(--fs-14px);
+  vertical-align: 0.0625em;
 }
 
 kbd {
+  background-color: color-mix(in srgb, var(--foreground) 5%, var(--background));
   border: 1px solid var(--foreground);
   border-radius: 0.25em;
   padding-inline: 0.25em;
   box-shadow: 0.125em 0.125em 0 0.125em var(--foreground);
   margin-inline-end: 0.25em;
-}
-
-:is(p, li) code,
-kbd {
-  font-size: 0.875em;
-  vertical-align: 0.0625em;
+  font-size: var(--fs-12px);
+  vertical-align: 0.25em;
+  /* Ensure a minimum of 1:1 aspect ratio for keys with short labels */
+  display: inline-block;
+  min-width: 1em;
+  min-width: 1lh;
+  text-align: center;
 }
