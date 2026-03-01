@@ -80,3 +80,7 @@ summary {
 [aria-busy="true"] {
   cursor: progress;
 }
+
+abbr[title] {
+  cursor: help;
+}
