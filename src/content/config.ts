@@ -1,5 +1,7 @@
 import { defineCollection, z } from "astro:content";
 
+const categorySchema = z.enum(["A11y", "Components", "Workaround", "Ramblings"]);
+
 const articles = defineCollection({
   type: "content",
   schema: z.object({
@@ -7,7 +9,7 @@ const articles = defineCollection({
     publishDate: z.date().nullable(),
     updateDate: z.date().nullable(),
     description: z.string(),
-    categories: z.array(z.string()).min(1),
+    categories: z.array(categorySchema).min(1),
   }),
 });
 

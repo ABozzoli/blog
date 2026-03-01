@@ -54,7 +54,7 @@ export function sortByDate(articles: CollectionEntry<"articles">[]): CollectionE
 
 /** Options: filter by categories, exclude title, limit results, only published by default. */
 export type FetchArticlesOptions = {
-  categories?: string[];
+  categories?: CollectionEntry<"articles">["data"]["categories"];
   excludeTitle?: string;
   limit?: number;
 };
