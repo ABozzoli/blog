@@ -1,8 +1,16 @@
 body {
+  font: -apple-system-body; /* Allow OS-based text-resize on mobile for Safari (Ref: https://adrianroselli.com/2026/02/honoring-mobile-os-text-size.html#Safari) */
   font-family: var(--ff-base);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Limit it to iOS and mobile only (Ref: https://adrianroselli.com/2026/02/honoring-mobile-os-text-size.html#Safari) */
+@supports (font: -apple-system-body) and (not (-webkit-touch-callout: default)) {
+  :root {
+    font-size: 100%;
+  }
 }
 
 /* Faux bold detection animation (Ref: https://clagnut.com/blog/2438/) */
