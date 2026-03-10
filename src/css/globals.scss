@@ -156,11 +156,16 @@ input[type="radio"] {
   width: 1.25rem;
   height: 1.25rem;
   flex-shrink: 0;
-  border: 1px solid var(--foreground);
+  border: 1px solid;
   background-color: var(--background);
 
   &:hover {
-    background-color: color-mix(in srgb, var(--background), var(--foreground) 5%);
+    background-color: var(--background-muted);
+  }
+
+  &:disabled {
+    background-color: var(--background-disabled);
+    color: var(--foreground-disabled);
   }
 
   &::after {
@@ -182,10 +187,11 @@ input[type="checkbox"] {
   &::after {
     width: 0.875rem;
     height: 0.875rem;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>');
+    background-color: currentColor;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    mask-position: center;
+    mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>');
   }
 }
 
