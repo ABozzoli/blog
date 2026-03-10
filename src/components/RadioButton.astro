@@ -1,0 +1,36 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { createId, joinIds } from "../js/utils";
+
+interface Props extends Omit<HTMLAttributes<"input">, "type" | "id"> {
+  name: string;
+  label: string;
+  description?: string;
+  error?: string;
+}
+
+const { name, label, description, error, ...props } = Astro.props;
+
+const id = createId();
+const inputId = `input-${id}`;
+const descriptionId = `description-${id}`;
+const errorId = `error-${id}`;
+const ariaDescribedByIds = joinIds(description && descriptionId, error && errorId);
+---
+
+<div class="radio-button">
+  <input id={inputId} type="radio" {name} aria-describedby={ariaDescribedByIds} {...props} />
+  <div>
+    <label for={inputId}>{label}</label>
+    {description && <p id={descriptionId}>{description}</p>}
+    {error && <p id={errorId} role="alert">{error}</p>}
+  </div>
+</div>
+
+<style lang="scss">
+  .radio-button {
+    display: flex;
+    align-items: baseline;
+    column-gap: 8px;
+  }
+</style>

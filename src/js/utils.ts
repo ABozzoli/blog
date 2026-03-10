@@ -21,6 +21,61 @@ export function slugify(text: string): string {
 }
 
 /**
+ * Returns a generated unique id.
+ *
+ * Uses `crypto.randomUUID()` when available, otherwise falls back to a
+ * random base-36 string.
+ *
+ * Example:
+ * ```ts
+ * createId() // "3e4f5g6h7"
+ * ```
+ *
+ * @returns {string} A unique id string.
+ */
+export function createId(): string {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+
+  return Math.random().toString(36).slice(2, 11);
+}
+
+/**
+ * Returns an array of generated unique ids.
+ *
+ * Example:
+ * ```ts
+ * createIds(3) // ["abc123", "def456", "ghi789"]
+ * ```
+ *
+ * @param {number} count - The number of ids to generate.
+ * @returns {string[]} An array of unique id strings.
+ */
+export function createIds(count: number): string[] {
+  return Array.from({ length: count }, () => createId());
+}
+
+/**
+ * Joins multiple id strings into a space-separated string, filtering out
+ * falsy values. Returns `undefined` if no valid ids are provided.
+ *
+ * Useful for building `aria-labelledby` or `aria-describedby` attribute values.
+ *
+ * Example:
+ * ```ts
+ * joinIds("id-1", "id-2", null) // "id-1 id-2"
+ * joinIds(null, undefined)      // undefined
+ * ```
+ *
+ * @param {...(string | false | null | undefined)} ids - The ids to join.
+ * @returns {string | undefined} A space-separated string of ids, or `undefined`.
+ */
+export function joinIds(...ids: (string | false | null | undefined)[]): string | undefined {
+  return ids.filter(Boolean).join(" ") || undefined;
+}
+
+/**
  * Formats a date into a locale date string (UTC timezone).
  *
  * Example:
