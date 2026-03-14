@@ -6,6 +6,7 @@
   --foreground-inverted: var(--background);
 
   --foreground-muted: color-mix(in srgb, var(--foreground), var(--background) 39%);
+  --background-muted: color-mix(in srgb, var(--foreground), var(--background) 95%);
 
   --foreground-disabled: color-mix(in srgb, var(--foreground), var(--background) 60%);
   --background-disabled: color-mix(in srgb, var(--foreground), var(--background) 90%);
