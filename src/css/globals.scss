@@ -151,12 +151,14 @@ details[open]::details-content {
 
 input[type="checkbox"],
 input[type="radio"] {
+  --controls-foreground: var(--foreground);
+
   appearance: none;
   position: relative;
   width: 1.25rem;
   height: 1.25rem;
   flex-shrink: 0;
-  border: 1px solid;
+  border: 1px solid var(--controls-foreground);
   background-color: var(--background);
   print-color-adjust: exact; /* Prevent the browser from erasing the background in print mode */
 
@@ -166,7 +168,7 @@ input[type="radio"] {
 
   &:disabled {
     background-color: var(--background-disabled);
-    color: var(--foreground-disabled);
+    --controls-foreground: var(--foreground-disabled);
   }
 
   &::after {
@@ -174,7 +176,7 @@ input[type="radio"] {
     position: absolute;
     inset: 0;
     margin: auto;
-    background-color: currentColor;
+    background-color: var(--controls-foreground);
     display: none;
   }
 
@@ -183,21 +185,14 @@ input[type="radio"] {
   }
 
   /* Ref: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/system-color#syntax */
-  @media (forced-colors: active) {
+  /* Note: `screen` is important to prevent the styles from being applied in print preview */
+  @media screen and (forced-colors: active) {
     &:checked {
-      border-color: Highlight;
-
-      &::after {
-        background-color: Highlight;
-      }
+      --controls-foreground: Highlight;
     }
 
     &:disabled {
-      border-color: GrayText;
-
-      &::after {
-        background-color: GrayText;
-      }
+      --controls-foreground: GrayText;
     }
   }
 }
@@ -216,7 +211,7 @@ input[type="checkbox"] {
 }
 
 input[type="radio"] {
-  border-radius: 100vw;
+  border-radius: 100vmax;
 
   &::after {
     width: 0.625rem;
