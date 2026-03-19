@@ -29,6 +29,10 @@ img {
 
 a {
   color: inherit;
+
+  @media screen and (forced-colors: active) {
+    color: revert; /* Restore the default link color in forced colors mode */
+  }
 }
 
 button {
@@ -39,6 +43,10 @@ button {
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+
+  @media screen and (forced-colors: active) {
+    border: 1px solid transparent; /* Ensure the button has a visible border in forced colors mode */
+  }
 }
 
 input,
