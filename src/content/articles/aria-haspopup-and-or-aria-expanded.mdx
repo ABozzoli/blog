@@ -27,7 +27,7 @@ To understand when, let's look at the available values for `aria-haspopup`:
 
 As you can note, all these map to specific roles (and <Link href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-haspopup#:~:text=the%20value%20of%20aria%2Dhaspopup%20matches%20the%20role%20of%20the%20popup%20container.">should match the triggered element</Link>), except for `true`.
 
-Despite appearing generic, `true` actually falls back to `menu` (for <Link href="https://www.w3.org/WAI/ARIA/wiki/ARIA_1.1_Changes#New_or_changed_user_agent_normative_statements">backward compatibility reasons</Link>), which is quite misleading. In practice, it's better to avoid it opt for the explicit values instead.
+Despite appearing generic, `true` actually falls back to `menu` (for <Link href="https://www.w3.org/WAI/ARIA/wiki/ARIA_1.1_Changes#New_or_changed_user_agent_normative_statements">backward compatibility reasons</Link>), which is quite misleading. In practice, it's better to avoid it and opt for the explicit values instead.
 
 But what if the popup doesn't match any of these roles?
 
