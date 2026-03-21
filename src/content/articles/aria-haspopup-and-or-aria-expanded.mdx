@@ -1,0 +1,56 @@
+---
+title: "Aria-haspopup and/or aria-expanded"
+publishDate: 2026-03-21
+updateDate: null
+description: "When to use <code>aria-haspopup</code> and when to use <code>aria-expanded</code>? When to use one and when to use both? Let's find out!"
+categories: ["A11y"]
+---
+
+import Link from "../../components/Link.astro";
+
+When to use `aria-haspopup` and when to use `aria-expanded`? When to use one and when to use both? Let's find out!
+
+## Introduction
+
+`aria-haspopup` is used to indicate that an element triggers a popup, while `aria-expanded` is used to communicate its state, open (`true`) or closed (`false`).
+
+At first glance, it looks like they should always be used in tandem, and it _is_ true in most cases, but there are a couple of exceptions.
+
+To understand when, let's look at the available values for `aria-haspopup`:
+
+- `menu`
+- `listbox`
+- `tree`
+- `grid`
+- `dialog`
+- `true`
+
+As you can note, all these map to specific roles (and <Link href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-haspopup#:~:text=the%20value%20of%20aria%2Dhaspopup%20matches%20the%20role%20of%20the%20popup%20container.">should match the triggered element</Link>), except for `true`.
+
+Despite appearing generic, `true` actually falls back to `menu` (for <Link href="https://www.w3.org/WAI/ARIA/wiki/ARIA_1.1_Changes#New_or_changed_user_agent_normative_statements">backward compatibility reasons</Link>), which is quite misleading. In practice, it's better to avoid it opt for the explicit values instead.
+
+But what if the popup doesn't match any of these roles?
+
+That's where `aria-expanded` comes in. It works with any popup type and can be used on its own when `aria-haspopup` doesn't apply. When it does apply, you can safely use both.
+
+## An exception: modal dialogs
+
+There's just one case in which it isn't really of much use, and that is with modal dialogs.
+
+When a dialog is open, its trigger shouldn't be reachable, so the state is implicit: either you're inside the dialog (open) or outside it (closed). In this case, `aria-expanded` adds little value.
+
+## What about tooltips?
+
+Why is `tooltip` excluded from the list of available values? <Link href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-haspopup#:~:text=A%20tooltip%20is%20not%20considered%20to%20be%20a%20popup%20in%20this%20context%2C%20as%20it%20is%20not%20interactive.">MDN explains</Link>:
+
+> A tooltip is not considered to be a popup in this context, as it is not interactive.
+
+Interactivity is what qualifies all the roles supported by `aria-haspopup`.
+
+## TL;DR
+
+- Use both for interactive popups with a matching `aria-haspopup` value (`menu`, `listbox`, etc.);
+- Use only `aria-haspopup` for dialogs;
+- Use only `aria-expanded` for popups without a matching role (e.g. generic popups or tooltips).
+
+I hope this was helpful~ until next time, be (and code) well!
