@@ -82,6 +82,11 @@ dialog {
   margin: auto;
   border: none;
   max-height: none;
+
+  @media screen and (forced-colors: none) {
+    outline: 1px solid var(--foreground);
+    outline-offset: -1px;
+  }
 }
 
 dialog:not([open]),

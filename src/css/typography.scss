@@ -110,6 +110,8 @@ pre {
   overflow-x: auto;
   padding: 1rem;
   margin-block: 1rem;
+  outline: 1px solid var(--foreground);
+  outline-offset: -1px;
 }
 
 code {
@@ -134,7 +136,6 @@ kbd {
   border-radius: 0.25em;
   padding-inline: 0.25em;
   box-shadow: 0.125em 0.125em 0 0.125em var(--foreground);
-  margin-inline-end: 0.25em;
   font-size: var(--fs-12px);
   vertical-align: 0.25em;
   /* Ensure a minimum of 1:1 aspect ratio for keys with short labels */
@@ -142,4 +143,8 @@ kbd {
   min-width: 1em;
   min-width: 1lh;
   text-align: center;
+
+  @media screen and (forced-colors: none) {
+    margin-inline-end: 0.25em;
+  }
 }

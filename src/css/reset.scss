@@ -31,7 +31,8 @@ a {
   color: inherit;
 
   @media screen and (forced-colors: active) {
-    color: revert; /* Restore the default link color in forced colors mode */
+    color: revert;
+    text-decoration: revert; /* Can't rely on color only (`LinkText` color doesn't have enough contrast with `CanvasText`) */
   }
 }
 
@@ -45,7 +46,7 @@ button {
   user-select: none;
 
   @media screen and (forced-colors: active) {
-    border: 1px solid transparent; /* Ensure the button has a visible border in forced colors mode */
+    border: 1px solid transparent; /* In `forced-colors` mode the border is needed to distinguish buttons from plain text (outline misses the focus/hover effect) */
   }
 }
 

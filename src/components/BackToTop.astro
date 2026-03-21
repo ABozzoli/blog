@@ -33,6 +33,11 @@ const currentPath = Astro.url.pathname;
         background-color: var(--foreground);
         color: var(--background);
       }
+
+      @media screen and (forced-colors: active) {
+        outline: 1px solid transparent;
+        outline-offset: -1px;
+      }
     }
   }
 </style>
