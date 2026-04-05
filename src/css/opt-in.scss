@@ -112,11 +112,11 @@ aside.callout {
     color: var(--background);
 
     &:hover {
-      background-color: color-mix(in srgb, var(--foreground), var(--background) 15%);
+      background-color: var(--background-inverted-hover);
     }
 
     &:active {
-      background-color: color-mix(in srgb, var(--foreground), var(--background) 30%);
+      background-color: var(--background-inverted-active);
     }
   }
 
@@ -125,11 +125,11 @@ aside.callout {
     color: var(--foreground);
 
     &:hover {
-      background-color: color-mix(in srgb, var(--foreground) 10%, var(--background));
+      background-color: var(--background-hover);
     }
 
     &:active {
-      background-color: color-mix(in srgb, var(--foreground) 20%, var(--background));
+      background-color: var(--background-active);
     }
   }
 }

@@ -42,7 +42,7 @@ const { title, ...props } = Astro.props;
   }
 
   details[open] summary {
-    background-color: color-mix(in srgb, var(--foreground) 5%, var(--background));
+    background-color: var(--background-muted);
   }
 
   details summary svg {

@@ -10,6 +10,12 @@
 
   --foreground-disabled: color-mix(in srgb, var(--foreground), var(--background) 60%);
   --background-disabled: color-mix(in srgb, var(--foreground), var(--background) 90%);
+
+  --background-hover: color-mix(in srgb, var(--foreground) 10%, var(--background));
+  --background-active: color-mix(in srgb, var(--foreground) 20%, var(--background));
+
+  --background-inverted-hover: color-mix(in srgb, var(--foreground), var(--background) 15%);
+  --background-inverted-active: color-mix(in srgb, var(--foreground), var(--background) 30%);
 }
 
 html {

@@ -124,14 +124,14 @@ pre code {
 
 :is(p, li) code {
   font-weight: 600;
-  background-color: color-mix(in srgb, var(--foreground) 5%, var(--background));
+  background-color: var(--background-muted);
   padding: 0.125em 0.25em;
   font-size: var(--fs-14px);
   vertical-align: 0.0625em;
 }
 
 kbd {
-  background-color: color-mix(in srgb, var(--foreground) 5%, var(--background));
+  background-color: var(--background-muted);
   border: 1px solid var(--foreground);
   border-radius: 0.25em;
   padding-inline: 0.25em;
