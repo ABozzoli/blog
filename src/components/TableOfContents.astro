@@ -87,6 +87,7 @@ const currentPath = Astro.url.pathname;
   /* Highlight current section only when sticky */
   @media (min-width: 1200px) {
     .table-of-contents {
+      box-shadow: var(--border-shadow);
       /* Ref: https://una.im/scroll-target-group/ */
       scroll-target-group: auto;
 
