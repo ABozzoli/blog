@@ -12,11 +12,11 @@ When to use `aria-haspopup` and when to use `aria-expanded`? When to use one and
 
 ## Introduction
 
-`aria-haspopup` is used to indicate that an element triggers a popup, while `aria-expanded` is used to communicate its state, open (`true`) or closed (`false`).
+`aria-haspopup` is used to indicate that an element triggers a popup, while `aria-expanded` is used to communicate its state: open (`true`) or closed (`false`).
 
 At first glance, it looks like they should always be used in tandem, and it _is_ true in most cases, but there are a couple of exceptions.
 
-To understand when, let's look at the available values for `aria-haspopup`:
+To understand what these are, let's take a look at the available values for `aria-haspopup`:
 
 - `menu`
 - `listbox`
@@ -25,9 +25,9 @@ To understand when, let's look at the available values for `aria-haspopup`:
 - `dialog`
 - `true`
 
-As you can note, all these map to specific roles (and <Link href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-haspopup#:~:text=the%20value%20of%20aria%2Dhaspopup%20matches%20the%20role%20of%20the%20popup%20container.">should match the triggered element</Link>), except for `true`.
+As you can note, all these map to specific roles, because it is required that they <Link href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-haspopup#:~:text=the%20value%20of%20aria%2Dhaspopup%20matches%20the%20role%20of%20the%20popup%20container.">match the triggered element</Link>, with the only exception of the `true` value.
 
-Despite appearing generic, `true` actually falls back to `menu` (for <Link href="https://www.w3.org/WAI/ARIA/wiki/ARIA_1.1_Changes#New_or_changed_user_agent_normative_statements">backward compatibility reasons</Link>), which is quite misleading. In practice, it's better to avoid it and opt for the explicit values instead.
+One would expect it to be some sort of wildcard, but the `true` value unexpectedly falls back to the `menu` value for <Link href="https://www.w3.org/WAI/ARIA/wiki/ARIA_1.1_Changes#New_or_changed_user_agent_normative_statements">backward compatibility reasons</Link>, which is quite misleading. In practice, it's better to avoid it and opt for the explicit values instead.
 
 But what if the popup doesn't match any of these roles?
 
@@ -43,7 +43,7 @@ When a dialog is open, its trigger shouldn't be reachable, so the state is impli
 
 Why is `tooltip` excluded from the list of available values? <Link href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-haspopup#:~:text=A%20tooltip%20is%20not%20considered%20to%20be%20a%20popup%20in%20this%20context%2C%20as%20it%20is%20not%20interactive.">MDN explains</Link>:
 
-> A tooltip is not considered to be a popup in this context, as it is not interactive.
+> A tooltip is not considered to be a popup [...], as it is not interactive.
 
 Interactivity is what qualifies all the roles supported by `aria-haspopup`.
 

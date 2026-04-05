@@ -6,13 +6,15 @@ description: "Sometimes the design calls for footnotes indicated by an asterisk 
 categories: ["A11y", "Workaround"]
 ---
 
-Sometimes the design calls for footnotes indicated by an asterisk (<span aria-hidden="true">\*</span>), and while providing a two-way connection (with jump-links) between the footnote reference and the footnote itself might be the best solution for everyone, it is not always possible because:
+import Link from "../../components/Link.astro";
+
+Sometimes the design calls for footnotes indicated by an asterisk (<span aria-hidden="true">\*</span>), and while providing a two-way connection (with jump-links) between the footnote reference and the footnote itself might be the best solution for everyone, it is not always possible because, as the <abbr title="Product Manager">PM</abbr> says:
 
 > The design has already been approved, sorry.
 
 While researching solutions that do not interfere with the design as-is, I stumbled upon `aria-details`, which seemed perfect for the job since it optionally provides additional details on demand, instead of forcing the user to read them (as `aria-describedby` would do).
 
-However, I soon discovered that `aria-details` is not widely supported yet and also needs to be applied to an interactive element to work properly (the latter constraint also applies to `aria-describedby`).
+However, I soon discovered that `aria-details` is <Link href="https://a11ysupport.io/tech/aria/aria-details_attribute#support-table-by-assertion-and-at-sr">not widely supported yet</Link> and (as I tested it) also needs to be applied to an interactive element to work properly (the latter constraint also applies to `aria-describedby`).
 
 So instead, the solution I found was faking the connection by adding the footnote content directly as a visually hidden `<span>` right after the asterisk, while marking the asterisk itself as `aria-hidden="true"`.
 

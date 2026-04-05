@@ -133,7 +133,9 @@ Assuming the first tab is active, we set:
 
 Using the `hidden` attribute achieves the same visual result as `display: none`, but it encodes the visibility state directly in the markup.
 
-This makes the intent clearer, simplifies JavaScript interaction, and keeps the state declarative rather than relying on imperative style changes, closely following the <Link href="https://en.wikipedia.org/wiki/Rule_of_least_power">Rule of Least Power</Link> too.
+This makes the intent clearer, simplifies JavaScript interaction, and keeps the state declarative rather than imperative.
+
+It also applies the <Link href="https://en.wikipedia.org/wiki/Rule_of_least_power">Rule of Least Power</Link>, relying on HTML as much as possible before playing the CSS card.
 
 ## Making it Functional
 
@@ -196,7 +198,7 @@ buttons.forEach((button) => {
 });
 ```
 
-Finally, we need to add this line to the click handler, which will ensure the focus index always starts from the last clicked button:
+Finally, we need to add this line to the click handler to ensure the focus index always starts from the last clicked tab (if there was one):
 
 ```js
 focusIndex = Array.from(buttons).indexOf(clickedButton);

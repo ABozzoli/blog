@@ -78,9 +78,9 @@ menuToggle?.addEventListener("click", () => menuDialog?.showModal());
 
 Well, it ain't that bad.
 
-### Styling it as a sidebar
+### Styling it
 
-I would like to style it as a sidebar while blurring the content of the page beneath it, so let us do that:
+Time to style it as a sidebar while blurring the content of the page beneath it:
 
 ```css
 .menu-dialog {
@@ -97,7 +97,9 @@ I would like to style it as a sidebar while blurring the content of the page ben
 }
 ```
 
-But what about the animation? Here, take a look at this:
+### Animating it
+
+But what about the animation? Here you go:
 
 ```css
 @media (prefers-reduced-motion: no-preference) {
@@ -138,7 +140,7 @@ But what about the animation? Here, take a look at this:
 }
 ```
 
-There is a bunch of weird stuff in there, but suffice you to know that the `allow-discrete` plus `@starting-style` combo
+I know I know, there is a bunch of weird stuff in there, but suffice you to know that the `allow-discrete` plus `@starting-style` combo
 is what's needed to enable transitions on properties that do not really have intermediate states,
 and even if Firefox support is still lacking, this is another case of _progressive enhancement_, so no problem.
 
