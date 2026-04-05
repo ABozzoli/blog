@@ -107,6 +107,16 @@ export function sortByDate(articles: CollectionEntry<"articles">[]): CollectionE
   );
 }
 
+function hasExactCategories(
+  articleCategories: CollectionEntry<"articles">["data"]["categories"],
+  requestedCategories: CollectionEntry<"articles">["data"]["categories"],
+): boolean {
+  return (
+    articleCategories.length === requestedCategories.length &&
+    requestedCategories.every((category) => articleCategories.includes(category))
+  );
+}
+
 /** Options: filter by categories, exclude title, limit results, only published by default. */
 export type FetchArticlesOptions = {
   categories?: CollectionEntry<"articles">["data"]["categories"];
@@ -120,7 +130,7 @@ export async function fetchArticles(options: FetchArticlesOptions = {}): Promise
 
   const entries = await getCollection("articles", ({ data }) => {
     if (!import.meta.env.DEV && !data.publishDate) return false;
-    if (categories?.length && !categories.some((category) => data.categories.includes(category))) return false;
+    if (categories?.length && !hasExactCategories(data.categories, categories)) return false;
     if (excludeTitle && data.title === excludeTitle) return false;
     return true;
   });
