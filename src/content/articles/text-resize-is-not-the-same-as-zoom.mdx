@@ -41,7 +41,7 @@ Forget using `px` for text-related properties, instead use:
 - relative or unitless values for `line-height`
 - relative units for `letter-spacing`
 
-Also, be careful to avoid fixed-height containers for textual content, especially when using `overflow: hidden`, as it can cause text to be cut off when resized.
+Also, be careful to avoid fixed-height containers for textual content, especially when using `overflow: hidden`, as it can cause text to be cut off when resized. Prefer `min-height` whenever possible, or at least ensure the containers are scrollable.
 
 With this in place, you're not just compliant, you're _actually_ supporting your users.
 
@@ -49,8 +49,8 @@ Until next time, be (and code) well!
 
 <Footnotes>
   <Footnote n="1">
-    Text resizing can affect layout if elements are sized using `rem` or `em`. However, layout should not depend on text
-    scaling. For non-text elements, it's generally better to use other units that preserve structural stability.
+    For this reason, `rem` and `em` should be reserved for text: if everything scales with font size, text resizing end
+    up having the same effect as zoom, defeating its purpose.
   </Footnote>
   <Footnote n="2">
     The conversion is simple: `1rem` equals the root font size (typically `16px`). For example, `20px` becomes
