@@ -1,6 +1,6 @@
 import { defineCollection, z } from "astro:content";
 
-const categorySchema = z.enum(["A11y", "Components", "Workaround", "Ramblings", "ARIA"]);
+const categorySchema = z.enum(["A11y", "Components", "Workaround", "Ramblings", "ARIA", "WCAG"]);
 
 const articles = defineCollection({
   type: "content",

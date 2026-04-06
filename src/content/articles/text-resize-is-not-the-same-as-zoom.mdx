@@ -1,0 +1,59 @@
+---
+title: "Text resize is not the same as zoom"
+publishDate: 2026-04-06
+updateDate: null
+description: Text resizing and page zoom are often treated as interchangeable, but they are fundamentally different mechanisms. While zoom is enough to meet accessibility requirements, text resizing is what truly respects user preferences."
+categories: ["A11y", "WCAG"]
+---
+
+import Link from "../../components/Link.astro";
+import { Footnote, FootnoteRef, Footnotes } from "../../components/Footnotes";
+
+Text resizing and page zoom are often treated as interchangeable, but they are fundamentally different mechanisms. While zoom is enough to meet accessibility requirements, text resizing is what truly respects user preferences.
+
+## The differences
+
+1. **Zoom scales the entire page**: layout, images, _and_ text. Which is not always what's desired. Text resizing, on the other hand, affects only (you guessed it) text, greatly improving readability while keeping whitespace at bay<FootnoteRef n="1"/>.
+2. **Zoom is applied at the page level**, while text resizing depends on user-defined settings such as the browser's default font-size. This means that users rightfully expect these preferences to work consistently across all websites, and if they don't, your site feels “broken”.
+3. **Zoom functionality is provided by the browser**, you just have to keep your website responsive. Text-resizing would be too, if only developers wouldn't inadvertently brake it using fixed units (such as `px`) for text-related properties.
+
+## What WCAG actually requires
+
+The <Link href="https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html">SC 1.4.4 Resize Text (Level AA)</Link> does not mandate a specific technique for scaling text. It states:
+
+> Content satisfies the success criterion if it can be scaled up to 200% using at least one text scaling mechanism supported by user agents.
+
+Zoom is therefore a perfectly valid way to satisfy this requirement.
+
+## Why go beyond zoom
+
+If zoom already ensures compliance, why care about text resizing as well?
+
+Because _meeting the standard is not the same as serving users well_. It's just a starting point.
+
+Text resizing respects user preferences at their source. It allows users to define how they read content across the web, rather than forcing them to adjust each page individually via zoom.
+
+## What you should do
+
+Forget using `px` for text-related properties, instead use:
+
+- `rem` or `em` for `font-size`<FootnoteRef n="2"/>
+- relative or unitless values for `line-height`
+- relative units for `letter-spacing`
+
+Also, be careful to avoid fixed-height containers for textual content, especially when using `overflow: hidden`, as it can cause text to be cut off when resized.
+
+With this in place, you're not just compliant, you're _actually_ supporting your users.
+
+Until next time, be (and code) well!
+
+<Footnotes>
+  <Footnote n="1">
+    Text resizing can affect layout if elements are sized using `rem` or `em`. However, layout should not depend on text
+    scaling. For non-text elements, it's generally better to use other units that preserve structural stability.
+  </Footnote>
+  <Footnote n="2">
+    The conversion is simple: `1rem` equals the root font size (typically `16px`). For example, `20px` becomes
+    `1.25rem`.
+  </Footnote>
+</Footnotes>
