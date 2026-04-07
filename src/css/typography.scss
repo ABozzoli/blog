@@ -94,6 +94,12 @@ blockquote {
   font-size: var(--fs-18px);
   font-style: italic;
   margin: 1rem 0 1rem 1rem;
+  text-indent: -0.7ch; /* Pull the first line back to create a hanging indent effect */
+
+  @supports (hanging-punctuation: first) {
+    text-indent: 0;
+    hanging-punctuation: first;
+  }
 
   p {
     &::before {
