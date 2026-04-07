@@ -1,25 +1,25 @@
 ---
-title: "Text resize is not the same as zoom"
+title: "Text-resize is not the same as zoom"
 publishDate: 2026-04-06
-updateDate: null
-description: Text resizing and page zoom are often treated as interchangeable, but they are fundamentally different mechanisms. While zoom is enough to meet accessibility requirements, text resizing is what truly respects user preferences."
+updateDate: 2026-04-07
+description: Text-resizing and page zoom are often treated as interchangeable, but they are fundamentally different mechanisms. While zoom is enough to meet accessibility requirements, text-resizing is what truly respects user preferences."
 categories: ["A11y", "WCAG"]
 ---
 
 import Link from "../../components/Link.astro";
 import { Footnote, FootnoteRef, Footnotes } from "../../components/Footnotes";
 
-Text resizing and page zoom are often treated as interchangeable, but they are fundamentally different mechanisms. While zoom is enough to meet accessibility requirements, text resizing is what truly respects user preferences.
+Text-resizing and page zoom are often treated as interchangeable, but they are fundamentally different mechanisms. While zoom is enough to meet accessibility requirements, text-resizing is what truly respects user preferences.
 
 ## The differences
 
-1. **Zoom scales the entire page**: layout, images, _and_ text. Which is not always what's desired. Text resizing, on the other hand, affects only (you guessed it) text, greatly improving readability while keeping whitespace at bay<FootnoteRef n="1"/>.
-2. **Zoom is applied at the page level**, while text resizing depends on user-defined settings such as the browser's default font-size. This means that users rightfully expect these preferences to work consistently across all websites, and if they don't, your site feels “broken”.
-3. **Zoom functionality is provided by the browser**, you just have to keep your website responsive. Text-resizing would be too, if only developers wouldn't inadvertently brake it using fixed units (such as `px`) for text-related properties.
+1. **Zoom scales the entire page**: layout, images, _and_ text. Which is not always what's desired. Text-resizing, on the other hand, affects only (you guessed it) text, greatly improving readability while keeping whitespace at bay<FootnoteRef n="1"/>.
+2. **Zoom is applied at the page level**, while text-resizing depends on user-defined settings such as the browser's default font-size. This means that users rightfully expect these preferences to work consistently across all websites, and if they don't, it's _your_ site that feels "broken".
+3. **Zoom functionality is provided by the browser**, you _just_ have to keep your website responsive<FootnoteRef n="2"/>. Text-resizing would be too, if only developers wouldn't inadvertently brake it using fixed units (such as `px`) for text-related properties.
 
 ## What WCAG actually requires
 
-The <Link href="https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html">SC 1.4.4 Resize Text (Level AA)</Link> does not mandate a specific technique for scaling text. It states:
+The <Link href="https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html">SC 1.4.4 Resize Text</Link> does not mandate a specific technique for scaling text, as it states:
 
 > Content satisfies the success criterion if it can be scaled up to 200% using at least one text scaling mechanism supported by user agents.
 
@@ -27,11 +27,11 @@ Zoom is therefore a perfectly valid way to satisfy this requirement.
 
 ## Why go beyond zoom
 
-If zoom already ensures compliance, why care about text resizing as well?
+If zoom already ensures compliance, why care about text-resizing as well?
 
 Because _meeting the standard is not the same as serving users well_. It's just a starting point.
 
-Text resizing respects user preferences at their source. It allows users to define how they read content across the web, rather than forcing them to adjust each page individually via zoom.
+Text-resizing respects user preferences at their source. It allows users to define how they read content across the web, rather than forcing them to adjust each page individually via zoom.
 
 Plus, the difference is wildly evident when you compare the two side-by-side. Just take a look:
 
@@ -39,22 +39,21 @@ Plus, the difference is wildly evident when you compare the two side-by-side. Ju
   <div class="grid-auto-fit">
     <img
       src="/blog/images/text-resize-is-not-the-same-as-zoom/text-resize-vs-zoom-comparison-normal.png"
-      alt="Wikipedia homepage in its normal state, with default text size and zoom level"
+      alt="Wikipedia homepage at default text-size and zoom"
     />
     <img
       src="/blog/images/text-resize-is-not-the-same-as-zoom/text-resize-vs-zoom-comparison-text-resize.png"
-      alt="Wikipedia homepage with text resized to 150%, showing larger text while maintaining the overall layout, images and whitespace staying the same"
+      alt="Wikipedia homepage with text resized to 150%: layout remains unchanged"
     />
     <img
       src="/blog/images/text-resize-is-not-the-same-as-zoom/text-resize-vs-zoom-comparison-zoom.png"
-      alt="Wikipedia homepage zoomed to 150%, showing everything scaled up, including images and whitespace, and even triggering the mobile media query"
+      alt="Wikipedia homepage zoomed to 150%: everything is scaled up and mobile layout is triggered"
     />
   </div>
   <figcaption class="striped-background">
-    Side-by-side comparison of the Wikipedia homepage with normal text size, with text resized, and with page zoomed to
-    150%. The text-resized version shows larger text while maintaining the overall layout, with images and whitespace
-    staying the same, while the zoomed version shows everything scaled up, including images and whitespace, and even
-    triggering the mobile media query.
+    Comparison of the Wikipedia homepage in three states: default, text resized to 150%, and zoomed to 150%.
+    Text-resizing increases font-size while preserving layout and spacing, whereas zoom scales all elements (including
+    images and whitespace) and it's shown to trigger the mobile layout.
   </figcaption>
 </figure>
 
@@ -62,7 +61,7 @@ Plus, the difference is wildly evident when you compare the two side-by-side. Ju
 
 Forget using `px` for text-related properties, instead use:
 
-- `rem` or `em` for `font-size`<FootnoteRef n="2"/>;
+- `rem` or `em` for `font-size`<FootnoteRef n="3"/>;
 - relative or unitless values for `line-height`;
 - relative units for `letter-spacing`.
 
@@ -74,11 +73,16 @@ Until next time, be (and code) well!
 
 <Footnotes>
   <Footnote n="1">
-    For this reason, `rem` and `em` should be reserved for text-related properties: if everything scales with font size,
-    text resizing end up having the same effect as zoom, defeating its purpose.
+    For this reason, `rem` and `em` should be reserved for text-related properties: if everything scales with font-size,
+    text-resizing end up having the same effect as zoom, defeating its purpose. One exception would be _images of text_
+    (not mandatory for <Link href="https://www.w3.org/TR/WCAG22/#resize-text">SC 1.4.4 Resize Text</Link> anyway)
   </Footnote>
   <Footnote n="2">
-    The conversion is simple: `1rem` equals the root font size (typically `16px`). For example, `20px` becomes
-    `1.25rem`.
+    Easier said than done, I know. Additionally: be aware of sticky elements at 400% zoom. They can easily overwhelm
+    your viewport if not managed properly. Most of the time un-sticking them is a good solution.
+  </Footnote>
+  <Footnote n="3">
+    The conversion from `px` is simple: `1rem` equals the root font-size (the one set on the `<html>`, usually `16px`).
+    To convert pixels to `rem`, just divide the pixel value by the root font size (e.g. `20px` becomes `1.25rem`).
   </Footnote>
 </Footnotes>
