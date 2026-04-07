@@ -29,6 +29,11 @@ const currentPath = Astro.url.pathname;
         background-color 0.3s ease,
         color 0.3s ease;
 
+      @supports not (container-type: scroll-state) {
+        background-color: var(--foreground);
+        color: var(--background);
+      }
+
       @container scroll-state(stuck: bottom) {
         background-color: var(--foreground);
         color: var(--background);
