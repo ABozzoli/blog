@@ -77,6 +77,28 @@ svg {
   flex-shrink: 0; /* Prevent the icon from shrinking when placed inside a flex container */
 }
 
+figure {
+  border: 1px solid var(--foreground);
+
+  .grid-auto-fit {
+    --min-size: 200px;
+
+    gap: 1px; /* To avoid outlines doubling up */
+    justify-items: stretch; /* Fix a visual bug where there's a space on the right side of the last image */
+    background-color: var(--background-muted);
+
+    img {
+      outline: 1px solid var(--foreground);
+    }
+  }
+
+  figcaption {
+    font-size: var(--fs-14px);
+    text-align: center;
+    padding: 16px;
+  }
+}
+
 dialog {
   padding: 0;
   margin: auto;

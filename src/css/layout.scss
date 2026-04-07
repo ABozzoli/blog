@@ -33,10 +33,9 @@ html {
 }
 
 /* Ref: https://youtu.be/bj0Z_GncIwY */
-.grid-auto-fill {
+.grid-auto-fit {
   --min-size: 120px;
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(var(--min-size), 100%), 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--min-size), 100%), 1fr));
 }

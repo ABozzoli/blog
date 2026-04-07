@@ -99,7 +99,8 @@ aside.callout {
     color: var(--foreground);
     background-image: var(--striped-background);
 
-    .preserve-background {
+    .preserve-background,
+    > p {
       background-color: var(--background);
       box-shadow: 0 0 0 6px var(--background); /* Don't use outline, it breaks focus styles */
     }
