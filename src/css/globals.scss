@@ -105,9 +105,8 @@ dialog {
   border: none;
   max-height: none;
 
-  @media screen and (forced-colors: none) {
+  @media screen and (forced-colors: active) {
     outline: 1px solid var(--foreground);
-    outline-offset: -1px;
   }
 }
 
