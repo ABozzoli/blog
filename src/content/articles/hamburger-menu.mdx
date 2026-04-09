@@ -2,14 +2,14 @@
 title: "Hamburger Menu"
 publishDate: 2025-12-27
 updateDate: null
-description: "The Hamburger Menu is a common mobile navigation pattern, but its implementation can be tricky. This post walks through a minimal, mostly native approach based on the 'dialog' element."
+description: "The Hamburger Menu is a common mobile navigation pattern, but its implementation can be quite tricky. This post walks through a minimal, mostly native approach based on the 'dialog' element."
 categories: ["A11y", "Components"]
 ---
 
 import Link from "../../components/Link.astro";
 import { Footnote, FootnoteRef, Footnotes } from "../../components/Footnotes";
 
-The Hamburger Menu is a common mobile navigation pattern, but its implementation can be tricky.
+The Hamburger Menu is a common mobile navigation pattern, but its implementation can be quite tricky.
 This post walks through a minimal, mostly native approach based on the `<dialog>` element.
 
 ## The open button
@@ -61,13 +61,13 @@ Then comes the actual content of the `<dialog>`, which would be an exact copy of
 </dialog>
 ```
 
-With the structure in place, only one thing is missing.
+With the structure in place, most of the work is done.
 
 ### Opening the dialog
 
 In the near future, we will be able to open the dialog without a single line of JavaScript thanks to
 the <Link href="https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API">Invoker Commands API</Link>,
-which has just entered baseline<FootnoteRef n="6" />. For now, let us sprinkle in a bit of JavaScript:
+which has just entered baseline<FootnoteRef n="6"/>. For now, let us sprinkle in a bit of JavaScript:
 
 ```js
 const menuToggle = document.getElementById("menu-toggle");
@@ -76,11 +76,11 @@ const menuDialog = document.getElementById("menu-dialog");
 menuToggle?.addEventListener("click", () => menuDialog?.showModal());
 ```
 
-Well, it ain't that bad.
+Well that's minimal indeed!
 
 ### Styling it
 
-Time to style it as a sidebar while blurring the content of the page beneath it:
+Now it's time to style it as a sidebar while blurring the content of the page beneath it:
 
 ```css
 .menu-dialog {
@@ -141,8 +141,8 @@ But what about the animation? Here you go:
 ```
 
 I know I know, there is a bunch of weird stuff in there, but suffice you to know that the `allow-discrete` plus `@starting-style` combo
-is what's needed to enable transitions on properties that do not really have intermediate states,
-and even if Firefox support is still lacking, this is another case of _progressive enhancement_, so no problem.
+is what's needed to enable transitions on properties that don't really have intermediate states (like `display`),
+and even if Firefox support is still lacking (at the time of writing), this is a textbook case of _progressive enhancement_, so no problem.
 
 ## The final structure
 

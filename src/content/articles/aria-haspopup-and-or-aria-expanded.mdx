@@ -7,6 +7,7 @@ categories: ["A11y", "ARIA"]
 ---
 
 import Link from "../../components/Link.astro";
+import { Footnote, FootnoteRef, Footnotes } from "../../components/Footnotes";
 
 When to use `aria-haspopup` and when to use `aria-expanded`? When to use one and when to use both? Let's find out!
 
@@ -25,7 +26,7 @@ To understand what these are, let's take a look at the available values for `ari
 - `dialog`
 - `true`
 
-As you can note, all these map to specific roles, because it is required that they <Link href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-haspopup#:~:text=the%20value%20of%20aria%2Dhaspopup%20matches%20the%20role%20of%20the%20popup%20container.">match the triggered element</Link>, with the only exception of the `true` value.
+As you can note, all these map to specific roles<FootnoteRef n="1"/>, with the only exception of the `true` value.
 
 One would expect it to be some sort of wildcard, but the `true` value unexpectedly falls back to the `menu` value for <Link href="https://www.w3.org/WAI/ARIA/wiki/ARIA_1.1_Changes#New_or_changed_user_agent_normative_statements">backward compatibility reasons</Link>, which is quite misleading. In practice, it's better to avoid it and opt for the explicit values instead.
 
@@ -53,4 +54,14 @@ Interactivity is what qualifies all the roles supported by `aria-haspopup`.
 - Use only `aria-haspopup` for dialogs;
 - Use only `aria-expanded` for popups without a matching role (e.g. generic popups or tooltips).
 
-I hope this was helpful~ until next time, be (and code) well!
+I hope this was helpful. Until next time, be (and code) well!
+
+<Footnotes>
+  <Footnote n="1">
+    Because it is required that they{" "}
+    <Link href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-haspopup#:~:text=the%20value%20of%20aria%2Dhaspopup%20matches%20the%20role%20of%20the%20popup%20container.">
+      match the triggered element
+    </Link>
+    .
+  </Footnote>
+</Footnotes>

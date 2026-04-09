@@ -28,18 +28,18 @@ So instead, the solution I found was faking the connection by adding the footnot
 <p>*I'm the definition of the element.</p>
 ```
 
-This approach will force the user to read the footnote right away and also requires content duplication, which I'm not fond of, but that's what we can do given the limitations imposed by design constraints.
+This approach will force the user to read the footnote right away and also requires content duplication, which I'm not fond of, but that's what we can do given the limitations imposed by the design.
 
 To enhance it, I would add `aria-hidden="true"` to the footnote itself so the screen reader doesn't read it twice, and to ensure the footnote is read separately from the main content, enclose it in parentheses (so screen readers add a small pause before and after it).
 
 The `::before` and `::after` pseudo-elements are perfect for the job:
 
 ```css
-.footnote::before {
+.asterisk-footnote::before {
   content: "(";
 }
 
-.footnote::after {
+.asterisk-footnote::after {
   content: ")";
 }
 ```
@@ -49,8 +49,8 @@ Here's the final result:
 ```html
 <p>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis orci magna<span aria-hidden="true">*</span
-  ><span class="visually-hidden footnote">I'm the definition of the element</span>. Maecenas fermentum euismod eros, ut
-  commodo nulla dictum sed.
+  ><span class="visually-hidden asterisk-footnote">I'm the definition of the element</span>. Maecenas fermentum euismod
+  eros, ut commodo nulla dictum sed.
 </p>
 
 <p aria-hidden="true">*I'm the definition of the element.</p>

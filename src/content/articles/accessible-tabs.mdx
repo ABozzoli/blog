@@ -22,7 +22,7 @@ What we are trying to achieve is similar to how a _named group_ of native radio-
 
 You press <kbd>Tab ↹</kbd> to reach the group, then use the arrow keys (<kbd>↑</kbd>, <kbd>↓</kbd>, <kbd>→</kbd>, <kbd>←</kbd>) to move between options. If you press <kbd>Tab ↹</kbd> again, focus moves outside the group to the next focusable element.
 
-In short: the group behaves as a single <kbd>Tab ↹</kbd> stop because it represents a single control.
+In short: the group behaves as a single tab-stop because it represents a single control.
 
 Tabs follow the same principle. You <kbd>Tab ↹</kbd> into them, navigate with the arrow keys (limited to <kbd>→</kbd> and <kbd>←</kbd> this time), then <kbd>Tab ↹</kbd> again to leave.
 
@@ -198,7 +198,7 @@ buttons.forEach((button) => {
 });
 ```
 
-Finally, we need to add this line to the click handler to ensure the focus index always starts from the last clicked tab (if there was one):
+Finally, we need to add this one line to the click handler, to ensure the focus index always starts from the last clicked tab (if there was one):
 
 ```js
 focusIndex = Array.from(buttons).indexOf(clickedButton);

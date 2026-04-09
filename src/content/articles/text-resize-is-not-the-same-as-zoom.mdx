@@ -19,7 +19,7 @@ Text-resizing and page zoom are often treated as interchangeable, but they are f
 
 ## What WCAG actually requires
 
-The <Link href="https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html">SC 1.4.4 Resize Text</Link> does not mandate a specific technique for scaling text, as it states:
+The <Link href="https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html">SC 1.4.4 Resize Text</Link> _does not_ mandate a specific technique for scaling text, as it states:
 
 > Content satisfies the success criterion if it can be scaled up to 200% using at least one text scaling mechanism supported by user agents.
 
@@ -75,11 +75,11 @@ Until next time, be (and code) well!
   <Footnote n="1">
     For this reason, `rem` and `em` should be reserved for text-related properties: if everything scales with font-size,
     text-resizing end up having the same effect as zoom, defeating its purpose. One exception would be _images of text_
-    (not mandatory for <Link href="https://www.w3.org/TR/WCAG22/#resize-text">SC 1.4.4 Resize Text</Link> anyway)
+    (not mandatory for <Link href="https://www.w3.org/TR/WCAG22/#resize-text">SC 1.4.4 Resize Text</Link> anyway).
   </Footnote>
   <Footnote n="2">
-    Easier said than done, I know. Additionally: be aware of sticky elements at 400% zoom. They can easily overwhelm
-    your viewport if not managed properly. Most of the time un-sticking them is a good solution.
+    Easier said than done, I know. Additionally, you have to be aware of sticky elements: at high zoom-value they can easily
+    cover much of the viewport, in which case un-sticking them is a good solution (most of the time).
   </Footnote>
   <Footnote n="3">
     The conversion from `px` is simple: `1rem` equals the root font-size (the one set on the `<html>`, usually `16px`).
