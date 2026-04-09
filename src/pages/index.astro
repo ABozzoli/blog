@@ -23,10 +23,14 @@ const title = "Home";
     </p>
   </section>
 
-  <h2 id="latest-articles-title">Latest articles</h2>
-  <ul class="card-stack" role="list" aria-labelledby="latest-articles-title">
-    {articles.map((article, index) => <ArticleCard {article} {index} hLevel="h3" />)}
-  </ul>
+  <section aria-labelledby="latest-articles-title">
+    <h2 id="latest-articles-title">Latest articles</h2>
+    <ul class="card-stack" role="list">
+      {articles.map((article, index) => <ArticleCard {article} {index} hLevel="h3" />)}
+    </ul>
+
+    <a href="articles" class="button">View all articles</a>
+  </section>
 </MainLayout>
 
 <style lang="scss">
@@ -48,5 +52,11 @@ const title = "Home";
     > p {
       font-size: var(--fs-20px);
     }
+  }
+
+  [href="articles"] {
+    max-width: fit-content;
+    margin-inline: auto;
+    margin-top: 24px;
   }
 </style>
