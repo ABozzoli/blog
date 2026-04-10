@@ -3,7 +3,7 @@ import { fetchArticles } from "../js/utils";
 
 const { categories, title } = Astro.props;
 
-const articles = await fetchArticles({ categories, excludeTitle: title, limit: 3 });
+const articles = await fetchArticles({ categories, sameCategories: true, titleToExclude: title, limit: 3 });
 ---
 
 {

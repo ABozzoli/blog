@@ -107,36 +107,76 @@ export function sortByDate(articles: CollectionEntry<"articles">[]): CollectionE
   );
 }
 
-function hasExactCategories(
-  articleCategories: CollectionEntry<"articles">["data"]["categories"],
-  requestedCategories: CollectionEntry<"articles">["data"]["categories"],
+/**
+ * Returns `true` when both category lists contain the exact same values,
+ * regardless of order.
+ *
+ * This is used by `fetchArticles()` when callers need an exact category set
+ * match instead of the default "matches any requested category" behavior.
+ *
+ * A sorted comparison keeps the logic explicit and avoids false positives when
+ * duplicate category values are present.
+ *
+ * @param {CollectionEntry<"articles">["data"]["categories"]} categoriesSetA - First category list.
+ * @param {CollectionEntry<"articles">["data"]["categories"]} categoriesSetB - Second category list.
+ * @returns {boolean} `true` when both lists contain the same category values.
+ */
+function hasSameCategories(
+  categoriesSetA: CollectionEntry<"articles">["data"]["categories"],
+  categoriesSetB: CollectionEntry<"articles">["data"]["categories"],
 ): boolean {
-  return (
-    articleCategories.length === requestedCategories.length &&
-    requestedCategories.every((category) => articleCategories.includes(category))
-  );
+  if (categoriesSetA.length !== categoriesSetB.length) return false;
+
+  const sortedCategoriesSetA = [...categoriesSetA].sort();
+  const sortedCategoriesSetB = [...categoriesSetB].sort();
+
+  return sortedCategoriesSetA.every((category, index) => category === sortedCategoriesSetB[index]);
 }
 
-/** Options: filter by categories, exclude title, limit results, only published by default. */
 export type FetchArticlesOptions = {
   categories?: CollectionEntry<"articles">["data"]["categories"];
-  excludeTitle?: string;
+  sameCategories?: boolean;
+  titleToExclude?: string;
   limit?: number;
 };
 
-/** Fetch articles with basic filters and newest-first sorting. */
+/**
+ * Fetches articles from the Astro content collection using optional filters.
+ *
+ * Behavior summary:
+ * - Excludes unpublished articles outside development.
+ * - Filters by category overlap when `categories` is provided.
+ * - Filters by exact category set when `sameCategories` is `true`.
+ * - Excludes one article by exact title when `titleToExclude` is provided.
+ * - Sorts results from newest to oldest.
+ * - Applies `limit` after sorting.
+ *
+ * Example:
+ * ```ts
+ * const relatedArticles = await fetchArticles({
+ *   categories: ["accessibility", "astro"],
+ *   sameCategories: true,
+ *   titleToExclude: "Accessible Tabs",
+ *   limit: 3,
+ * });
+ * ```
+ *
+ * @param {FetchArticlesOptions} options - Optional article filters.
+ * @returns {Promise<CollectionEntry<"articles">[]>} A filtered, date-sorted list of articles.
+ */
 export async function fetchArticles(options: FetchArticlesOptions = {}): Promise<CollectionEntry<"articles">[]> {
-  const { categories, excludeTitle, limit } = options;
+  const { categories, sameCategories, titleToExclude, limit } = options;
 
   const entries = await getCollection("articles", ({ data }) => {
     if (!import.meta.env.DEV && !data.publishDate) return false;
-    if (categories?.length && !hasExactCategories(data.categories, categories)) return false;
-    if (excludeTitle && data.title === excludeTitle) return false;
+    if (sameCategories && categories?.length && !hasSameCategories(data.categories, categories)) return false;
+    if (categories?.length && !categories.some((category) => data.categories.includes(category))) return false;
+    if (titleToExclude && data.title === titleToExclude) return false;
     return true;
   });
 
   let result = sortByDate(entries);
-  if (limit && limit >= 0) result = result.slice(0, limit);
+  if (typeof limit === "number" && limit >= 0) result = result.slice(0, limit);
   return result;
 }
 
