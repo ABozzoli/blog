@@ -13,7 +13,7 @@ html {
   }
 
   @view-transition {
-    navigation: auto;
+    /* navigation: auto; Disable view transition for navigation to prevent a visual bug where the new page flashes before the transition starts */
   }
 }
 
