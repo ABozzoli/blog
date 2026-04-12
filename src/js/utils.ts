@@ -111,8 +111,8 @@ export function sortByDate(articles: CollectionEntry<"articles">[]): CollectionE
  * Returns `true` when both category lists contain the exact same values,
  * regardless of order.
  *
- * This is used by `fetchArticles()` when callers need an exact category set
- * match instead of the default "matches any requested category" behavior.
+ * This is used by `fetchArticles()` when callers want exact category-set
+ * matches to be prioritized ahead of partial matches.
  *
  * A sorted comparison keeps the logic explicit and avoids false positives when
  * duplicate category values are present.
@@ -133,9 +133,32 @@ function hasSameCategories(
   return sortedCategoriesSetA.every((category, index) => category === sortedCategoriesSetB[index]);
 }
 
+/**
+ * Orders articles so exact category matches come first while preserving the
+ * existing order within each group.
+ *
+ * @param {CollectionEntry<"articles">[]} articles - The articles to reorder.
+ * @param {CollectionEntry<"articles">["data"]["categories"]} categories - The requested categories.
+ * @returns {CollectionEntry<"articles">[]} Articles with exact category matches first.
+ */
+function prioritizeSameCategories(
+  articles: CollectionEntry<"articles">[],
+  categories: CollectionEntry<"articles">["data"]["categories"],
+): CollectionEntry<"articles">[] {
+  const exactMatches: CollectionEntry<"articles">[] = [];
+  const otherMatches: CollectionEntry<"articles">[] = [];
+
+  for (const article of articles) {
+    if (hasSameCategories(article.data.categories, categories)) {
+      exactMatches.push(article);
+    } else otherMatches.push(article);
+  }
+
+  return [...exactMatches, ...otherMatches];
+}
+
 export type FetchArticlesOptions = {
   categories?: CollectionEntry<"articles">["data"]["categories"];
-  sameCategories?: boolean;
   titleToExclude?: string;
   limit?: number;
 };
@@ -146,7 +169,7 @@ export type FetchArticlesOptions = {
  * Behavior summary:
  * - Excludes unpublished articles outside development.
  * - Filters by category overlap when `categories` is provided.
- * - Filters by exact category set when `sameCategories` is `true`.
+ * - Prioritizes exact category set matches when `categories` is provided.
  * - Excludes one article by exact title when `titleToExclude` is provided.
  * - Sorts results from newest to oldest.
  * - Applies `limit` after sorting.
@@ -155,7 +178,6 @@ export type FetchArticlesOptions = {
  * ```ts
  * const relatedArticles = await fetchArticles({
  *   categories: ["accessibility", "astro"],
- *   sameCategories: true,
  *   titleToExclude: "Accessible Tabs",
  *   limit: 3,
  * });
@@ -165,19 +187,19 @@ export type FetchArticlesOptions = {
  * @returns {Promise<CollectionEntry<"articles">[]>} A filtered, date-sorted list of articles.
  */
 export async function fetchArticles(options: FetchArticlesOptions = {}): Promise<CollectionEntry<"articles">[]> {
-  const { categories, sameCategories, titleToExclude, limit } = options;
+  const { categories, titleToExclude, limit } = options;
 
-  const entries = await getCollection("articles", ({ data }) => {
-    if (!import.meta.env.DEV && !data.publishDate) return false;
-    if (sameCategories && categories?.length && !hasSameCategories(data.categories, categories)) return false;
-    if (categories?.length && !categories.some((category) => data.categories.includes(category))) return false;
+  const articles = await getCollection("articles", ({ data }) => {
     if (titleToExclude && data.title === titleToExclude) return false;
+    if (!import.meta.env.DEV && !data.publishDate) return false;
+    if (categories?.length && !categories.some((category) => data.categories.includes(category))) return false;
     return true;
   });
 
-  let result = sortByDate(entries);
-  if (typeof limit === "number" && limit >= 0) result = result.slice(0, limit);
-  return result;
+  let filteredArticles = sortByDate(articles);
+  if (categories?.length) filteredArticles = prioritizeSameCategories(filteredArticles, categories);
+  if (typeof limit === "number" && limit >= 0) filteredArticles = filteredArticles.slice(0, limit);
+  return filteredArticles;
 }
 
 /**
