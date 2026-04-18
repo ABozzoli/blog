@@ -10,8 +10,7 @@ import Link from "../../components/Link.astro";
 import { Footnote, FootnoteRef, Footnotes } from "../../components/Footnotes";
 
 <a href="articles/skip-links">Skipping to the main content</a> is important, but what if you want to go back to the top
-of a long page? Here comes our next (accessible) essential blog component: the
-Back-to-top.
+of a long page? Here comes our next (accessible) essential blog component: the Back-to-top.
 
 ## What is the Back-to-top?
 
@@ -43,8 +42,7 @@ Well, it's time to dust off our old friend, the (informal) `href` placeholder: t
 Because yes, while mostly misused as a placeholder for non-functional links (_psst_, `javascript:void(0)` is what you're looking for),
 the hash alone actually has a defined behavior in the browser: it takes you to the top of the page!<FootnoteRef n="2"/>
 
-But - you guessed it - it still doesn't move the focus.
-So, what's the solution?
+But, quite unfortunately, it still doesn't move the focus... so, what's the solution?
 
 Just as we did for the <a href="articles/skip-links#how-to-build-them">Skip-links</a>, we have to target the `<main>` element:
 
@@ -105,7 +103,7 @@ The result should be something along these lines:
 </div>
 ```
 
-That's it. The Back-to-top is a deceptively simple feature - it has _literally_ one purpose(!) - but still,
+That's it. The Back-to-top is a deceptively simple feature (it has _literally_ one purpose!) but still,
 it's easy to miss the accessibility part by just scrolling the page visually.
 
 Until next time, be (and code) well!
