@@ -1,90 +1,91 @@
 ---
-const { page } = Astro.props;
-const length = page.lastPage;
-const pageNumbers = Array.from({ length }, (_, i) => i + 1);
-const currentUrl = Astro.url.pathname;
-const root = currentUrl.replace(/\/\d$/, "");
+import { isCurrentPage } from "../js/utils";
 
-const ellipsedPageNumbers = (range = 0) => {
+const { page } = Astro.props;
+const pageCount = page.lastPage;
+const pageNumbers = Array.from({ length: pageCount }, (_, i) => i + 1);
+const currentPath = Astro.url.pathname;
+const basePath = currentPath.replace(/\/\d$/, "");
+
+const getVisiblePageNumbers = (windowSize = 0) => {
   /* Check to prevent cutting off pages if not needed */
-  if (1 + range * 2 >= pageNumbers.length) {
-    return { hiddenBefore: [], shownPages: pageNumbers, hiddenAfter: [] };
+  if (1 + windowSize * 2 >= pageNumbers.length) {
+    return { skippedBefore: [], visiblePages: pageNumbers, skippedAfter: [] };
   }
 
   const index = pageNumbers.indexOf(page.currentPage);
-  const start = Math.max(0, index - range);
-  const end = index + range + 1;
+  const start = Math.max(0, index - windowSize);
+  const end = index + windowSize + 1;
 
-  const hiddenBefore = pageNumbers.slice(0, start);
-  const shownPages = pageNumbers.slice(start, end);
-  const hiddenAfter = pageNumbers.slice(end);
+  const skippedBefore = pageNumbers.slice(0, start);
+  const visiblePages = pageNumbers.slice(start, end);
+  const skippedAfter = pageNumbers.slice(end);
 
-  return { hiddenBefore, shownPages, hiddenAfter };
+  return { skippedBefore, visiblePages, skippedAfter };
 };
 
-const getSkipText = (pages: number[]) => {
+const getSkippedPagesText = (pages: number[]) => {
   if (pages.length === 1) return `Skipping page ${pages[0]}`;
   if (pages.length === 2) return `Skipping pages ${pages[0]} and ${pages[1]}`;
   return `Skipping pages from ${pages[0]} to ${pages[pages.length - 1]}`;
 };
 
-const { hiddenBefore, shownPages, hiddenAfter } = ellipsedPageNumbers(1);
+const { skippedBefore, visiblePages, skippedAfter } = getVisiblePageNumbers(2);
 
 /* Ref: https://www.htmhell.dev/adventcalendar/2024/14/ */
-/* TODO: review following this https://afixt.com/a-quick-primer-on-accessible-pagination/ */
 ---
 
 <nav aria-label="Pagination" inert={!(page.lastPage > 1)}>
   <ul class="pagination" role="list">
     <li class="arrow">
-      <a role="link" href={page.url.first} aria-disabled={!page.url.first ? "true" : "false"} title="First page">
+      <a role="link" href={page.url.first} aria-disabled={!page.url.first} title="First page">
         <span class="visually-hidden">First page</span>
         <span aria-hidden="true">❮❮</span>
       </a>
     </li>
     <li class="arrow">
-      <a role="link" href={page.url.prev} aria-disabled={!page.url.prev ? "true" : "false"} title="Previous page">
+      <a role="link" href={page.url.prev} aria-disabled={!page.url.prev} title="Previous page">
         <span class="visually-hidden">Previous page</span>
         <span aria-hidden="true">❮</span>
       </a>
     </li>
     {
-      hiddenBefore.length > 0 && (
+      skippedBefore.length > 0 && (
         <li>
           <div class="ellipses">
-            <span class="visually-hidden">{getSkipText(hiddenBefore)}</span>
+            <span class="visually-hidden">{getSkippedPagesText(skippedBefore)}</span>
             <span aria-hidden="true">⋯</span>
           </div>
         </li>
       )
     }
     {
-      shownPages.map((pageNumber) => (
+      visiblePages.map((pageNumber) => (
         <li>
-          <a href=`${root}/${pageNumber}` aria-current={`${root}/${pageNumber}` === currentUrl ? "page" : undefined}>
+          <a href=`${basePath}/${pageNumber}` aria-current={isCurrentPage(currentPath, `articles/${pageNumber}`)}>
             {pageNumber}
           </a>
         </li>
       ))
     }
     {
-      hiddenAfter.length > 0 && (
+      skippedAfter.length > 0 && (
         <li>
           <div class="ellipses">
-            <span class="visually-hidden">{getSkipText(hiddenAfter)}</span>
+            <span class="visually-hidden">{getSkippedPagesText(skippedAfter)}</span>
             <span aria-hidden="true">⋯</span>
           </div>
         </li>
       )
     }
     <li class="arrow">
-      <a role="link" href={page.url.next} aria-disabled={!page.url.next ? "true" : "false"} title="Next page">
+      <a role="link" href={page.url.next} aria-disabled={!page.url.next} title="Next page">
         <span class="visually-hidden">Next page</span>
         <span aria-hidden="true">❯</span>
       </a>
     </li>
     <li class="arrow">
-      <a role="link" href={page.url.last} aria-disabled={!page.url.last ? "true" : "false"} title="Last page">
+      <a role="link" href={page.url.last} aria-disabled={!page.url.last} title="Last page">
         <span class="visually-hidden">Last page</span>
         <span aria-hidden="true">❯❯</span>
       </a>
