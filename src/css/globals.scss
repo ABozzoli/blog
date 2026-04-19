@@ -20,7 +20,7 @@ html {
 a {
   text-decoration-line: none;
 
-  &[href]:not(:where(#header) *):is(:hover, :active) {
+  &[href]:not(:where(#header, .pagination) *):is(:hover, :active) {
     text-decoration-line: underline;
   }
 }

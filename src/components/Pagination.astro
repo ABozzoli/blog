@@ -100,25 +100,25 @@ const { skippedBefore, visiblePages, skippedAfter } = getVisiblePageNumbers(2);
     gap: 8px;
     margin-block: 32px;
 
-    a,
-    .ellipses {
-      display: inline-block;
-      width: 44px;
-      aspect-ratio: 1;
-      flex-shrink: 0;
-      display: grid;
-      place-items: center;
-
-      &[aria-current="page"] {
-        background-color: var(--foreground);
-        color: var(--background);
-        font-weight: 600;
+    li {
+      > * {
+        display: inline-block;
+        width: 44px;
+        aspect-ratio: 1;
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
       }
 
-      &:not([aria-disabled="true"]):hover {
-        background-color: var(--foreground);
-        color: var(--background);
-        text-decoration-line: none;
+      a {
+        &[aria-current="page"] {
+          text-decoration-line: underline;
+        }
+
+        &:not([aria-disabled="true"]):hover {
+          background-color: var(--foreground);
+          color: var(--background);
+        }
       }
     }
 
