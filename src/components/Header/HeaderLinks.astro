@@ -1,5 +1,5 @@
 ---
-import { isCurrentPage } from "../../js/utils";
+import { isCurrentPage, isCurrentSubpage } from "../../js/utils";
 
 export const routes = [
   { href: "", title: "Home" },
@@ -14,7 +14,7 @@ const currentPath = Astro.url.pathname;
   {
     routes.map(({ href, title }) => (
       <li>
-        <a class="nav-link" href={href} aria-current={isCurrentPage(currentPath, href)}>
+        <a class=`nav-link ${isCurrentSubpage(currentPath, href)}` href={href} aria-current={isCurrentPage(currentPath, href)}>
           {title}
         </a>
       </li>
@@ -27,7 +27,8 @@ const currentPath = Astro.url.pathname;
     display: flex;
     align-items: center;
 
-    [aria-current="page"] {
+    [aria-current="page"],
+    .is-current-subpage {
       text-decoration-line: underline;
     }
   }

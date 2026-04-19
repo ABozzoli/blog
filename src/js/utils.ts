@@ -232,5 +232,25 @@ export function resolveHref(href: string): string {
  * @returns {"page" | undefined} Returns `"page"` if it's the current page, otherwise `undefined`.
  */
 export function isCurrentPage(currentPath: string, href: string): "page" | undefined {
-  return currentPath.replace(/\/$/, "") === resolveHref(href).replace(/\/$/, "") ? "page" : undefined;
+  const normalizedCurrentPath = currentPath.replace(/\/$/, "");
+  const normalizedHref = resolveHref(href).replace(/\/$/, "");
+  return normalizedCurrentPath === normalizedHref ? "page" : undefined;
+}
+
+/**
+ * Checks whether the provided `href` matches a numbered subpage.
+ *
+ * Example:
+ * ```ts
+ * isCurrentSubpage("/blog/articles/2", "articles") // "is-current-subpage"
+ * ```
+ *
+ * @param {string} currentPath - The current page path.
+ * @param {string} href - The href to compare.
+ * @returns {"is-current-subpage" | ""} Returns `"is-current-subpage"` for numbered subpages, otherwise an empty string.
+ */
+export function isCurrentSubpage(currentPath: string, href: string): "is-current-subpage" | "" {
+  const normalizedCurrentPath = currentPath.replace(/\/$/, "");
+  const normalizedHref = resolveHref(href).replace(/\/$/, "");
+  return new RegExp(`^${normalizedHref}/\\d+$`).test(normalizedCurrentPath) ? "is-current-subpage" : "";
 }
