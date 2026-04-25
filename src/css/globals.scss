@@ -189,7 +189,7 @@ input[type="radio"] {
   print-color-adjust: exact; /* Prevent the browser from erasing the background in print mode */
 
   &:hover {
-    background-color: var(--background-muted);
+    background-color: var(--background-hover);
   }
 
   &:disabled {
