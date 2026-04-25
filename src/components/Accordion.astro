@@ -38,11 +38,11 @@ const { title, ...props } = Astro.props;
   }
 
   details summary:hover {
-    text-decoration-line: underline;
+    background-color: var(--background-hover);
   }
 
   details[open] summary {
-    background-color: var(--background-muted);
+    text-decoration-line: underline;
   }
 
   details summary svg {
