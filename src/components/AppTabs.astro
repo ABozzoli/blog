@@ -23,10 +23,10 @@ const { tabs } = Astro.props;
         <li role="presentation">
           <button
             type="button"
-            id={`tab-${slugify(label)}-id`}
+            id={`tab-${slugify(label)}`}
             class="button secondary"
             role="tab"
-            aria-controls={`tabpanel-${slugify(label)}-id`}
+            aria-controls={`tabpanel-${slugify(label)}`}
             aria-selected={index === 0 ? "true" : "false"}
             tabindex={index === 0 ? "0" : "-1"}
           >
@@ -39,9 +39,9 @@ const { tabs } = Astro.props;
   {
     tabs.map(({ label, content }, index) => (
       <section
-        id={`tabpanel-${slugify(label)}-id`}
+        id={`tabpanel-${slugify(label)}`}
         role="tabpanel"
-        aria-labelledby={`tab-${slugify(label)}-id`}
+        aria-labelledby={`tab-${slugify(label)}`}
         hidden={index === 0 ? false : true}
         tabindex="0"
       >
