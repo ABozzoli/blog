@@ -27,7 +27,7 @@ const { tabs } = Astro.props;
             class="button secondary"
             role="tab"
             aria-controls={`tabpanel-${slugify(label)}`}
-            aria-selected={index === 0 ? "true" : "false"}
+            aria-selected={index === 0}
             tabindex={index === 0 ? "0" : "-1"}
           >
             {label}
@@ -42,7 +42,7 @@ const { tabs } = Astro.props;
         id={`tabpanel-${slugify(label)}`}
         role="tabpanel"
         aria-labelledby={`tab-${slugify(label)}`}
-        hidden={index === 0 ? false : true}
+        hidden={index !== 0}
         tabindex="0"
       >
         {content}
