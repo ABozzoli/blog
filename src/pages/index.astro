@@ -2,6 +2,7 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import ArticleCard from "../components/ArticleCard.astro";
 import { fetchArticles } from "../js/utils";
+import Section from "../components/Section.astro";
 
 const articles = await fetchArticles({ limit: 3 });
 
@@ -23,14 +24,13 @@ const title = "Home";
     </p>
   </section>
 
-  <section aria-labelledby="latest-articles-title">
-    <h2 id="latest-articles-title">Latest articles</h2>
+  <Section title="Latest articles">
     <ul class="card-stack" role="list">
       {articles.map((article, index) => <ArticleCard {article} {index} hLevel="h3" />)}
     </ul>
 
     <a href="articles" class="button">View all articles</a>
-  </section>
+  </Section>
 </MainLayout>
 
 <style lang="scss">
