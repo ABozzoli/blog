@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { slugify } from "../../js/utils";
+import { createId } from "../../js/utils";
 import { Icon } from "astro-icon/components";
 
 interface Props extends HTMLAttributes<"section"> {
@@ -8,13 +8,16 @@ interface Props extends HTMLAttributes<"section"> {
   icon: string;
 }
 
+const id = createId();
+const titleId = `title-${id}`;
+
 const { title, icon, ...props } = Astro.props;
 ---
 
-<section aria-labelledby=`section-${slugify(title)}-title` {...props}>
+<section aria-labelledby={titleId} {...props}>
   <div class="title-wrapper">
     <Icon name={icon} size="1.5em" aria-hidden="true" focusable="false" />
-    <h2 id=`section-${slugify(title)}-title`>{title}</h2>
+    <h2 id={titleId}>{title}</h2>
   </div>
   <slot />
 </section>

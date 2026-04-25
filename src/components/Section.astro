@@ -1,15 +1,18 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { slugify } from "../js/utils";
+import { createId } from "../js/utils";
 
 interface Props extends HTMLAttributes<"section"> {
   title: string;
 }
 
+const id = createId();
+const titleId = `title-${id}`;
+
 const { title, ...props } = Astro.props;
 ---
 
-<section aria-labelledby=`section-${slugify(title)}-title` {...props}>
-  <h2 id=`section-${slugify(title)}-title`>{title}</h2>
+<section aria-labelledby={titleId} {...props}>
+  <h2 id={titleId}>{title}</h2>
   <slot />
 </section>

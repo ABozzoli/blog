@@ -1,5 +1,5 @@
 ---
-import { formatDate, slugify } from "../js/utils";
+import { createId, formatDate, slugify } from "../js/utils";
 import CategoryList from "./CategoryList.astro";
 
 interface Props {
@@ -13,20 +13,21 @@ interface Props {
   isClickable?: boolean;
 }
 
+const id = createId();
+const titleId = `title-${id}`;
+
 const { article, index, page, hLevel, isClickable } = Astro.props;
 const { title, categories, publishDate, description } = article.data;
+
 const url = `${article.collection}/${article.slug}`;
 const Heading = hLevel ?? "h2"; // Alternatively role="heading" and aria-level="[n]" can be used
 // OR as a bolder strategy: always use <h6> (skipping heading levels is fine if page hierarchy is correct)
 ---
 
 <li aria-setsize={page?.total} aria-posinset={page ? page.start + index + 1 : undefined}>
-  <article
-    class=`article-card block-shadow ${isClickable ? 'is-clickable' : ''}`
-    aria-labelledby=`article-card-${slugify(title)}-title`
-  >
+  <article class=`article-card block-shadow ${isClickable ? 'is-clickable' : ''}` aria-labelledby={titleId}>
     <hgroup>
-      <Heading id=`article-card-${slugify(title)}-title` class="h3 mb-4">
+      <Heading id={titleId} class="h3 mb-4">
         <a href={url}>{title}</a>
       </Heading>
       <small>Posted on {formatDate(publishDate)}</small>
