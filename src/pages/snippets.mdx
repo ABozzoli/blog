@@ -1,0 +1,62 @@
+---
+layout: ../layouts/MainLayout.astro
+title: Snippets
+---
+
+# Code snippets
+
+## Popup debugger
+
+```js
+setTimeout(() => {
+  debugger;
+}, 3000);
+```
+
+## Capitalize first letter
+
+```js
+str.charAt(0).toUpperCase() + str.slice(1);
+```
+
+```js
+str.replace(/^./, (char) => char.toUpperCase());
+```
+
+## Visually hidden
+
+```css
+.visually-hidden:not(:focus, :active, :focus-within) {
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+}
+```
+
+## "Oreo" focus indicator
+
+```css
+:focus-visible,
+:target:focus {
+  box-shadow: 0 0 0 3px var(--background);
+  outline: 2px solid var(--foreground);
+  outline-offset: 2px;
+}
+```
+
+## Container
+
+Feature: prevent padding from detracting from content.
+
+```css
+.container {
+  --content-max-width: 1160px;
+  --padding-inline: 32px;
+
+  width: min(var(--content-max-width), 100% - var(--padding-inline) * 2);
+  margin-inline: auto;
+}
+```
