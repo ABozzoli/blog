@@ -5,7 +5,9 @@ title: Snippets
 
 # Code snippets
 
-## Popup debugger
+## JavaScript
+
+### Popup debugger
 
 ```js
 setTimeout(() => {
@@ -13,7 +15,7 @@ setTimeout(() => {
 }, 3000);
 ```
 
-## Capitalize first letter
+### Capitalize first letter
 
 ```js
 str.charAt(0).toUpperCase() + str.slice(1);
@@ -23,7 +25,9 @@ str.charAt(0).toUpperCase() + str.slice(1);
 str.replace(/^./, (char) => char.toUpperCase());
 ```
 
-## Visually hidden
+## CSS
+
+### Visually hidden
 
 ```css
 .visually-hidden:not(:focus, :active, :focus-within) {
@@ -36,7 +40,7 @@ str.replace(/^./, (char) => char.toUpperCase());
 }
 ```
 
-## "Oreo" focus indicator
+### "Oreo" focus indicator
 
 ```css
 :focus-visible,
@@ -47,7 +51,7 @@ str.replace(/^./, (char) => char.toUpperCase());
 }
 ```
 
-## Container
+### Container
 
 Feature: prevent padding from detracting from content.
 
@@ -59,4 +63,12 @@ Feature: prevent padding from detracting from content.
   width: min(var(--content-max-width), 100% - var(--padding-inline) * 2);
   margin-inline: auto;
 }
+```
+
+## Git
+
+### Undo last commit
+
+```bash
+git reset --soft HEAD~1
 ```
