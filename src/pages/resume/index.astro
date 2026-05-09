@@ -10,9 +10,15 @@ const title = `Alessandro Bozzoli resume ${new Date().getFullYear().toString()}`
 
 const experience: ResumeExperienceI[] = [
   {
+    title: "Full Stack Developer",
+    location: "Sernicola Labs",
+    startDate: "2026-04",
+  },
+  {
     title: "Web Accessibility Specialist",
     location: "Accenture Song",
     startDate: "2025-05",
+    endDate: "2026-04",
     description:
       "Conducting accessibility assessments on numerous websites (using screen readers, plus automated and manual testing), mainly for the Public Administration and multinational banks, producing detailed reports and providing operational guidance for regulatory compliance.",
   },
@@ -203,6 +209,10 @@ const skills: string[][] = [
     a {
       text-decoration-thickness: 1px;
       text-decoration-skip-ink: none;
+    }
+
+    section:nth-last-of-type(-n + 2) {
+      margin-top: -32px; /* Regain some space lost by footer on print */
     }
 
     @media screen and (max-width: 768px) {
