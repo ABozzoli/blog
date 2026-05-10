@@ -3,7 +3,7 @@ title: "Quick tips for a fabulous FAB"
 publishDate: 2026-05-10
 updateDate: null
 description: "The Floating Action Button (or FAB for short) is a pattern that consist of placing what is considered to be the most important action of the page at its bottom corner, as a floating button."
-categories: ["A11y", "WCAG"]
+categories: ["A11y", "Components"]
 ---
 
 import Link from "../../components/Link.astro";
@@ -14,14 +14,15 @@ It is especially beloved on mobile, where it is used to keep things within thumb
 
 ## The basics
 
-The FAB is a button (or a link), so it should be coded as such, with all the semantics and accessibility features that come with it: it should <Link href="https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html">have an accessible name</Link>,
-and be focusable and <Link href="https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html">operable by keyboard</Link>.
+The FAB (as its name implies) is a button (or a link), which should be natively coded as such to easily ensure it's focusable and <Link href="https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html">operable by keyboard</Link>.
+
+Since it usually consist of an icon-only button, be sure to <Link href="https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html">provide an accessible name</Link> for it, either by using an `aria-label` or by adding a visually-hidden text to it.
 
 ## A sticky mess
 
 Like anything sticky or fixed-positioned (especially if <Link href="https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html">text-resized</Link> or <Link href="https://www.w3.org/WAI/WCAG21/Understanding/reflow">at 400% zoom</Link>)
-it might end covering a good chunk of the page, even rendering part of it unusable (for example hiding part of the footer, or the <Link href="https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html">currently focused element</Link>).
-Be sure to double check for it!
+it might end covering a good chunk of the page, even making part of it unusable (for example hiding part of the footer, or the <Link href="https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html">currently focused element</Link>).
+So, keep an eye on it.
 
 ## Focus order
 
@@ -30,9 +31,11 @@ It's whole purpose is to be always readily accessible, so let's make it so!
 
 The easiest solution would be to place it just after the header navigation in the DOM, but it might be a bit jarring to have the focus jump from the header to it and back to the page. So what to do?
 
-Simple: _add it to your <a href="articles/skip-links">skip-links</a>!_ Just as you would do with your footer for exactly the same reason.
+> Add it to your <a href="articles/skip-links">skip-links</a>!
 
-This way it can still sit at the end of the page in the DOM, but it will be easily reachable for keyboard users too. It's a win-win!
+The crowd roars. Just as you would do with your footer for exactly the same reason.
+
+This way the FAB can still sit at the end of the page in the DOM, but it will be easily reachable for keyboard users too. Easy win-win!
 
 ## Conclusion
 
