@@ -1,0 +1,41 @@
+---
+title: "Quick tips for a fabulous FAB"
+publishDate: 2026-05-10
+updateDate: null
+description: "The Floating Action Button (or FAB for short) is a pattern that consist of placing what is considered to be the most important action of the page at its bottom corner, as a floating button."
+categories: ["A11y", "WCAG"]
+---
+
+import Link from "../../components/Link.astro";
+
+The Floating Action Button (or FAB for short) is a pattern that consist of placing what is considered to be the most important action of the page at its bottom corner, as a floating button.
+
+It is especially beloved on mobile, where it is used to keep things within thumb reach, but it comes with its own set of possible accessibility shortcomings.
+
+## The basics
+
+The FAB is a button (or a link), so it should be coded as such, with all the semantics and accessibility features that come with it: it should <Link href="https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html">have an accessible name</Link>,
+and be focusable and <Link href="https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html">operable by keyboard</Link>.
+
+## A sticky mess
+
+Like anything sticky or fixed-positioned (especially if <Link href="https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html">text-resized</Link> or <Link href="https://www.w3.org/WAI/WCAG21/Understanding/reflow">at 400% zoom</Link>)
+it might end covering a good chunk of the page, even rendering part of it unusable (for example hiding part of the footer, or the <Link href="https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html">currently focused element</Link>).
+Be sure to double check for it!
+
+## Focus order
+
+Last but not least, even if it's visually "at the end of the page", it would be almost useless if a keyboard user had to traverse the entire page to reach it.
+It's whole purpose is to be always readily accessible, so let's make it so!
+
+The easiest solution would be to place it just after the header navigation in the DOM, but it might be a bit jarring to have the focus jump from the header to it and back to the page. So what to do?
+
+Simple: _add it to your <a href="articles/skip-links">skip-links</a>!_ Just as you would do with your footer for exactly the same reason.
+
+This way it can still sit at the end of the page in the DOM, but it will be easily reachable for keyboard users too. It's a win-win!
+
+## Conclusion
+
+Was the whole preamble just to say "add it to your skip-links"? Maybe, but it's a very important point that is often overlooked, and it can make a huge difference for keyboard users.
+
+Until next time, be (and code) well!
