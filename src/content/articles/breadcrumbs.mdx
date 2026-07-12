@@ -1,0 +1,187 @@
+---
+title: "Breadcrumbs"
+publishDate: 2026-12-07
+updateDate: null
+description: "Structurally and functionally, breadcrumbs are a simple component that can be described as: \"A list of links that represent the current page's location within a navigational hierarchy.\""
+categories: ["A11y", "Components"]
+---
+
+import Link from "../../components/Link.astro";
+
+Structurally and functionally, breadcrumbs are a simple component that can be described as:
+
+> A list of links that represent the current page's location within a navigational hierarchy.
+
+This definition already gives us a good idea of how to implement them, but there are a few accessibility considerations to keep in mind.
+
+## The structure
+
+First, they are a list, so we would naturally reach for a `<ul>` element, but for once, it's not only a list, but an ordered one!
+
+So, let's dust off the trusty old (_wink_) `<ol>` element and use it to lay the foundation of our breadcrumbs:
+
+```html
+<ol>
+  <li>
+    <a href="/">Home</a>
+  </li>
+  <li>
+    <a href="/articles">Articles</a>
+  </li>
+  <li>
+    <a href="/articles/lorem-ipsum">Lorem ipsum</a>
+  </li>
+</ol>
+```
+
+Granted, once the list markers are removed (the numbers in this case),
+AT users won't notice any difference between an ordered and an unordered list,
+but it is still a good idea to use the correct element for the job whenever possible.
+Keep those (brain) muscles in shape!
+
+The next consideration is the use of the `nav` landmark.
+
+Since breadcrumbs are a form of navigation we should wrap them in a `<nav>` element and give it an appropriate label:
+
+```html
+<nav aria-label="Breadcrumbs">
+  <ol>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/articles">Articles</a>
+    </li>
+    <li>
+      <a href="/articles/lorem-ipsum">Lorem ipsum</a>
+    </li>
+  </ol>
+</nav>
+```
+
+The label is especially important if the page contains multiple navigation landmarks,
+so that AT users can distinguish between them.
+
+Finally, we should communicate that the last link corresponds to the current page,
+and the `aria-current` attribute with a value of `page` does exactly that.
+
+```html
+<nav aria-label="Breadcrumbs">
+  <ol>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/articles">Articles</a>
+    </li>
+    <li>
+      <a href="/articles/lorem-ipsum" aria-current="page">Lorem ipsum</a>
+    </li>
+  </ol>
+</nav>
+```
+
+Most of the time, the last breadcrumb is not designed to be a link (since it would offer little value), but as plain text.
+In this case, we can use a `<span>` instead of an anchor element:
+
+```html
+<nav aria-label="Breadcrumbs">
+  <ol>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/articles">Articles</a>
+    </li>
+    <li>
+      <span aria-current="page">Lorem ipsum</span>
+    </li>
+  </ol>
+</nav>
+```
+
+But leave the `aria-current` attribute where it is! It still provides useful information to AT users.
+
+## The style
+
+Having the (accessible) structure in place, we can now style the breadcrumbs to our liking.
+
+First of all, the list styles should be removed:
+
+```css
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+```
+
+Then we can make the breadcrumbs flow on a single line by using `display: inline` on the `<li>` elements:
+
+```css
+li {
+  display: inline;
+}
+```
+
+<aside class="callout">
+  I find this preferable to using `display: flex` on the `<ol>` element,
+  because it makes the breadcrumbs wrap like a single line of text,
+  instead of each "crumb" being a flex-item, giving it a more _"blocky"_ feeling.
+</aside>
+
+But wait, aren't we missing something?
+
+### The separator
+
+Every "crumb" is usually separated by a slash (`/`) or greater-than (`>`) character.
+This is a purely visual element, so it should be hidden from ATs.
+
+You can either add it to the markup and hide it with `aria-hidden="true"`:
+
+```html
+<nav aria-label="Breadcrumbs">
+  <ol>
+    <li>
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+    </li>
+    <li>
+      <a href="/articles">Articles</a>
+      <span aria-hidden="true">/</span>
+    </li>
+    <li>
+      <span aria-current="page">Lorem ipsum</span>
+    </li>
+  </ol>
+</nav>
+```
+
+Or set it via CSS:
+
+```css
+li:not(:last-child)::after {
+  content: "/" / "";
+}
+```
+
+Which requires less markup and keeps the visual presentation in the CSS layer.
+
+<aside class="callout">
+  If you are wondering about the `/ ""` part, it's a somewhat recent addition to the CSS spec that allows you to provide an
+  <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/content#alternative_text_string_counter_attr">alternative text</Link>
+  for the character/emoji/image assigned to the `content` property.
+
+  In this case, we set the alternative text to an empty string so that the separator is ignored by assistive technologies.
+</aside>
+
+## TL;DR
+
+- use an ordered list (`<ol>`) to represent the navigation hierarchy;
+- wrap it in a `<nav>` landmark with a descriptive `aria-label`;
+- mark the current page with `aria-current="page"`;
+- treat separators as purely decorative so they aren't announced by assistive technologies.
+
+That's really all there is to it. By relying on semantic HTML and just a handful of ARIA attributes, you end up with breadcrumbs that are both accessible and easy to maintain.
+
+Now go, be (and code) well!
