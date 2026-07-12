@@ -51,7 +51,7 @@ aside.callout {
     }
   }
 
-  p {
+  p:not(p:has(+ p)) {
     margin: 0;
   }
 }
