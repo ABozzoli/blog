@@ -1,0 +1,14 @@
+/* Ref: https://www.scottohara.me/blog/2023/03/21/visually-hidden-hack.html */
+.visually-hidden:not(:focus, :active, :focus-within) {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* Fix for focus-indicator */
+a[href]:has(> :is(img, svg):only-child) {
+  display: block;
+}
