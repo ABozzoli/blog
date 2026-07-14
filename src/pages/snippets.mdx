@@ -25,6 +25,12 @@ str.charAt(0).toUpperCase() + str.slice(1);
 str.replace(/^./, (char) => char.toUpperCase());
 ```
 
+### Parse and clamp page number
+
+```js
+const currentPage = Math.max(1, Number(page) || 1);
+```
+
 ## CSS
 
 ### Visually hidden
