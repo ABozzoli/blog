@@ -31,6 +31,55 @@ str.replace(/^./, (char) => char.toUpperCase());
 const currentPage = Math.max(1, Number(page) || 1);
 ```
 
+### Normalize a path slashes
+
+```js
+const normalizePath = (pathname: string) =>{
+  // Remove leading and trailing slashes
+  const normalized = pathname.replace(/^\/+|\/+$/g, "");
+  // Ensure the path always starts with a slash
+  return normalized ? `/${normalized}` : "/";
+}
+
+```
+
+### Set `aria-current` on all links to the current page
+
+```js
+document.addEventListener("DOMContentLoaded", () => {
+  const samePage = (a, b) => {
+    const sameOrigin = a.origin === b.origin;
+    const samePath = normalizePath(a.pathname) === normalizePath(b.pathname);
+    const samePageParam = a.searchParams.get("page") === b.searchParams.get("page");
+
+    return sameOrigin && samePath && samePageParam;
+  };
+
+  // Remove searchParams and hash
+  const currentPage = new URL(location.href);
+
+  document.querySelectorAll("a[href]").forEach((link) => {
+    if (samePage(new URL(link.href), currentPage)) {
+      link.setAttribute("aria-current", "page");
+    }
+  });
+});
+```
+
+### Check if a URL is external
+
+```js
+const isExternalUrl = (href: string) => /^https?:\/\//.test(href);
+
+```
+
+### Check if a URL is non-http
+
+```js
+const isNonHttpUrl = (href: string) => /^(mailto:|tel:|javascript:|#)/.test(href);
+
+```
+
 ## CSS
 
 ### Visually hidden
