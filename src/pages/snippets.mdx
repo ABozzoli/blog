@@ -33,8 +33,8 @@ const currentPage = Math.max(1, Number(page) || 1);
 
 ### Normalize a path slashes
 
-```js
-const normalizePath = (pathname: string) =>{
+```ts
+const normalizePath = (pathname: string) => {
   // Remove leading and trailing slashes
   const normalized = pathname.replace(/^\/+|\/+$/g, "");
   // Ensure the path always starts with a slash
@@ -68,14 +68,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ### Check if a URL is external
 
-```js
+```ts
 const isExternalUrl = (href: string) => /^https?:\/\//.test(href);
 
 ```
 
 ### Check if a URL is non-http
 
-```js
+```ts
 const isNonHttpUrl = (href: string) => /^(mailto:|tel:|javascript:|#)/.test(href);
 
 ```
