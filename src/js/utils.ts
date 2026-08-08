@@ -254,3 +254,24 @@ export function isCurrentSubpage(currentPath: string, href: string): "is-current
   const normalizedHref = resolveHref(href).replace(/\/$/, "");
   return new RegExp(`^${normalizedHref}/\\d+$`).test(normalizedCurrentPath) ? "is-current-subpage" : "";
 }
+
+export const normalizePath = (pathname: string) => {
+  // Remove leading and trailing slashes
+  const normalized = pathname.replace(/^\/+|\/+$/g, "");
+  // Ensure the path always starts with a slash
+  return normalized ? `/${normalized}` : "/";
+};
+
+export const isExternalUrl = (href: string) => /^https?:\/\//.test(href);
+
+export const isNonHttpUrl = (href: string) => /^(mailto:|tel:|javascript:|#)/.test(href);
+
+export const isInternalUrl = (href: string) => !isExternalUrl(href) && !isNonHttpUrl(href);
+
+export const localizePath = (href: string, locale: string) => {
+  const normalizedPath = normalizePath(href);
+  if (normalizedPath === `/${locale}` || normalizedPath.startsWith(`/${locale}/`)) {
+    return normalizedPath;
+  }
+  return `/${locale}${normalizedPath}`;
+};
