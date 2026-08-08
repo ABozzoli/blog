@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import type { HTMLAttributes } from "astro/types";
+import { isExternalUrl } from "../js/utils";
 
 interface Props extends HTMLAttributes<"a"> {
   iconBefore?: string;
@@ -10,7 +11,7 @@ interface Props extends HTMLAttributes<"a"> {
 
 const { iconBefore, iconAfter, iconSize = "1em", title, href, ...props } = Astro.props;
 const currentPath = Astro.url.pathname;
-const isExternal = String(href).startsWith("http://") || String(href).startsWith("https://");
+const isExternal = isExternalUrl(String(href));
 
 /* The fragment is needed to prevent additional whitespace (Ref: https://notesofdev.com/blog/fixing-extra-whitespace-in-astro-components) */
 ---
