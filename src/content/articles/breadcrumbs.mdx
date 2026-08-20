@@ -1,8 +1,8 @@
 ---
 title: "Breadcrumbs"
 publishDate: 2026-07-12
-updateDate: null
-description: "Structurally and functionally, breadcrumbs are a simple component that can be described as: \"A list of links that represent the current page's location within a navigational hierarchy.\""
+updateDate: 2026-08-20
+description: 'Structurally and functionally, breadcrumbs are a simple component that can be described as: "A list of links that represent the current page''s location within a navigational hierarchy."'
 categories: ["A11y", "Components"]
 ---
 
@@ -18,7 +18,7 @@ This definition already gives us a good idea of how to implement them, but there
 
 First, they are a list, so we would naturally reach for a `<ul>` element, but for once, it's not only a list, but an ordered one!
 
-So, let's dust off the trusty old (_wink_) `<ol>` element and use it to lay the foundation of our breadcrumbs:
+So, let's dust off the trusty ol' (_wink_) `<ol>` element and use it to lay the foundation of our breadcrumbs:
 
 ```html
 <ol>
@@ -116,6 +116,14 @@ ol {
 }
 ```
 
+<aside class="callout">
+  Interesting enough,
+  <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/list-style#:~:text=Safari%20does%20not%20recognize%20ordered,is%20not%20considered%20a%20bug.">Safari will remove the list semantics</Link>
+  if you set `list-style: none`, but _not_ if it's inside a `<nav>` landmark.
+
+  We already have a `<nav>` element, so we are safe, but it's good to be aware of this behavior.
+</aside>
+
 Then we can make the breadcrumbs flow on a single line by using `display: inline` on the `<li>` elements:
 
 ```css
@@ -124,11 +132,8 @@ li {
 }
 ```
 
-<aside class="callout">
-  I find this preferable to using `display: flex` on the `<ol>` element,
-  because it makes the breadcrumbs wrap like a single line of text,
-  instead of each "crumb" being a flex-item, giving it a more _"blocky"_ feeling.
-</aside>
+I find this preferable to using `display: flex` on the `<ol>` element,
+because it makes the breadcrumbs wrap like a single line of text, avoiding that _"blocky"_ feeling.
 
 But wait, aren't we missing something?
 
@@ -170,7 +175,7 @@ Which requires less markup and keeps the visual presentation in the CSS layer.
 <aside class="callout">
   If you are wondering about the `/ ""` part, it's a somewhat recent addition to the CSS spec that allows you to provide an
   <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/content#alternative_text_string_counter_attr">alternative text</Link>
-  for the character/emoji/image assigned to the `content` property.
+  for the character/<wbr />emoji/<wbr />image assigned to the `content` property.
 
   In this case, we set the alternative text to an empty string so that the separator is ignored by assistive technologies.
 </aside>
