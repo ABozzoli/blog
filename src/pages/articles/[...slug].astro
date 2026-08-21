@@ -1,19 +1,20 @@
 ---
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import { render } from "astro:content";
 import { fetchArticles } from "../../js/utils";
 
 export async function getStaticPaths() {
   const articles = await fetchArticles();
 
   return articles.map((article) => ({
-    params: { slug: article.slug },
+    params: { slug: article.id },
     props: { article },
   }));
 }
 
 const { article } = Astro.props;
 
-const { Content, headings } = await article.render();
+const { Content, headings } = await render(article);
 ---
 
 <ArticleLayout frontmatter={article.data} {headings}>

@@ -1,5 +1,5 @@
 ---
-import { createId, formatDate, slugify } from "../js/utils";
+import { createId, formatDate } from "../js/utils";
 import CategoryList from "./CategoryList.astro";
 
 interface Props {
@@ -19,7 +19,7 @@ const titleId = `title-${id}`;
 const { article, index, page, hLevel, isClickable } = Astro.props;
 const { title, categories, publishDate, description } = article.data;
 
-const url = `${article.collection}/${article.slug}`;
+const url = `${article.collection}/${article.id}`;
 const Heading = hLevel ?? "h2"; // Alternatively role="heading" and aria-level="[n]" can be used
 // OR as a bolder strategy: always use <h6> (skipping heading levels is fine if page hierarchy is correct)
 ---

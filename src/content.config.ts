@@ -1,9 +1,11 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 const categorySchema = z.enum(["A11y", "Components", "Workarounds", "Ramblings", "ARIA", "WCAG"]);
 
 const articles = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/articles" }),
   schema: z.object({
     title: z.string(),
     publishDate: z.date().nullable(),
