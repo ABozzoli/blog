@@ -12,6 +12,7 @@
     "noembed",
     "noframes",
     "tabindex",
+    "tabpanels",
     "closedby",
     "commandfor",
     /*** ROLES ***/

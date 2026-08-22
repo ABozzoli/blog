@@ -1,7 +1,7 @@
 ---
 title: "Accessible Tabs"
 publishDate: 2026-03-01
-updateDate: null
+updateDate: 2026-08-22
 description: "Tabs, love them (designers <em>do</em> love them) or hate them, they are here to stay. So we might as well make their stay a bit more <em>accessible</em>."
 categories: ["A11y", "Components"]
 ---
@@ -66,11 +66,11 @@ Now let's add the required roles:
 </ul>
 ```
 
-You may have noticed `role="none"` (an alias for `role="presentation"`). It removes semantics from the `<li>` because the element that needs to be announced as a Tab is the `<button>` itself.
+You may have noticed the `role="none"` (an alias for `role="presentation"`) on the `<li>`: it's needed to remove its semantics because the element that has to be announced as a `tab` is the `<button>` itself.
 
-Additionally, `role="tab"` must be directly nested inside `role="tablist"` to work correctly (similar to how `<li>` must be nested inside `<ul>`).
+Similar to how `<li>` elements must be directly nested inside the `<ul>` to work correctly, `role="tab"` and `role="tablist"` behave the same.
 
-Following the `tablist`, we define the panels:
+Following the `tablist`, we define the `tabpanel` elements:
 
 ```html
 <section role="tabpanel">Tabpanel 1</section>
@@ -90,7 +90,7 @@ Now we need to connect "Tab 1" to "Tabpanel 1", and so on. We'll do this bidirec
 <section id="tabpanel-1" role="tabpanel" aria-labelledby="tab-1">Tabpanel 1</section>
 ```
 
-Labeling the `tabpanel` by referencing the `tab` ensures it is properly identified. If you don't provide an _accessible name_, it won't be exposed correctly as a `tabpanel`.
+Labeling the `tabpanel` by referencing the `tab` ensures it is properly identified. If you don't provide an _accessible name_, it won't be exposed as a `tabpanel` (similar to `<section>`).
 
 Referencing the `tabpanel` via `aria-controls` on the `tab` on the other hand doesn't help as much as one would expect (<Link href="https://a11ysupport.io/tech/aria/aria-controls_attribute">only JAWS reliably announces it</Link>). However, it remains useful as a JavaScript hook, and that's why we are using it anyway.
 
@@ -115,6 +115,7 @@ We are just missing a couple more attributes before adding JavaScript:
   role="tabpanel"
   aria-labelledby={`tab-${index}`}
   hidden={index !== 0}
+  tabindex="0"
 >
   Tabpanel {index}
 </section>
@@ -130,43 +131,44 @@ Assuming the first tab is active, we set:
 1. `aria-selected="true"` on it and `"false"` on the others, to let the <abbr title="Assistive Technologies">ATs</abbr> know which tab is active;
 2. `tabindex="0"` on it and `"-1"` on the others, to support the implementation of the _roving tabindex_ technique;
 3. `hidden` on all `tabpanel` elements except the active one.
+4. `tabindex="0"` on all `tabpanel` elements to make them focusable and facilitate keyboard navigation.
+
+The last point is optional, but it is <Link href="https://www.w3.org/WAI/ARIA/apg/patterns/tabs/examples/tabs-manual/#:~:text=it%20is%20recommended%20that%20all%20tabpanel%20elements%20in%20a%20tab%20set%20are%20focusable">recommended by the W3C</Link> if the tabpanel doesn't contain any focusable elements.
 
 Using the `hidden` attribute achieves the same visual result as `display: none`, but it encodes the visibility state directly in the markup.
-
 This makes the intent clearer, simplifies JavaScript interaction, and keeps the state declarative rather than imperative.
-
 It also applies the <Link href="https://en.wikipedia.org/wiki/Rule_of_least_power">Rule of Least Power</Link>, relying on HTML as much as possible before playing the CSS card.
 
 ## Making it Functional
 
-First, select the buttons and panels:
+First, select the tabs (`<button>`) and tabpanels (`<section>`):
 
 ```js
-const buttons = document.querySelectorAll('[role="tab"]');
-const panels = document.querySelectorAll('[role="tabpanel"]');
+const tabs = document.querySelectorAll('[role="tab"]');
+const tabpanels = document.querySelectorAll('[role="tabpanel"]');
 ```
 
-Next, add a click event listener to each button that:
+Next, add a click event listener to each `tab` that:
 
 1. Sets the correct `aria-selected` value;
 2. Updates `tabindex` for _roving tabindex_;
-3. Shows the corresponding panel and hides the others.
+3. Shows the corresponding `tabpanel` and hides the others.
 
 ```js
-buttons.forEach((button) => {
-  button.addEventListener("click", (e) => {
-    const clickedButton = e.currentTarget;
-    const tabId = clickedButton.getAttribute("aria-controls");
+tabs.forEach((tab) => {
+  tab.addEventListener("click", (e) => {
+    const clickedTab = e.currentTarget;
+    const tabpanelId = clickedTab.getAttribute("aria-controls");
 
-    buttons.forEach((button) => {
-      const isActive = button === clickedButton;
-      button.setAttribute("aria-selected", String(isActive));
-      button.setAttribute("tabindex", isActive ? "0" : "-1");
+    tabs.forEach((tab) => {
+      const isActive = tab === clickedTab;
+      tab.setAttribute("aria-selected", String(isActive));
+      tab.setAttribute("tabindex", isActive ? "0" : "-1");
     });
 
-    panels.forEach((panel) => {
-      const isActive = panel.id === tabId;
-      panel.hidden = !isActive;
+    tabpanels.forEach((tabpanel) => {
+      const isActive = tabpanel.id === tabpanelId;
+      tabpanel.hidden = !isActive;
     });
   });
 });
@@ -175,14 +177,24 @@ buttons.forEach((button) => {
 Now it's time for the _roving tabindex_ implementation, which I like to keep as straightforward as possible:
 
 ```js
-let focusIndex = 0;
+tabs.forEach((tab) => {
+  let focusIndex = 0;
 
-buttons.forEach((button) => {
-  button.addEventListener("keydown", (e) => {
-    if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(e.key)) return;
+  tab.addEventListener("click", (e) => {
+    /* ... */
+
+    // Ensure the focus index always points to the last clicked tab
+    focusIndex = Array.from(tabs).indexOf(clickedTab);
+  });
+
+  // Roving tabindex implementation for keyboard navigation
+  tab.addEventListener("keydown", (e) => {
+    const keys = ["ArrowRight", "ArrowLeft", "Home", "End"];
+    if (!keys.includes(e.key)) return;
+    e.preventDefault();
 
     const minIndex = 0;
-    const maxIndex = buttons.length - 1;
+    const maxIndex = tabs.length - 1;
     // Go to the first or last tab
     if (e.key === "Home") focusIndex = minIndex;
     if (e.key === "End") focusIndex = maxIndex;
@@ -193,15 +205,9 @@ buttons.forEach((button) => {
     if (focusIndex < minIndex) focusIndex = maxIndex;
     if (focusIndex > maxIndex) focusIndex = minIndex;
 
-    buttons[focusIndex].focus();
+    tabs[focusIndex].focus();
   });
 });
-```
-
-Finally, we need to add this one line to the click handler, to ensure the focus index always starts from the last clicked tab (if there was one):
-
-```js
-focusIndex = Array.from(buttons).indexOf(clickedButton);
 ```
 
 And with that, we're done. Until next time, be (and code) well!

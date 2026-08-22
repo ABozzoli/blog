@@ -12,15 +12,15 @@ interface Props {
 
 const { tabs } = Astro.props;
 
-/* Why the `<li role="presentation">`: https://inclusive-components.design/tabbed-interfaces/ */
-/* Why the `tabindex` on the panels: https://daveden.co.uk/blog/recipe-for-an-accessible-tab-pattern#focus-management */
+// Why the `<li role="none">`: https://inclusive-components.design/tabbed-interfaces/
+// Why the `tabindex="0"` on the tabpanels: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/examples/tabs-manual/#:~:text=it%20is%20recommended%20that%20all%20tabpanel%20elements%20in%20a%20tab%20set%20are%20focusable
 ---
 
 <app-tabs>
   <ul role="tablist">
     {
       tabs.map(({ label }, index) => (
-        <li role="presentation">
+        <li role="none">
           <button
             type="button"
             id={`tab-${slugify(label)}`}
@@ -56,8 +56,7 @@ const { tabs } = Astro.props;
     display: flex;
 
     button:focus-visible {
-      position: relative;
-      z-index: 1; /* Ensure the focused button is above other elements */
+      position: relative; /* Ensure the focused tab shows above the others */
     }
 
     li + li {
@@ -83,36 +82,36 @@ const { tabs } = Astro.props;
 <script>
   class AppTabs extends HTMLElement {
     connectedCallback() {
-      const buttons = this.querySelectorAll('[role="tab"]') as NodeListOf<HTMLButtonElement>;
-      const panels = this.querySelectorAll('[role="tabpanel"]') as NodeListOf<HTMLElement>;
+      const tabs = this.querySelectorAll('[role="tab"]') as NodeListOf<HTMLButtonElement>;
+      const tabpanels = this.querySelectorAll('[role="tabpanel"]') as NodeListOf<HTMLElement>;
       let focusIndex = 0;
 
-      buttons.forEach((button) => {
-        button.addEventListener("click", (e) => {
-          const clickedButton = e.currentTarget as HTMLButtonElement;
-          const tabId = clickedButton.getAttribute("aria-controls");
-          focusIndex = Array.from(buttons).indexOf(clickedButton);
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", (e) => {
+          const clickedTab = e.currentTarget as HTMLButtonElement;
+          const tabpanelId = clickedTab.getAttribute("aria-controls");
+          focusIndex = Array.from(tabs).indexOf(clickedTab);
 
-          buttons.forEach((button) => {
-            const isActive = button === clickedButton;
-            button.setAttribute("aria-selected", String(isActive));
-            button.setAttribute("tabindex", isActive ? "0" : "-1");
+          tabs.forEach((tab) => {
+            const isActive = tab === clickedTab;
+            tab.setAttribute("aria-selected", String(isActive));
+            tab.setAttribute("tabindex", isActive ? "0" : "-1");
           });
 
-          panels.forEach((panel) => {
-            const isActive = panel.id === tabId;
-            panel.hidden = !isActive;
+          tabpanels.forEach((tabpanel) => {
+            const isActive = tabpanel.id === tabpanelId;
+            tabpanel.hidden = !isActive;
           });
         });
-      });
 
-      // Roving tabindex implementation for keyboard navigation
-      buttons.forEach((button) => {
-        button.addEventListener("keydown", (e) => {
-          if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(e.key)) return;
+        // Roving tabindex implementation for keyboard navigation
+        tab.addEventListener("keydown", (e) => {
+          const keys = ["ArrowRight", "ArrowLeft", "Home", "End"];
+          if (!keys.includes(e.key)) return;
+          e.preventDefault();
 
           const minIndex = 0;
-          const maxIndex = buttons.length - 1;
+          const maxIndex = tabs.length - 1;
           // Go to the first or last tab
           if (e.key === "Home") focusIndex = minIndex;
           if (e.key === "End") focusIndex = maxIndex;
@@ -123,7 +122,7 @@ const { tabs } = Astro.props;
           if (focusIndex < minIndex) focusIndex = maxIndex;
           if (focusIndex > maxIndex) focusIndex = minIndex;
 
-          buttons[focusIndex].focus();
+          tabs[focusIndex].focus();
         });
       });
     }
