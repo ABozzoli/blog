@@ -2,7 +2,7 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
-const categorySchema = z.enum(["A11y", "Components", "Workarounds", "Ramblings", "ARIA", "WCAG", "CSS"]);
+const categorySchema = z.enum(["A11y", "Components", "Workarounds", "Ramblings", "ARIA", "WCAG", "CSS-only"]);
 
 const articles = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/articles" }),

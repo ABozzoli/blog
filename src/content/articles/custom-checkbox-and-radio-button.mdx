@@ -1,30 +1,31 @@
 ---
 title: "Custom checkbox and radio-button"
 publishDate: 2026-08-22
-updateDate: null
-description: "The default checkbox and radio-button elements don't offer much in terms of styling (shoutout to <code>accent-color</code>), and can be tricky to customize without compromising their accessibility."
-categories: [A11y, Components, CSS]
+updateDate: 2026-08-29
+description: "The native checkbox and radio button elements don't offer much in terms of styling (aside from <code>`accent-color`</code>), and they can be tricky to customize without compromising accessibility."
+categories: [A11y, Components, CSS-only]
 ---
 
 import Link from "../../components/Link.astro";
 
-The default checkbox and radio-button elements don't offer much in terms of styling (shoutout to `accent-color`), and can be tricky to customize without compromising their accessibility.
+The native checkbox and radio button elements don't offer much in terms of styling (aside from `accent-color`),
+and they can be tricky to customize without compromising accessibility.
 
-In this article we will explore how to create custom checkboxes and radio-buttons that are both visually appealing and accessible.
+You essentially have to hide the native control and visually rebuild it from scratch. However, if done correctly,
+you can preserve its functionality and avoid having to handle all the accessibility work yourself.
 
 <aside class="callout" aria-label="Disclaimer">
-  To keep things focused, I won't be covering the `<label>` element,
-  assuming you will keep it coupled with the `<input>` element,
-  either by wrapping it or by using the `for` attribute.
+  To keep things focused, I won't be covering the `<label>` element. I'll assume you will use it properly
+  and keep it associated with the `<input>` element, either by wrapping it or by using the `for` attribute.
 </aside>
 
 ## Hide the default
 
-Beware of the way in which you hide the controls. You might be tempted to use `display: none`
-but that's the _nuclear option_, and it will also hide the control from ATs.
+Beware of the way in which you hide the controls! You might be tempted to reach for `display: none`,
+but that's more drastic than it seems: it will completely remove the controls from the accessibility tree.
 
-There are some other ways that work but your safest bet is to use `appearance: none`
-which exists exactly for this purpose (plus `margin: 0`, which is not removed by `appearance: none`).
+There are other ways that would work just fine, but your safest bet is to use `appearance: none` nonetheless,
+which exists precisely for this purpose (along with `margin: 0`, which is not reset by it).
 
 ```css
 input[type="checkbox"],
@@ -34,11 +35,12 @@ input[type="radio"] {
 }
 ```
 
-Perfect! Now we have a clean slate to work with, let's start!
+Perfect! Now that we have a clean slate to work with, let's start!
 
 ## Styling the controls
 
-To recreate them we will style the `<input>` elements directly, and use pseudo-elements to create the checkmark and the dot.
+To build them, we'll first style the `<input>` elements to recreate the "box" of the controls
+and then use some pseudo-elements to draw the checkmark and the dot glyphs.
 
 ### The input
 
@@ -51,7 +53,7 @@ input[type="radio"] {
   margin: 0;
   position: relative;
   width: 1.25rem;
-  height: 1.25rem;
+  aspect-ratio: 1;
   flex-shrink: 0;
   border: 1px solid var(--control-color);
   background-color: var(--background);
@@ -69,9 +71,9 @@ input[type="radio"] {
 
 Nothing special here, just some basic styling:
 
-- The `--control-color` variable will be used to color the glyphs (the checkmark and the dot).
-- `position: relative` is needed to position the pseudo-elements.
-- `flex-shrink: 0` is a little bonus to prevent the controls from shrinking when placed inside a flex container.
+- The `--control-color` variable keeps the glyphs and the border in sync (we'll see it come in handy later).
+- `position: relative` to position the pseudo-elements.
+- `flex-shrink: 0` is a little bonus that prevents the controls from shrinking when they're placed inside a flex container.
 
 ### The pseudo-elements
 
@@ -122,7 +124,7 @@ input[type="radio"] {
 }
 ```
 
-Finished! Easier than expected, isn't it? The checkmark is created using a `clip-path`, but you could also use a `mask`.
+The checkmark is created using a `clip-path`, but you could easily swap it for a `mask` with any `<svg>` you want instead:
 
 ```css
 input[type="checkbox"] {
@@ -137,18 +139,18 @@ input[type="checkbox"] {
 }
 ```
 
-What I wouldn't recommend is to use a `background-image` for it, because it would be hard to change its color, and also it's not really a _shape_.
+Both of these approaches let you easily control the element's color, whereas something like `background-image` wouldn't.
 
-But why is it important?
+But why is this so important?
 
 ## Forced-colors mode
 
-In <Link href="https://polypane.app/blog/forced-colors-explained-a-practical-guide/">forced-colors mode</Link>,
-the browser will ignore any color you set, and rely on
-the <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/system-color">system colors</Link>
-instead, so if you want to keep the glyphs visible, you have to set their color to a system color as well.
+In forced-colors mode, none of the colors you've set matter, and any element that relies on color for legibility can be heavily compromised.
+Most backgrounds are removed, and our pseudo-elements are no exception: you can say goodbye to our glyphs!
 
-And this is where the `--control-color` variable comes into play (as a handy way to keep the colors of the glyph and the border synced).
+But there's a solution: just use the <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/system-color">system colors</Link> yourself!
+
+Remember the `--control-color` variable? Now it comes into play.
 
 ```css
 input[type="checkbox"],
@@ -167,21 +169,19 @@ input[type="radio"] {
 }
 ```
 
-If you are asking yourself why I chose to use these specific system colors,
-it's because they are the ones used by the default controls in forced-colors mode.
-
-That's the most sensible option. Don't mess with the system colors!
+Easier then expected, right? But don't mess with them, or you'll make a disservice to the users relaying on them.
+Choose the ones already used by the native controls you're trying to reproduce (just as I did).
 
 And one last thing...
 
 ## Print
 
-One last footgun to be aware of is that the browser might remove the `background-color` in print mode.
+Poor `background-color` isn't safe in print mode either! The browser might remove it to save ink.
 
 We could <Link href="https://dev.to/alvaromontoro/comment/1214h">use `box-shadow` instead</Link>,
-but that's a bit of a hack, and it would also make the glyphs disappear in forced-colors mode.
+but that's a bit of a hack, and it wouldn't preserve the glyphs in forced-colors mode anyway.
 
-The right way to prevent it is `print-color-adjust: exact`:
+The right way to prevent this is to use `print-color-adjust: exact`.
 
 ```css
 input[type="checkbox"],
@@ -192,7 +192,12 @@ input[type="radio"] {
 }
 ```
 
-That will tell the browser to keeps the color as is, and to not try to optimize it for printing. Use sparingly!
+That will tell the browser to print the element as it appears on screen. Use it sparingly!
+As always, overriding browser behavior or user preferences comes with great responsibility.
 
-Now, those are sturdy controls indeed!
+## Conclusion
+
+The key takeaways are two: preserve the native `<input>` for its built-in behavior and accessibility,
+and remember to account for unusual environments, such as forced-colors mode and print.
+
 Until next time, be (and code) well!
