@@ -96,14 +96,18 @@ import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
 /**
- * Sorts an array of Astro content articles from newest to oldest.
+ * Sorts an array of Astro content articles by publication date,
+ * from newest to oldest. Articles without a publication date
+ * are placed at the top of the list.
  *
  * @param {CollectionEntry<"articles">[]} articles - The list of articles to sort.
- * @returns {CollectionEntry<"articles">[]} A new array sorted by date (descending).
+ * @returns {CollectionEntry<"articles">[]} A new array sorted by date descending, with undated articles first.
  */
 export function sortByDate(articles: CollectionEntry<"articles">[]): CollectionEntry<"articles">[] {
   return [...articles].sort(
-    (a, b) => new Date(b.data.publishDate ?? "").getTime() - new Date(a.data.publishDate ?? "").getTime(),
+    (a, b) =>
+      (b.data.publishDate ? new Date(b.data.publishDate).getTime() : Infinity) -
+      (a.data.publishDate ? new Date(a.data.publishDate).getTime() : Infinity),
   );
 }
 
