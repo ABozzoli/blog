@@ -1,0 +1,54 @@
+---
+title: "A sticky situation"
+publishDate: null
+updateDate: null
+description: "Sticky (or fixed) elements can pose an easily unnoticed threat to accessibility, especially when the content is zoomed, as they can end up covering a considerable amount of the screen estate."
+categories: ["A11y", "CSS-only"]
+---
+
+import Link from "../../components/Link.astro";
+
+Sticky (or fixed) elements can pose an easily unnoticed threat to accessibility, especially when
+the content is zoomed, as they can end up covering a considerable amount of the screen estate.
+
+## What the WCAG say
+
+<Link href="https://www.w3.org/WAI/WCAG22/Understanding/reflow">SC 1.4.10 Reflow</Link> prescribes that "content can be
+presented without loss of information or functionality", and strongly suggests that "at smaller viewport sizes"
+sticky/fixed elements "are modified to have static positioning".
+
+But how much of the viewport an element has to cover before it's too much?
+The <Link href="https://www.w3.org/WAI/WCAG22/Techniques/css/C34">Advisory Technique C34</Link> gives us some useful guidance.
+
+## The C34 technique
+
+The technique doesn't define a specific threshold, but it provides a concrete scenario:
+
+```css
+header {
+  min-height: 130px;
+}
+
+@media (min-height: 480px) {
+  header {
+    position: sticky;
+    top: 0;
+  }
+}
+```
+
+Although these values are illustrative rather than normative, we can calculate the ratio between the sticky element and the viewport height to get a rough idea of how much space is considered "enough".
+
+```text
+130 / 480 ≈ 27%
+```
+
+In this scenario, the header takes up about 27% of the viewport height when the sticky behavior kicks in.
+
+Approximating it a bit more, we can say that a sticky element should not cover more than 1/4 of the viewport height to avoid interfering with the content.
+
+## Conclusion
+
+The 25% figure is a practical heuristic, not a WCAG threshold. Testing across different viewport sizes and zoom levels remains essential.
+
+That said, be (and code) well!
