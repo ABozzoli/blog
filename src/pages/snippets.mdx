@@ -39,8 +39,7 @@ const normalizePath = (pathname: string) => {
   const normalized = pathname.replace(/^\/+|\/+$/g, "");
   // Ensure the path always starts with a slash
   return normalized ? `/${normalized}` : "/";
-}
-
+};
 ```
 
 ### Set `aria-current` on all links to the current page
@@ -103,6 +102,23 @@ Feature: prevent padding from detracting from content.
 
   width: min(var(--content-max-width), 100% - var(--padding-inline) * 2);
   margin-inline: auto;
+}
+```
+
+### Prefers-reduced-motion guard
+
+Nukes all animations, transitions and smooth scrolling for users who prefer reduced motion.
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 ```
 
