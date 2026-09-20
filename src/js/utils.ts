@@ -10,14 +10,17 @@
  * @returns {string} The slugified version of the input string.
  */
 export function slugify(text: string): string {
+  /* prettier-ignore */
   return text
-    .toString()
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^\w-]+/g, "")
-    .replace(/--+/g, "-")
-    .replace(/^-+/, "")
-    .replace(/-+$/, "");
+    .normalize("NFD")                 // Normalize Unicode
+    .replace(/[\u0300-\u036f]/g, "")  // Remove accents
+    .toLowerCase()                    // Convert to lowercase
+    .trim()                           // Remove outer spaces
+    .replace(/\s+/g, "-")             // Replace spaces with hyphens
+    .replace(/[^\w-]+/g, "")          // Remove special characters
+    .replace(/-+/g, "-")              // Remove duplicate hyphens
+    .replace(/^-+/, "")               // Remove leading hyphens
+    .replace(/-+$/, "");              // Remove trailing hyphens
 }
 
 /**
